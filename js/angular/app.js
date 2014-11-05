@@ -25,7 +25,7 @@ angular.module('fundeezeeApp', [
     'fundeezee.supplierModule'
 
 ]).config(['$stateProvider', '$httpProvider', function($stateProvider, $httpProvider) {
-
+        $httpProvider.defaults.useXDomain = true;
         $stateProvider
             .state('/', {
                 url: "",
@@ -59,6 +59,18 @@ angular.module('fundeezeeApp', [
                     },
                     "maincontent": {
                         templateUrl: "/fe/partials/pta/pta-registration.html",
+                        controller: "PTARegistrationCtrl"
+                    }
+                }
+            })
+            .state('ptacontributions', {
+                url: "/PTA-Contributions",
+                views: {
+                    "leftnav": {
+                        templateUrl: "/fe/partials/main/leftnav.html"
+                    },
+                    "maincontent": {
+                        templateUrl: "/fe/partials/pta/pta-contributions.html",
                         controller: "PTARegistrationCtrl"
                     }
                 }

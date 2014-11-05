@@ -49,31 +49,6 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Contributions</label>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">
-                                        School Supply Contribution
-                                    </label>
-                                ($10.00 per student)</div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">
-                                        Technology Supply Contribution</label>
-                                ($10.00 per family)</div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">
-                                        Clinic Supplies</label>
-                                ($10.00 per student)</div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">
-                                        Cultural Arts Programs/School Events</label>
-                                ($5.00 per student)</div>
-                            </div>
-
-                            <div class="form-group">
                                 <label>May we contact you by Email?</label>
                                 <div class="radio">
                                     <label class="radio-inline">
@@ -88,39 +63,17 @@
                                     </label>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <button ng-click="ptaRegistrationSubmit(ptaAcctObj, ptaRegForm)" type="button" class="btn btn-default">Register</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
+                            <button ng-click="ptaRegistrationSubmit(ptaAcctObj, ptaRegForm)" type="button" class="btn btn-default">Continue</button>
                             
                         </form>
-                        <form id="ptaAddStudentForm" name="ptaAddStudentForm" role="form" novalidate>
+                        <form id="ptaAddStudentForm" name="ptaAddStudentForm" role="form" class="form-inline" novalidate>
 					<div class="form-group">
                                 <label>Student Names</label>
                                 <div id="itemRows">
-<label>First Name:</label> <input type="text" ng-model="ptaStudents.studentFirstName" name="studentFirstName" /> 
-<label>Last Name: </label><input type="text" ng-model="ptaStudents.studentLastName" name="studentLastName" /> <button ng-click="ptaAddStudent(ptaStudents, ptaAddStudentForm);" type="button" class="btn btn-primary" value="Add Student">Add Student</button>
+<label class="sr-only">First Name:</label> <input type="text" ng-model="ptaStudents.studentFirstName" name="studentFirstName" placeholder="First name"/>
+<label class="sr-only">Last Name: </label><input type="text" ng-model="ptaStudents.studentLastName" name="studentLastName" placeholder="Last name"/>
+                                    <label class="sr-only">Teacher Name: </label><input type="text" ng-model="ptaStudents.teacherName" name="teacherName" placeholder="Teacher name"/>
+                                    <button ng-click="ptaAddStudent(ptaStudents, ptaAddStudentForm);" type="button" class="btn btn-primary" value="Add Student">Add Student</button>
 
 </div>
                             </div>

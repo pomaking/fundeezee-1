@@ -1,6 +1,6 @@
 'use strict';
 
-ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', 'ptaService', 'ptaAcctService', function($scope, $http, ptaService, ptaAcctService) {
+ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$state', 'ptaService', 'ptaAcctService', function($scope, $http, $state, ptaService, ptaAcctService) {
 	// getSchools API URL
 	var url = "https://inventory.data.gov/api/action/datastore_search?";
 	
@@ -47,14 +47,18 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', 'ptaS
     };
 	
 	$scope.ptaRegistrationSubmit = function (ptaAcctObj, ptaRegForm) {
-		$scope.ptaRegistrationJSON = {'PTARegForm': ptaAcctObj, 'StudentInfo': $scope.populatedPtaStudents};
+
+		$scope.ptaRegistrationJSON = {'PTARegForm': ptaAcctObj, 'students': $scope.populatedPtaStudents};
 		// send create acct form
 	ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 	};
 	
-	var createAcctCallback = function (data) {
-		alert(data.id+" "+data.content);
+	var createAcctCallback = function (data, status, headers) {
+		alert(data.id+" "+data.userName);
+
+        // go to pta contributions page
+        $state.transitionTo('ptacontributions');
 	}
-	
+
 	
 }]);

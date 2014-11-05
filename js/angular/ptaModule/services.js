@@ -10,8 +10,10 @@ ptaServices.factory('ptaAcctService', function($http) {
 			var postData = ptaForm;
             $http({
                 method: 'POST',
-				url: '//localhost:8999/createFundeezeeAccount/add',
-    			data: postData
+				url: 'http://localhost:8999/createFundeezeeAccount/add',
+    			data: postData,
+                //dataType: 'jsonp',
+                headers: {'Content-Type': 'application/json'}
 				}).
                 success(function(data) {
                     callback(data);
