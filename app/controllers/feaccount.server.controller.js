@@ -25,24 +25,41 @@ var mongoose = require('mongoose'),
         });
     };
 
-    exports.postHelloWorld = function(req, res) {
-        console.log('processing hello world');
-        res.json('hello world');
+    exports.findbySchoolName = function(req, res) {
+        var schoolName = req.params.schoolname.susbtring(1);
+
+        console.dir('schoolname:' + schoolName);
+        FEAccount.find({ 'FEAccount.schoolName': schoolName }, function(err, ptaregforms) {
+            if (err)
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            if (!ptaregforms)
+                return res.status(404).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            res.json(ptaregforms);
+
+        });
     };
 
     /**
      * Show the current article
      */
     exports.findbyUsername = function(req, res) {
-        var userName = req.param.feAccountUsername;
+        var userName = req.params.username.substring(1);
 
+        console.dir('username:' + userName);
         FEAccount.findOne({ 'FEAccount.userName': userName }, function(err, ptaregforms) {
             if (err) return next(err);
-            if (!ptaregforms) return next(new Error('Failed to load user by username ' + userName));
-            res.json(req.ptaregforms);
+            if (!ptaregforms)
+                return next(new Error('Failed to load user by username ' + userName));
+
+            res.json(ptaregforms);
 
         });
     };
+
 
    /* exports.feAccountUsername = function(req, res, next, feAccountUsername) {
         FEAccount.findById(id).populate('user', 'displayName').exec(function(err, article) {
@@ -55,7 +72,7 @@ var mongoose = require('mongoose'),
 
     exports.readHelloWorld = function(req, res) {
         console.log('processing');
-        res.json("hello world");
+        res.json('hello world');
     };
 
 /**
