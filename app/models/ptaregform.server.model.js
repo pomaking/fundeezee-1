@@ -13,8 +13,7 @@ var FEAccountSchema = new Schema({
         lastName: String,
         userName: String,
         relationshipTitle: {
-            type: String,
-            values: {}
+            type: String
         },
         state: String,
         county: String,
@@ -24,8 +23,17 @@ var FEAccountSchema = new Schema({
         nationalPTAId: {
             type: String,
             default: ''},
+        isSchoolAdmin:{
+            type: Boolean,
+            default: false
+        },
         adminApprovedBy: {
-            type: String
+            type: String,
+            default: ''
+        },
+        createDate:{
+            type: Date,
+            default: Date.now
         }
     },
     StudentInfo:[{
