@@ -9,10 +9,14 @@ var feAccount = require('../../app/controllers/feaccount.server.controller');
 
 module.exports = function(app) {
     // Article Routes
-    app.route('/api/ptaregistration')
-        .get(feAccount.readHelloWorld)
+    app.route('/api/ptaregistration/')
         .post(feAccount.createfeaccount);
 
+    app.route('/api/ptaregistration/username/:username')
+        .get(feAccount.findbyUsername);
+
+    app.route('/api/ptaregistration/schoolname/:schoolname')
+        .get(feAccount.findbySchoolName);
 
     app.route('/fe/postHelloworld')
         .post(feAccount.postHelloWorld);
