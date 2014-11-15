@@ -9,7 +9,7 @@
                                 <i class="fa fa-dashboard"></i>  <a ui-sref="/">Home</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-edit"></i> School Admin PTA Registration
+                                <i class="fa fa-edit"></i> Register to be a School Admin for your PTA
                             </li>
                         </ol>
                     </div>
@@ -38,10 +38,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.username" name="username">
+                                <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.userName" name="username">
                             </div>
 
-                            <button ng-click="ptaRegistrationSubmit(ptaAcctObj, schoolAdminRegForm)" type="button" class="btn btn-default">Register</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
+                            <button ng-click="schoolAdminRegistrationSubmit(ptaAcctObj, schoolAdminRegForm)" type="button" class="btn btn-default">Register</button>
                         </form>
+                    </div>
                 </div>

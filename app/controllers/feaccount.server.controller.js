@@ -8,9 +8,7 @@ var mongoose = require('mongoose'),
     FEAccount = mongoose.model('FEAccount'),
     _ = require('lodash');
 
-/**
- * Create a article
- */
+
     exports.createfeaccount = function(req, res) {
         // create an instance/object out of the model
         var newAccount = new FEAccount(req.body);
@@ -29,7 +27,7 @@ var mongoose = require('mongoose'),
 
     exports.postHelloWorld = function(req, res) {
         console.log('processing hello world');
-        res.json("hello world");
+        res.json('hello world');
     };
 
     /**
@@ -139,3 +137,4 @@ exports.hasAuthorization = function(req, res, next) {
     }
     next();
 };*/
+
