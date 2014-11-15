@@ -1,0 +1,125 @@
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Forms
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i>  <a ui-sref="/">Home</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-edit"></i> PTA Registration
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <form name="ptaRegForm" id="ptaRegForm" role="form" novalidate>
+
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input class="form-control" placeholder="First Name" type="text" ng-model="ptaRegForm.parentFirstName" name="parentFirstName">
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" placeholder="Last Name" type="text" ng-model="ptaRegForm.parentLastName" name="parentLastName">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Student Names</label>
+                                <div id="itemRows">
+<label>First Name:</label> <input type="text" ng-model="studentFirstName" name="studentFirstName" /> 
+<label>Last Name: </label><input type="text" ng-model="studentLastName" name="studentLastName" /> <input onclick="addRow(ptaRegForm);" type="button" class="btn btn-primary" value="Add Student" />
+
+</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>File input</label>
+                                <input type="file">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Text area</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Contributions</label>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        School Supply Contribution
+                                    </label>
+                                ($10.00 per student)</div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Technology Supply Contribution</label>
+                                ($10.00 per family)</div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Clinic Supplies</label>
+                                ($10.00 per student)</div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Cultural Arts Programs/School Events</label>
+                                ($5.00 per student)</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>May we contact you by Email?</label>
+                                <div class="radio">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Selects</label>
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Multiple Selects</label>
+                                <select multiple class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+
+                            <button ng-click="addChildren(ptaRegForm)" class="btn btn-default">Register</button>
+                            <button type="reset" class="btn btn-default">Reset Button</button>
+
+                        </form>
+
+                    </div>
+                    
+                </div>
+                <!-- /.row -->

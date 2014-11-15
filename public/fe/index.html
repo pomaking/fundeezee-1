@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-app="fundeezeeApp">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fundeezee.com</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/styles.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../font/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="../modules/html5shiv.js"></script>
+        <script src="../modules/respond.min.js"></script>
+    <![endif]-->
+	
+	<!-- jQuery Version 1.11.0 -->
+    <script type="text/javascript" src="../lib/jquery/dist/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+	<!-- AngularJS -->
+    <script type="text/javascript" src="../lib/angular/angular.js"></script>
+	<script type="text/javascript" src="../lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<script type="text/javascript" src="../lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    
+<script type="text/javascript" src="../app.js"></script>
+	<script type="text/javascript" src="../modules/directives.js"></script>
+	<script type="text/javascript" src="../modules/filters.js"></script>
+	<script type="text/javascript" src="../modules/services.js"></script>
+
+	<script type="text/javascript" src="../modules/mainModule/controllers/controllers.js"></script>
+	<script type="text/javascript" src="../modules/mainModule/controllers/HomeCtrl.js"></script>
+	<script type="text/javascript" src="../modules/mainModule/services/services.js"></script>
+
+	<script type="text/javascript" src="../modules/ptaModule/controllers/controllers.js"></script>
+	<script type="text/javascript" src="../modules/ptaModule/controllers/PTARegistrationCtrl.js"></script>
+	<script type="text/javascript" src="../modules/ptaModule/services/services.js"></script>
+
+    <script type="text/javascript" src="../modules/schoolAdminModule/controllers/controllers.js"></script>
+    <script type="text/javascript" src="../modules/schoolAdminModule/controllers/SchoolAdminRegistrationCtrl.js"></script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="/"></a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li>
+                    <a href="#" data-toggle="dropdown">Contact Us <i class="fa fa-envelope"></i></a>
+                    <div class="display-username"><i class="fa fa-user"></i> Hi, John Smith</div>
+                </li>
+            </ul>
+            <div ui-view='leftnav'></div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <div ui-view='maincontent'></div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+</body>
+
+</html>

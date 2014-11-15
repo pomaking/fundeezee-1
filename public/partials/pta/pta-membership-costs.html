@@ -1,0 +1,69 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            PTA Membership Costs
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a ui-sref="/">Home</a>
+            </li>
+            <li>
+                <i class="fa fa-dashboard"></i>  <a ui-sref="ptaregistration" href="#!/pta-registration">PTA Registration</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-edit"></i> PTA Membership Costs
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-6">
+
+        <form name="ptaRegForm" id="ptaRegForm" role="form" novalidate>
+            <div class="form-group required">
+                <label>Find School (enter zipcode or school name)</label>
+                <input type="text" ng-model="ptaAcctObj.schoolName" typeahead="school for school in getSchoolsSearch($viewValue)"  typeahead-min-length="3"class="form-control">
+            </div>
+            <div class="form-group required">
+                <label>First Name</label>
+                <input class="form-control" placeholder="First name" type="text" ng-model="ptaAcctObj.firstName" name="firstName">
+            </div>
+            <div class="form-group required">
+                <label>Last Name</label>
+                <input class="form-control" placeholder="last name" type="text" ng-model="ptaAcctObj.lastName" name="lastName">
+            </div>
+            <div class="form-group required">
+                <label>Email Address</label>
+                <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.userName" name="userName">
+            </div>
+            <div class="form-group">
+                <label>Relationship to School</label>
+
+                <select class="form-control" ng-model="ptaAcctObj.relationshipTitle"
+                        ng-options="schoolRel as schoolRel.label for schoolRel in schoolRelationship">
+                </select>
+
+            </div>
+
+            <form id="ptaAddStudentForm" name="ptaAddStudentForm" role="form" novalidate ng-show="">
+                <div class="form-group">
+                    <label>Student Names</label>
+                    <div id="itemRows">
+                        <label>First Name:</label> <input type="text" ng-model="ptaStudents.studentFirstName" name="studentFirstName" />
+                        <label>Last Name: </label><input type="text" ng-model="ptaStudents.studentLastName" name="studentLastName" />
+                        <label>Teacher Name: </label><input type="text" ng-model="ptaStudents.studentTeacherName" name="studentTeacherName" />
+                        <button ng-click="ptaAddStudent(ptaStudents, ptaAddStudentForm);" type="button" class="btn btn-primary" value="Add Student">Add Student</button>
+
+                    </div>
+                </div>
+
+            </form>
+            <button ng-click="ptaRegistrationSubmit(ptaAcctObj, ptaRegForm)" type="button" class="btn btn-primary">Continue</button>
+        </form>
+
+    </div>
+</div>
+<!-- /.row -->
