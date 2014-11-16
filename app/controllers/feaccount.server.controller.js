@@ -26,9 +26,9 @@ var mongoose = require('mongoose'),
     };
 
     exports.findbySchoolName = function(req, res) {
-        var schoolName = req.params.schoolname.susbtring(1);
+        var schoolName = req.params.schoolname.substring(1);
 
-        console.dir('schoolname:' + schoolName);
+        console.dir('schoolname ' + schoolName);
         FEAccount.find({ 'FEAccount.schoolName': schoolName }, function(err, ptaregforms) {
             if (err)
                 return res.status(400).send({

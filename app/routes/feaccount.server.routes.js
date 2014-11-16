@@ -12,14 +12,16 @@ module.exports = function(app) {
     app.route('/api/ptaregistration/')
         .post(feAccount.createfeaccount);
 
+    app.route('/api/ptaregistration/byschool/:schoolname')
+        .get(feAccount.findbySchoolName);
+
     app.route('/api/ptaregistration/username/:username')
         .get(feAccount.findbyUsername);
 
-    app.route('/api/ptaregistration/schoolname/:schoolname')
-        .get(feAccount.findbySchoolName);
 
-    app.route('/fe/postHelloworld')
-        .post(feAccount.postHelloWorld);
+
+    //app.route('/api/ptaregistration/schoolname/:schoolname')
+    //    .get(feAccount.findbySchoolName);
 
 
         //.put(users.requiresLogin, articles.hasAuthorization, articles.update)

@@ -25,6 +25,11 @@ mongoose.model('feadminaccount', FeadminaccountSchema);
 
 var feadminaccount = mongoose.model('feadminaccount', FeadminaccountSchema);
 
+feadminaccount.findOne({ 'userName': 'ddwible@gmail.com' }, function(err, data) {
+    if (err) return console.error(err);
+    console.dir(data);
+});
+
 //var feadminacct = new feadminaccount({
 //firstName: 'David',
 //lastName: 'Spencer' ,
