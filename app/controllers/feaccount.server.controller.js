@@ -60,15 +60,23 @@ var mongoose = require('mongoose'),
         });
     };
 
+    exports.findbyStateAbbr = function(req, res) {
+        var stateAbbr = req.params.stateAbbr.substring(1).trim();
 
-   /* exports.feAccountUsername = function(req, res, next, feAccountUsername) {
-        FEAccount.findById(id).populate('user', 'displayName').exec(function(err, article) {
-        if (err) return next(err);
-        if (!article) return next(new Error('Failed to load article ' + id));
-        req.feAccountUsername = feAccountUsername;
-        next();
+        console.dir('stateAbbr ' + stateAbbr);
+        FEAccount.find({ 'FEAccount.state': stateAbbr }, function(err, ptaregforms) {
+            if (err)
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            if (!ptaregforms)
+                return res.status(404).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            res.json(ptaregforms);
+
         });
-    };*/
+    };
 
     exports.readHelloWorld = function(req, res) {
         console.log('processing');
