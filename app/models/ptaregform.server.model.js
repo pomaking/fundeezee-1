@@ -16,7 +16,6 @@ var FEAccountSchema = new Schema({
             type: String
         },
         state: String,
-        county: String,
         statePTAId: {
             type: String,
             default: ''},
