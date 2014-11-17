@@ -12,6 +12,10 @@ module.exports = function(app) {
     app.route('/api/ptaregistration/')
         .post(feAccount.createfeaccount);
 
+
+    app.route('/api/ptaregistration/bystate/:stateAbbr')
+        .get(feAccount.findbyStateAbbr);
+
     app.route('/api/ptaregistration/byschool/:schoolname')
         .get(feAccount.findbySchoolName);
 
