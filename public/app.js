@@ -29,12 +29,15 @@ angular.module('fundeezee.supplierModule', [
 ]);*/
 
 angular.module('fundeezee.schoolAdminModule', [
+    'fundeezee.schoolAdminModule.services',
     'fundeezee.schoolAdminModule.controllers'
 ]);
 
 angular.module('fundeezeeApp', [
     'ui.router',
 	'ui.bootstrap',
+        'ngAnimate',
+        'dialogs',
 	'fundeezee.mainModule',
     'fundeezee.ptaModule',
     'fundeezee.schoolAdminModule'
@@ -112,7 +115,7 @@ angular.module('fundeezeeApp', [
                     },
                     "maincontent": {
                         templateUrl: "/partials/schooladmin/schooladmin-contributionbuilder.html",
-                        controller: "PTARegistrationCtrl"
+                        controller: "ContributionBuilderCtrl"
                     }
                 }
             })
