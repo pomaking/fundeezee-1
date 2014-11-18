@@ -15,7 +15,9 @@ var FEAccountSchema = new Schema({
         relationshipTitle: {
             type: String
         },
-        state: String,
+        state: {
+            type: String,
+            trim: true },
         statePTAId: {
             type: String,
             default: ''},

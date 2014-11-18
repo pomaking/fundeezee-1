@@ -28,11 +28,16 @@ angular.module('fundeezee.supplierModule', [
     'fundeezee.supplierModule.controllers'
 ]);*/
 
+angular.module('fundeezee.schoolAdminModule', [
+    'fundeezee.schoolAdminModule.controllers'
+]);
+
 angular.module('fundeezeeApp', [
     'ui.router',
 	'ui.bootstrap',
 	'fundeezee.mainModule',
-    'fundeezee.ptaModule'
+    'fundeezee.ptaModule',
+    'fundeezee.schoolAdminModule'
     //'fundeezee.supplierModule'
 
 ]).config(['$stateProvider', '$httpProvider', '$locationProvider', function($stateProvider, $httpProvider, $locationProvider) {
@@ -83,6 +88,30 @@ angular.module('fundeezeeApp', [
                     },
                     "maincontent": {
                         templateUrl: "/partials/pta/pta-membership-costs.html",
+                        controller: "PTARegistrationCtrl"
+                    }
+                }
+            })
+            .state('schooladminregistration', {
+                url: "/schooladminregistration",
+                views: {
+                    "leftnav": {
+                        templateUrl: "./partials/main/leftnav.html"
+                    },
+                    "maincontent": {
+                        templateUrl: "partials/schooladmin/schooladmin-registration.html",
+                        controller: "SchoolAdminRegistrationCtrl"
+                    }
+                }
+            })
+            .state('schooladmincontrib', {
+                url: "/schooladmincontrib-create",
+                views: {
+                    "leftnav": {
+                        templateUrl: "/partials/main/leftnav.html"
+                    },
+                    "maincontent": {
+                        templateUrl: "/partials/schooladmin/schooladmin-contributionbuilder.html",
                         controller: "PTARegistrationCtrl"
                     }
                 }
