@@ -32,6 +32,22 @@ exports.findbyUsername = function(req, res)  {
     });
 };
 
+// createSchoolAdminContribForm
+exports.createSchoolAdminContribForm = function(req, res) {
+    // create an instance/object out of the model
+    var newAccount = new schoolcontrib(req.body);
+
+    // 'save' the instance to mongodb
+    newAccount.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(newAccount);
+        }
+    });
+};
 
 exports.helloWorld = function(req, res)  {
     //var userName = req.params.username.substring(1).trim();

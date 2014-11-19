@@ -51,8 +51,8 @@ var contribForm = mongoose.model('schooladmincontribform', SchoolAdminContribFor
 
 var form = new contribForm(
 	{
-	  userName: 'dave@smith.com',
-	  schoolName: 'FORSYTH ELEMENTARY SCHOOL',
+	  userName: 'dave1@smith.com',
+	  schoolName: 'CUMMING ELEMENTARY SCHOOL',
 	  state: 'GA',
 	  contribution: {
 		form_id: '1',

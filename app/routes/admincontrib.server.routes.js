@@ -9,10 +9,19 @@ var contrib = require('../../app/controllers/schooladmincontrib.server.controlle
 
 module.exports = function(app) {
 
-    app.route('/api/schooladmincontrib/helloworld/')
-        .get(contrib.helloWorld);
+    app.route('/api/schooladmincontrib/')
+        .post(contrib.createSchoolAdminContribForm);
 
     app.route('/api/schooladmincontrib/findbyusername/:username')
         .get(contrib.findbyUsername);
+
+    app.route('/api/schooladmincontrib/helloworld/')
+        .get(contrib.helloWorld);
+
+
+
+
+
+
 
 };
