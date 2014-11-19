@@ -69,7 +69,7 @@ angular.module('fundeezeeApp.directives', []).directive('fieldDirective', functi
                 alert('Form canceled..');
             }
         },
-        templateUrl: './partials/directive-templates/form/form.html',
+        templateUrl: '../partials/directive-templates/form/form.html',
         restrict: 'E',
         scope: {
             form:'='
