@@ -118,8 +118,9 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
     }
 
     $scope.schoolAdminContribSubmit = function (schoolAdminContribObj, schoolAdminRegForm) {
-        var schoolAdminCreateFormJSON = {'userName':'kate@smith.com', 'schoolName':'SHARON ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminContribObj, 'contributions':[{}]};
-        alert(JSON.stringify(schoolAdminCreateFormJSON));
+        var schoolAdminCreateFormJSON = {'userName':'kate99@smith.com', 'schoolName':'SHELBY ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminContribObj};
+        console.dir(JSON.stringify(schoolAdminCreateFormJSON));
+
         // send create acct form
         contributionBuilderService.createContribForm(schoolAdminContribCreateCallback, schoolAdminCreateFormJSON);
     }

@@ -66,7 +66,7 @@ ptaAdminServices.service('contributionBuilderService', function($http) {
             var postData = schoolAdminDataObj;
             $http({
                 method: 'POST',
-                url: 'http://localhost:3000/api/schooladmincontrib',
+                url: 'http://localhost:3000/api/schooladmincontrib/',
                 data: postData
             }).
             success(function (data) {

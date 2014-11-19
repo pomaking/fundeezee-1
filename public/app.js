@@ -40,7 +40,8 @@ angular.module('fundeezeeApp', [
         'dialogs',
 	'fundeezee.mainModule',
     'fundeezee.ptaModule',
-    'fundeezee.schoolAdminModule'
+    'fundeezee.schoolAdminModule',
+    'fundeezee.directives'
     //'fundeezee.supplierModule'
 
 ]).config(['$stateProvider', '$httpProvider', '$locationProvider', function($stateProvider, $httpProvider, $locationProvider) {

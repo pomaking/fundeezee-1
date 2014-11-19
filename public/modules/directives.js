@@ -2,40 +2,40 @@
 
 /* Directives */
 
+var fundeezeeDirectives = angular.module('fundeezee.directives', []);
 
-angular.module('fundeezeeApp.directives', []).directive('fieldDirective', function ($http, $compile) {
-
+fundeezeeDirectives.directive('fieldDirective', function ($http, $compile) {
     var getTemplateUrl = function(field) {
         var type = field.field_type;
         var templateUrl = '';
 
         switch(type) {
             case 'textfield':
-                templateUrl = './partials/directive-templates/textfield.html';
+                templateUrl = '../fe/partials/directive-templates/textfield.html';
                 break;
             case 'email':
-                templateUrl = './partials/directive-templates/email.html';
+                templateUrl = '../fe/partials/directive-templates/email.html';
                 break;
             case 'textarea':
-                templateUrl = './partials/directive-templates/textarea.html';
+                templateUrl = '../fe/partials/directive-templates/textarea.html';
                 break;
             case 'checkbox':
-                templateUrl = './partials/directive-templates/checkbox.html';
+                templateUrl = '../fe/partials/directive-templates/checkbox.html';
                 break;
             case 'date':
-                templateUrl = './partials/directive-templates/date.html';
+                templateUrl = '../fe/partials/directive-templates/date.html';
                 break;
             case 'dropdown':
-                templateUrl = './partials/directive-templates/dropdown.html';
+                templateUrl = '../fe/partials/directive-templates/dropdown.html';
                 break;
             case 'hidden':
-                templateUrl = './partials/directive-templates/hidden.html';
+                templateUrl = '../fe/partials/directive-templates/hidden.html';
                 break;
             case 'password':
-                templateUrl = './partials/directive-templates/password.html';
+                templateUrl = '../fe/partials/directive-templates/password.html';
                 break;
             case 'radio':
-                templateUrl = './partials/directive-templates/radio.html';
+                templateUrl = '../fe/partials/directive-templates/radio.html';
                 break;
         }
         return templateUrl;
@@ -58,8 +58,10 @@ angular.module('fundeezeeApp.directives', []).directive('fieldDirective', functi
         },
         link: linker
     };
-}).directive('formDirective', function () {
+});
+fundeezeeDirectives.directive('formDirective', function () {
     return {
+
         controller: function($scope){
             $scope.submit = function(){
                 alert('Form submitted..');
@@ -69,7 +71,7 @@ angular.module('fundeezeeApp.directives', []).directive('fieldDirective', functi
                 alert('Form canceled..');
             }
         },
-        templateUrl: '../partials/directive-templates/form/form.html',
+        templateUrl: '../fe/partials/directive-templates/form/form.html',
         restrict: 'E',
         scope: {
             form:'='
