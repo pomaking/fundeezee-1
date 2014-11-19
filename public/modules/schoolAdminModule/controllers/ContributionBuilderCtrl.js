@@ -7,7 +7,7 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
     // new form
     $scope.form = {};
     $scope.form.form_id = 1;
-    $scope.form.form_name = 'My Form';
+    $scope.form.form_name = 'Membership';
     $scope.form.form_fields = [];
 
     // previewForm - for preview purposes, form will be copied into this
@@ -117,11 +117,20 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
             return false;
     }
 
+    $scope.schoolAdminContribSubmit = function (schoolAdminContribObj, schoolAdminRegForm) {
+        var schoolAdminCreateFormJSON = {'userName':'kate@smith.com', 'schoolName':'SHARON ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminContribObj, 'contributions':[{}]};
+        alert(JSON.stringify(schoolAdminCreateFormJSON));
+        // send create acct form
+        contributionBuilderService.createContribForm(schoolAdminContribCreateCallback, schoolAdminCreateFormJSON);
+    }
+
+    var schoolAdminContribCreateCallback = function(data){
+        console.dir(data);
+    }
+
     // deletes all the fields
     $scope.reset = function (){
         $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
         $scope.addField.lastAddedID = 0;
     }
-
-
 }]);
