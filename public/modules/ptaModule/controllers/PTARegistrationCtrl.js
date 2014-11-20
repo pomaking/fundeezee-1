@@ -47,7 +47,8 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
     };
 	
 	$scope.ptaRegistrationSubmit = function (ptaAcctObj, ptaRegForm) {
-		$scope.ptaRegistrationJSON = {'FEAccount': ptaAcctObj, 'StudentInfo': $scope.populatedPtaStudents};
+        ptaAcctObj.schoolName = ptaAcctObj.schoolName.substring(0,  ptaAcctObj.schoolName.indexOf('(') ).trim();
+        $scope.ptaRegistrationJSON = {'FEAccount': ptaAcctObj, 'StudentInfo': $scope.populatedPtaStudents};
         alert(JSON.stringify(ptaAcctObj));
 		// send create acct form
 	ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
