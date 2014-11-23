@@ -96,26 +96,27 @@ angular.module('fundeezeeApp', [
                     }
                 }
             })
-            .state('schooladminregistration', {
-                url: "/schooladminregistration",
+            .state('schooladmincontribution', {
+                url: "/schooladmincontribution-create",
                 views: {
                     "leftnav": {
                         templateUrl: "./partials/main/leftnav.html"
                     },
                     "maincontent": {
-                        templateUrl: "partials/schooladmin/schooladmin-registration.html",
-                        controller: "SchoolAdminRegistrationCtrl"
+                        templateUrl: "partials/schooladmin/schooladmin-contributionbuilder.html",
+                        controller: "ContributionBuilderCtrl"
                     }
                 }
             })
-            .state('schooladmincontrib', {
-                url: "/schooladmincontrib-create",
+
+            .state('schooladminmembership', {
+                url: "/schooladminmembership-create",
                 views: {
                     "leftnav": {
                         templateUrl: "/partials/main/leftnav.html"
                     },
                     "maincontent": {
-                        templateUrl: "/partials/schooladmin/schooladmin-contributionbuilder.html",
+                        templateUrl: "/partials/schooladmin/schooladmin-membershipbuilder.html",
                         controller: "ContributionBuilderCtrl"
                     }
                 }

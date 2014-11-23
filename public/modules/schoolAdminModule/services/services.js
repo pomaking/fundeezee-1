@@ -8,6 +8,8 @@ ptaAdminServices.service('contributionBuilderService', function($http) {
 
     var formsJsonPath = './data/sample_forms.json';
 
+    var schoolAdminMembership = {};
+
     return {
         fields:[
             {

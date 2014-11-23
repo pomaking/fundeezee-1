@@ -16,7 +16,12 @@ var SchoolAdminContribFormSchema = new Schema(
             "field_type": String,
             "field_value": String,
             "field_required": Boolean,
-            "field_disabled": Boolean
+            "field_disabled": Boolean,
+            "field_options":[{
+                "option_id":Number,
+                "option_title":String,
+                "option_value": String
+            }]
         }]
         },
         'contribution':{
@@ -28,7 +33,12 @@ var SchoolAdminContribFormSchema = new Schema(
                 "field_type": String,
                 "field_value": String,
                 "field_required": Boolean,
-                "field_disabled": Boolean
+                "field_disabled": Boolean,
+                "field_options":[{
+                    "option_id":Number,
+                    "option_title":String,
+                    "option_value": String
+                }]
             }]
         }
 });

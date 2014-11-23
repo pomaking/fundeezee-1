@@ -1,6 +1,6 @@
 'use strict';
 
-schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$dialogs', 'contributionBuilderService', function($scope, $dialogs, contributionBuilderService) {
+schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$dialogs', '$state', 'contributionBuilderService', function($scope, $dialogs, $state, contributionBuilderService) {
     // preview form mode
     $scope.previewMode = false;
 
@@ -9,6 +9,7 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
     $scope.form.form_id = 1;
     $scope.form.form_name = 'Membership';
     $scope.form.form_fields = [];
+    $scope.schooldAdminMembershipObj = {};
 
     // previewForm - for preview purposes, form will be copied into this
     // otherwise, actual form might get manipulated in preview mode
@@ -32,15 +33,16 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
 
         var newField = {
             "field_id" : $scope.addField.lastAddedID,
-            "field_title" : "New field - " + ($scope.addField.lastAddedID),
+            "field_title" : "PTA Membership" ,
             "field_type" : $scope.addField.new,
-            "field_value" : "",
+            "field_value" : "membership",
             "field_required" : true,
             "field_disabled" : false
         };
 
         // put newField into fields array
         $scope.form.form_fields.push(newField);
+        $scope.addOption(newField);
     }
 
     // deletes particular field on button click
@@ -55,26 +57,25 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
 
     // add new option to the field
     $scope.addOption = function (field){
-        if(!field.field_options)
-            field.field_options = new Array();
-
         var lastOptionID = 0;
-
-        if(field.field_options[field.field_options.length-1])
-            lastOptionID = field.field_options[field.field_options.length-1].option_id;
-
         // new option's id
         var option_id = lastOptionID + 1;
 
         var newOption = {
             "option_id" : option_id,
-            "option_title" : "Option " + option_id,
-            "option_value" : option_id
+            "option_title" : "PTA Membership",
+            "option_value" : "0"
         };
 
-        // put new option into field_options array
+        field.field_options = new Array();
         field.field_options.push(newOption);
+
+        if(field.field_options[field.field_options.length-1])
+            lastOptionID = field.field_options[field.field_options.length-1].option_id;
+
+
     }
+
 
     // delete particular option
     $scope.deleteOption = function (field, option){
@@ -118,7 +119,24 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
     }
 
     $scope.schoolAdminContribSubmit = function (schoolAdminContribObj, schoolAdminRegForm) {
-        var schoolAdminCreateFormJSON = {'userName':'kate99@smith.com', 'schoolName':'SHELBY ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminContribObj};
+        var schoolAdminCreateFormJSON = {'userName':'kate100@smith.com', 'schoolName':'SHELBY ELEMENTARY SCHOOL', 'state':'GA',  'membership': contributionBuilderService.schooldAdminMembershipObj, 'contribution': schoolAdminContribObj};
+        console.dir(JSON.stringify(schoolAdminCreateFormJSON));
+
+        // send create acct form
+        contributionBuilderService.createContribForm(schoolAdminContribCreateCallback, schoolAdminCreateFormJSON);
+    }
+
+    $scope.schoolAdminContribCreate = function (schoolAdminMembershipObj, schoolAdminRegForm) {
+
+        contributionBuilderService.schooldAdminMembershipObj = schoolAdminMembershipObj;
+        console.dir(JSON.stringify(contributionBuilderService.schooldAdminMembershipObj));
+
+        // send create acct form
+        $state.go('schooladmincontribution', {}, {reload: true});
+    }
+
+    $scope.schoolAdminMembershipSubmit = function (schoolAdminMembershipObj, schoolAdminRegForm) {
+        var schoolAdminCreateFormJSON = {'userName':'kate199@smith.com', 'schoolName':'SHELBY ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminMembershipObj};
         console.dir(JSON.stringify(schoolAdminCreateFormJSON));
 
         // send create acct form

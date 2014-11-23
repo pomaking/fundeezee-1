@@ -1,13 +1,14 @@
 <div class="field row">
-<!--    <div class="span2">{{field.field_title}}:</div>-->
+    <!--    <div class="span2">{{field.field_title}}:</div>-->
 
 
     <label class="form-field-label" for="{{field.field_id}}" ng-cloak>{{field.field_title}}</label>
     <div class="span4">
         <div ng-repeat="option in field.field_options" class="row-fluid">
             <label>
-                <input type="radio" value="{{option.option_value}}" ng-model="field.field_value"  ng-required="field.field_required" ng-disabled="field.field_disabled"/>
+                <input type="radio" value="{{field.field_value}}" ng-model="field.field_value"  ng-required="field.field_required" ng-disabled="field.field_disabled"/>
                 &nbsp;<span ng-bind="option.option_title"></span>
+                &nbsp;<span ng-bind="option.option_value"></span>
             </label>
         </div>
         <!--<span class="required-error" ng-show="field.field_required && field.field_value == 0">(* required)</span>-->
