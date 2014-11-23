@@ -63,7 +63,7 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
 
         var newOption = {
             "option_id" : option_id,
-            "option_title" : "PTA Membership",
+            "option_title" : "",
             "option_value" : "0"
         };
 
@@ -136,7 +136,7 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
     }
 
     $scope.schoolAdminMembershipSubmit = function (schoolAdminMembershipObj, schoolAdminRegForm) {
-        var schoolAdminCreateFormJSON = {'userName':'kate199@smith.com', 'schoolName':'SHELBY ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminMembershipObj};
+        var schoolAdminCreateFormJSON = {'userName':'kate198@smith.com', 'schoolName':'SHELTON ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminMembershipObj};
         console.dir(JSON.stringify(schoolAdminCreateFormJSON));
 
         // send create acct form
