@@ -14,7 +14,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
     }).then(function(response){
 		var schools = []
 		for(var i=0;i < response.data.result.records.length;i++){
-			schools.push(response.data.result.records[i].SCHNAM09+' ('+response.data.result.records[i].MZIP09+')');
+			schools.push(response.data.result.records[i].SCHNAM09+' ('+response.data.result.records[i].LSTATE09+')');
 		}
 
       //return response.data.result.records;
@@ -48,7 +48,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 	
 	$scope.ptaRegistrationSubmit = function (ptaAcctObj, ptaRegForm) {
         var x = ptaAcctObj.schoolName.indexOf('(');
-        ptaAcctObj.zip =  ptaAcctObj.schoolName.substring(x+1,x+6);
+        ptaAcctObj.schoolState =  ptaAcctObj.schoolName.substring(x+1,x+3);
         ptaAcctObj.schoolName = ptaAcctObj.schoolName.substring(0, x).trim();
         $scope.ptaRegistrationJSON = {'FEAccount': ptaAcctObj, 'StudentInfo': $scope.populatedPtaStudents};
         console.dir(JSON.stringify(ptaAcctObj));
