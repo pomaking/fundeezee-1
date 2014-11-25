@@ -9,7 +9,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
       params: {
         q: val,
         resource_id: '102fd9bd-4737-401b-b88f-5c5b0fab94ec',
-		fields: 'SCHNAM09,LEANM09,MZIP09'
+		fields: 'SCHNAM09,LEANM09,MZIP09,LSTATE09'
       }
     }).then(function(response){
 		var schools = []
