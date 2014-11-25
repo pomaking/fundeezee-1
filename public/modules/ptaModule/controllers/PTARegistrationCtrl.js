@@ -27,6 +27,9 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 	
 	// PTA Registration JSON obj
 	$scope.ptaRegistrationJSON = [];
+
+    // PTA Membership costs JSON obj
+    $scope.ptaMembershipCosts = [];
 	
 	// PTA students data - should be added to $scope.ptaRegistrationJSON
 	$scope.populatedPtaStudents = [];
@@ -55,7 +58,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 		// send create acct form
 	    ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 
-        ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, ptaAcctObj.schoolState);
+        $scope.ptaMembershipCosts = ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, ptaAcctObj.schoolState);
 
         $state.go('ptaregistrationCosts', {}, {reload: true});
 
