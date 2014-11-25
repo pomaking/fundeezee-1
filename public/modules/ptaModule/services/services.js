@@ -7,7 +7,7 @@ var ptaServices = angular.module('fundeezee.ptaModule.services', []);
 ptaServices.service('ptaAcctService', function($http) {
 
     var feAccount = {};
-    var feCosts = {};
+    var ptaCosts = {};
 
     $http.defaults.useXDomain = true;
 
@@ -35,7 +35,7 @@ ptaServices.service('ptaAcctService', function($http) {
                 url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolState
             }).
                 success(function(data) {
-                    feCosts = data;
+                    ptaCosts = data;
                     callback(data);
                 }).
             error(function(data) {
