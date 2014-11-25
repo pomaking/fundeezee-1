@@ -55,7 +55,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 		// send create acct form
 	    ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 
-        ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, 'GA');
+        ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, ptaAcctObj.schoolState);
 
         $state.go('ptaregistrationCosts', {}, {reload: true});
 
