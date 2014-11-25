@@ -5,7 +5,12 @@
 var ptaServices = angular.module('fundeezee.ptaModule.services', []);
 
 ptaServices.service('ptaAcctService', function($http) {
+
+    var feAccount = {};
+    var feCosts = {};
+
     $http.defaults.useXDomain = true;
+
         var createAcct = function (callback, ptaForm) {
 			var postData = ptaForm;
             $http({
@@ -14,6 +19,7 @@ ptaServices.service('ptaAcctService', function($http) {
     			data: postData
 				}).
                 success(function(data) {
+                    feAccount = data;
                     callback(data);
                 }).
                 error(function(data) {
@@ -22,8 +28,25 @@ ptaServices.service('ptaAcctService', function($http) {
 				
         };
 
+    var findCostsbySchoolName = function (callback, schoolname, schoolState) {
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolState
+        }).
+            success(function(data) {
+                feCosts = data;
+                callback(data);
+            }).
+            error(function(data) {
+                alert('there was an error creating an account');
+            });
+
+    };
+
         return {
-            createAcct: createAcct
+            createAcct: createAcct,
+            findCostsbySchoolName: findCostsbySchoolName
         };
 });
 

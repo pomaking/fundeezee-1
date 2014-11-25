@@ -1,6 +1,6 @@
 'use strict';
 
-ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$state', 'ptaAcctService', function($scope, $http, $state, ptaAcctService) {
+ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$state', 'ptaAcctService', 'contributionBuilderService', function($scope, $http, $state, ptaAcctService, contributionBuilderService) {
 	// getSchools API URL
 	var url = "https://inventory.data.gov/api/action/datastore_search?";
 	
@@ -47,17 +47,30 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
     };
 	
 	$scope.ptaRegistrationSubmit = function (ptaAcctObj, ptaRegForm) {
-        ptaAcctObj.schoolName = ptaAcctObj.schoolName.substring(0,  ptaAcctObj.schoolName.indexOf('(') ).trim();
+        var x = ptaAcctObj.schoolName.indexOf('(');
+        ptaAcctObj.zip =  ptaAcctObj.schoolName.substring(x+1,x+6);
+        ptaAcctObj.schoolName = ptaAcctObj.schoolName.substring(0, x).trim();
         $scope.ptaRegistrationJSON = {'FEAccount': ptaAcctObj, 'StudentInfo': $scope.populatedPtaStudents};
-        alert(JSON.stringify(ptaAcctObj));
+        console.dir(JSON.stringify(ptaAcctObj));
 		// send create acct form
-	ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
+	    ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
+
+        ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, 'GA');
+
+        $state.go('ptaregistrationCosts', {}, {reload: true});
+
 	};
 	
 	var createAcctCallback = function (data) {
-        alert('going to cost page');
-        $state.go('ptaregistrationCosts', {}, {reload: true});
+        console.dir('saving fe account');
+
 	};
+
+    var findCostsCallback = function (data) {
+        console.dir(JSON.stringify(data));
+        //console.dir('found school membership form data for ' + data.schoolName);
+
+    };
 
     // populate relationship to school
     $scope.schoolRelationship = [

@@ -9,6 +9,7 @@ var FEAccountSchema = new Schema({
         schoolName: {
             type: String
         },
+        schoolState: String,
         firstName: String,
         lastName: String,
         userName: String,
@@ -18,6 +19,7 @@ var FEAccountSchema = new Schema({
         state: {
             type: String,
             trim: true },
+        zip: Number,
         statePTAId: {
             type: String,
             default: ''},
