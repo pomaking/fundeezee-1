@@ -29,15 +29,15 @@ ptaServices.service('ptaAcctService', function($http) {
         };
 
     var findCostsbySchoolName = function (callback, schoolname, schoolState) {
-
-        $http({
-            method: 'GET',
-            url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolState
-        }).
-            success(function(data) {
-                feCosts = data;
-                callback(data);
+        console.dir('school cost lookup for school ' + schoolname);
+            $http({
+                method: 'GET',
+                url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolState
             }).
+                success(function(data) {
+                    feCosts = data;
+                    callback(data);
+                }).
             error(function(data) {
                 alert('there was an error creating an account');
             });
