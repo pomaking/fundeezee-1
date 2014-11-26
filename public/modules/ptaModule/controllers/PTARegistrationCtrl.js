@@ -29,11 +29,10 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 	$scope.ptaRegistrationJSON = [];
 
     // PTA Membership costs JSON obj
-    $scope.ptaMembershipCosts = [];
+    var ptaMembershipCosts = {};
 	
 	// PTA students data - should be added to $scope.ptaRegistrationJSON
 	$scope.populatedPtaStudents = [];
-	
 	// main JSON data JSON obj to send in PTA ajax submission
 	
   	// add child
@@ -68,15 +67,18 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 	
 	var createAcctCallback = function (data) {
         console.dir('saving fe account');
-
 	};
 
     var findCostsCallback = function (data) {
-        $scope.ptaMembershipCosts = data;
-        console.dir(JSON.stringify(data));
+        ptaMembershipCosts = data;
+        console.dir(JSON.stringify(ptaMembershipCosts));
         //console.dir('found school membership form data for ' + data.schoolName);
 
     };
+
+    var getMembershipCosts = function(){
+        return ptaAcctService.getCosts();
+    }
 
     // populate relationship to school
     $scope.schoolRelationship = [
