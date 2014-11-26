@@ -106,7 +106,8 @@ angular.module('fundeezeeApp', [
                         templateUrl: "partials/schooladmin/schooladmin-contributionbuilder.html",
                         controller: "ContributionBuilderCtrl"
                     }
-                }
+                },
+
             })
 
             .state('schooladminmembership', {

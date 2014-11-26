@@ -1,6 +1,6 @@
 'use strict';
 
-ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$state', 'ptaAcctService', 'contributionBuilderService', function($scope, $http, $state, ptaAcctService, contributionBuilderService) {
+ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', '$http', '$state', 'ptaAcctService', function($rootScope,$scope, $http, $state, ptaAcctService) {
 	// getSchools API URL
 	var url = "https://inventory.data.gov/api/action/datastore_search?";
 	
@@ -30,6 +30,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 
     // PTA Membership costs JSON obj
     var ptaMembershipCosts = {};
+    $scope.ptaMembershipCosts = {};
 	
 	// PTA students data - should be added to $scope.ptaRegistrationJSON
 	$scope.populatedPtaStudents = [];
@@ -52,17 +53,19 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
         var x = ptaAcctObj.schoolName.indexOf('(');
         ptaAcctObj.schoolState =  ptaAcctObj.schoolName.substring(x+1,x+3);
         ptaAcctObj.schoolName = ptaAcctObj.schoolName.substring(0, x).trim();
+
+        $state.go('ptaregistrationCosts', {}, {reload: true});
+
+        $scope.ptaMembershipCosts = ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, ptaAcctObj.schoolState);
+
         $scope.ptaRegistrationJSON = {'FEAccount': ptaAcctObj, 'StudentInfo': $scope.populatedPtaStudents};
 
-        console.dir(JSON.stringify(ptaAcctObj));
+        console.dir('ptaAcct:'  + JSON.stringify(ptaAcctObj));
 
 		// send create acct form
 	    ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 
-        ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, ptaAcctObj.schoolState);
-        console.dir(JSON.stringify($scope.ptaMembershipCosts));
-        $state.go('ptaregistrationCosts', {}, {reload: true});
-
+        console.dir( 'ptaRegistrationSubmit.getCosts '  + JSON.stringify($scope.ptaMembershipCosts));
 	};
 	
 	var createAcctCallback = function (data) {
@@ -70,14 +73,19 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 	};
 
     var findCostsCallback = function (data) {
+        $rootScope.ptaMembershipCosts = data;
+        console.dir('findCosts js callback schoolName: ' + data[0].schoolName);
         ptaMembershipCosts = data;
-        console.dir(JSON.stringify(ptaMembershipCosts));
-        //console.dir('found school membership form data for ' + data.schoolName);
+        console.dir('findCosts callback: ' + JSON.stringify(data));
+
+        //console.dir('found school membership form data for ' + data.schoolme);
 
     };
 
-    var getMembershipCosts = function(){
-        return ptaAcctService.getCosts();
+    $scope.getMembershipCosts = function(){
+        var x = ptaAcctService.getCosts();
+        console.dir('costs data: ' + x);
+        $scope.ptaMembershipCosts = JSON.stringify(x);
     }
 
     // populate relationship to school

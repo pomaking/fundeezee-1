@@ -41,6 +41,7 @@ ptaServices.service('ptaAcctService', function($http) {
                 success(function(data) {
                     ptaCosts = data;
                     callback(data);
+                    //return ptaCosts;
                 }).
             error(function(data) {
                 alert('there was an error creating an account');
