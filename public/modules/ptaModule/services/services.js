@@ -8,6 +8,8 @@ ptaServices.service('ptaAcctService', function($http) {
 
     var feAccount = {};
     var ptaCosts = {};
+    var schoolName = '';
+    var schoolState = '';
 
     $http.defaults.useXDomain = true;
 
@@ -28,7 +30,9 @@ ptaServices.service('ptaAcctService', function($http) {
 				
         };
 
-    var findCostsbySchoolName = function (callback, schoolname, schoolState) {
+    var findCostsbySchoolName = function (callback, schoolname, schoolstate) {
+        schoolName = schoolname;
+        schoolState = schoolstate;
         console.dir('school cost lookup for school ' + schoolname);
             $http({
                 method: 'GET',
@@ -37,6 +41,7 @@ ptaServices.service('ptaAcctService', function($http) {
                 success(function(data) {
                     ptaCosts = data;
                     callback(data);
+                    return data;
                 }).
             error(function(data) {
                 alert('there was an error creating an account');

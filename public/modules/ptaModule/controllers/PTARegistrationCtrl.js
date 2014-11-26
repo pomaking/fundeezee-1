@@ -41,7 +41,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 
             $scope.populatedPtaStudents.push(ptaStudents);
 			
-			alert(JSON.stringify($scope.populatedPtaStudents));
+			console.dir(JSON.stringify($scope.populatedPtaStudents));
 			
             // clear array so that we can add more from bound scope object
             // $scope.ptaStudents = '';
@@ -54,12 +54,14 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
         ptaAcctObj.schoolState =  ptaAcctObj.schoolName.substring(x+1,x+3);
         ptaAcctObj.schoolName = ptaAcctObj.schoolName.substring(0, x).trim();
         $scope.ptaRegistrationJSON = {'FEAccount': ptaAcctObj, 'StudentInfo': $scope.populatedPtaStudents};
+
         console.dir(JSON.stringify(ptaAcctObj));
+
 		// send create acct form
 	    ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 
-        $scope.ptaMembershipCosts = ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, ptaAcctObj.schoolState);
-
+        ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, ptaAcctObj.schoolState);
+        console.dir(JSON.stringify($scope.ptaMembershipCosts));
         $state.go('ptaregistrationCosts', {}, {reload: true});
 
 	};
@@ -70,6 +72,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$scope', '$http', '$sta
 	};
 
     var findCostsCallback = function (data) {
+        $scope.ptaMembershipCosts = data;
         console.dir(JSON.stringify(data));
         //console.dir('found school membership form data for ' + data.schoolName);
 
