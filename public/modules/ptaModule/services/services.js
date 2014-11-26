@@ -41,7 +41,6 @@ ptaServices.service('ptaAcctService', function($http) {
                 success(function(data) {
                     ptaCosts = data;
                     callback(data);
-                    return data;
                 }).
             error(function(data) {
                 alert('there was an error creating an account');
@@ -49,9 +48,14 @@ ptaServices.service('ptaAcctService', function($http) {
 
     };
 
+    var getCosts = function () {
+        return ptaCosts;
+    }
+
         return {
             createAcct: createAcct,
-            findCostsbySchoolName: findCostsbySchoolName
+            findCostsbySchoolName: findCostsbySchoolName,
+            getCosts: getCosts
         };
 });
 
