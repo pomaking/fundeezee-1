@@ -60,8 +60,6 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 
 		// send create acct form
 	    ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
-
-//        console.log( 'ptaRegistrationSubmit.getCosts '  + JSON.stringify($scope.ptaMembershipCosts));
 	};
 	
 	var createAcctCallback = function (data) {
@@ -69,13 +67,14 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 	};
 
     var findCostsCallback = function (data) {
-        $scope.ptaMembershipCosts = $scope.getMembershipCosts();
-        alert($scope.ptaMembershipCosts);
-        $state.go('ptaregistrationCosts', {}, {reload: true});
 
-        //console.dir('found school membership form data for ' + data.schoolme);
 
+        $state.go('ptaregistrationCosts', {});
+
+        console.log(JSON.stringify($scope.ptaMembershipCosts));
     };
+
+    $scope.ptaMembershipCosts = ptaAcctService.getCosts();
 
     $scope.getMembershipCosts = function(){
         ptaAcctService.getCosts();
