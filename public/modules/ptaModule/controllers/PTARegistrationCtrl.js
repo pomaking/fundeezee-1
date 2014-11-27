@@ -1,6 +1,6 @@
 'use strict';
 
-ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', '$http', '$state', 'ptaAcctService', function($rootScope,$scope, $http, $state, ptaAcctService) {
+ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', '$http', '$state', 'ptaAcctService', function($rootScope, $scope, $http, $state, ptaAcctService) {
 	// getSchools API URL
 	var url = "https://inventory.data.gov/api/action/datastore_search?";
 	
@@ -23,14 +23,12 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 	  // alert(JSON.stringify(response.data.result.records));
     });
   };
-	
-	
+
 	// PTA Registration JSON obj
 	$scope.ptaRegistrationJSON = [];
 
     // PTA Membership costs JSON obj
     var ptaMembershipCosts = {};
-    $scope.ptaMembershipCosts = {};
 	
 	// PTA students data - should be added to $scope.ptaRegistrationJSON
 	$scope.populatedPtaStudents = [];
@@ -67,18 +65,14 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 	};
 
     var findCostsCallback = function (data) {
-
-
         $state.go('ptaregistrationCosts', {});
-
-        console.log(JSON.stringify($scope.ptaMembershipCosts));
     };
 
-    $scope.ptaMembershipCosts = ptaAcctService.getCosts();
-
     $scope.getMembershipCosts = function(){
-        ptaAcctService.getCosts();
-    }
+        $scope.ptaMembershipCosts = ptaAcctService.getCosts();
+    };
+
+    $scope.getMembershipCosts();
 
     // populate relationship to school
     $scope.schoolRelationship = [
