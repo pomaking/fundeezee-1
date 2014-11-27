@@ -33,7 +33,7 @@ ptaServices.service('ptaAcctService', function($http) {
     var findCostsbySchoolName = function (callback, schoolname, schoolstate) {
         schoolName = schoolname;
         schoolState = schoolstate;
-        console.dir('school cost lookup for school ' + schoolname);
+        console.log('school cost lookup for school ' + schoolname);
             $http({
                 method: 'GET',
                 url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolState
