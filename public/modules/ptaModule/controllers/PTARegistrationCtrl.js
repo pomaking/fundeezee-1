@@ -69,7 +69,8 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 	};
 
     var findCostsCallback = function (data) {
-        $scope.ptaMembershipCosts = $scope.getMembershipCosts;
+        $scope.ptaMembershipCosts = $scope.getMembershipCosts();
+        alert($scope.ptaMembershipCosts);
         $state.go('ptaregistrationCosts', {}, {reload: true});
 
         //console.dir('found school membership form data for ' + data.schoolme);
