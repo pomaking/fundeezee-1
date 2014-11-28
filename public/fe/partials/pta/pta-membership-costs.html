@@ -27,12 +27,10 @@
             <label data-ng-repeat="field in ptaMembershipCosts[0].membership.form_fields">
                 <input name="membership"
                         type="radio"
-                        value="{{field.field_options[0].option_value}}" />{{field.field_title}} {{field.field_options[0].option_value}}</br>
+                        value="{{field.field_options[0].option_value}}" />
+                {{field.field_title}} {{field.field_options[0].option_value | currency}}
+
             </label>
-        <!--    <ng-repeat="field in ptaMembershipCosts[0].membership.form_fields">
-                <input type="radio" name="membership" value="{{field.field_options[0].option_value}}">{{field.field_title}} {{field.field_options[0].option_value}}
-                </input><br>
-            </ng-repeat>-->
         </form>
     </div>
 </div>
