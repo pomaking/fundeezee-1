@@ -51,6 +51,8 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
         var x = ptaAcctObj.schoolName.indexOf('(');
         $scope.schoolState =  ptaAcctObj.schoolName.substring(x+1,x+3);
         $scope.schoolName = ptaAcctObj.schoolName.substring(0, x).trim();
+        ptaAcctObj.schoolName = $scope.schoolName;
+        ptaAcctObj.schoolState = $scope.schoolState;
 
         ptaAcctService.findCostsbySchoolName(findCostsCallback, $scope.schoolName, $scope.schoolState);
 

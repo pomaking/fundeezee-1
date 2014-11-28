@@ -19,122 +19,21 @@
 
 <div class="row">
     <div class="col-lg-6">
-        hello from costs
+        Please select your PTA registration and if any available, your contributions.
 
         <H3>{{ptaMembershipCosts[0].schoolName}}</H3>
-
-        <!--<form name="ptaRegForm" id="ptaRegForm" role="form" novalidate>
-            <div class="form-group required">
-                <label>Find School (enter zipcode or school name)</label>
-                <input type="text" ng-model="ptaAcctObj.schoolName" typeahead="school for school in getSchoolsSearch($viewValue)"  typeahead-min-length="3"class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Prefix</label>
-                <select ng-model="ptaAcctObj.prefix">
-                    <option value="">Choose a Prefix</option>
-                    <option ng-repeat="pre in prefix" value="{{pre}}">{{pre}}</option>
-                </select>
-            </div>
-            <div class="form-group required">
-                <label>First Name</label>
-                <input class="form-control" placeholder="First name" type="text" ng-model="ptaAcctObj.firstName" name="firstName">
-            </div>
-            <div class="form-group required">
-                <label>Last Name</label>
-                <input class="form-control" placeholder="last name" type="text" ng-model="ptaAcctObj.lastName" name="lastName">
-            </div>
-            <div class="form-group required">
-                <label>Email Address</label>
-                <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.userName" name="userName">
-            </div>
-            <div class="form-group">
-                <label>Relationship to School</label>
-                <select class="form-control" ng-model="ptaAcctObj.relationshipTitle" name="relationshipTitle">
-                    <option value="parent">Parent</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="schoolAdmin">School Admin</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Contributions</label>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="">
-                        School Supply Contribution
-                    </label>
-                    ($10.00 per student)</div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="">
-                        Technology Supply Contribution</label>
-                    ($10.00 per family)</div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="">
-                        Clinic Supplies</label>
-                    ($10.00 per student)</div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="">
-                        Cultural Arts Programs/School Events</label>
-                    ($5.00 per student)</div>
-            </div>
-
-            <div class="form-group">
-                <label>May we contact you by Email?</label>
-                <div class="radio">
-                    <label class="radio-inline">
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                        Yes
-                    </label>
-                </div>
-                <div class="radio">
-                    <label class="radio-inline">
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        No
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Selects</label>
-                <select class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Multiple Selects</label>
-                <select multiple class="form-control">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-
-            <button ng-click="ptaRegistrationSubmit(ptaAcctObj, ptaRegForm)" type="button" class="btn btn-default">Register</button>
-            <button type="reset" class="btn btn-default">Reset Button</button>
-
+        <H3>{{ptaMembershipCosts[0].membership.form_name}}</H3>
+        <form name="ptaMembershipForm" id="ptaMembershipForm" role="form" novalidate>
+            <label data-ng-repeat="field in ptaMembershipCosts[0].membership.form_fields">
+                <input name="membership"
+                        type="radio"
+                        value="{{field.field_options[0].option_value}}" />{{field.field_title}} {{field.field_options[0].option_value}}</br>
+            </label>
+        <!--    <ng-repeat="field in ptaMembershipCosts[0].membership.form_fields">
+                <input type="radio" name="membership" value="{{field.field_options[0].option_value}}">{{field.field_title}} {{field.field_options[0].option_value}}
+                </input><br>
+            </ng-repeat>-->
         </form>
-        <form id="ptaAddStudentForm" name="ptaAddStudentForm" role="form" novalidate>
-            <div class="form-group">
-                <label>Student Names</label>
-                <div id="itemRows">
-                    <label>First Name:</label> <input type="text" ng-model="ptaStudents.studentFirstName" name="studentFirstName" />
-                    <label>Last Name: </label><input type="text" ng-model="ptaStudents.studentLastName" name="studentLastName" />
-                    <label>Teacher Name: </label><input type="text" ng-model="ptaStudents.studentTeacherName" name="studentTeacherName" />
-                    <button ng-click="ptaAddStudent(ptaStudents, ptaAddStudentForm);" type="button" class="btn btn-primary" value="Add Student">Add Student</button>
-
-                </div>
-            </div>
-
-        </form>-->
     </div>
 </div>
 <!-- /.row -->
