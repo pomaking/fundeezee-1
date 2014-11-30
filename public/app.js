@@ -84,6 +84,18 @@ angular.module('fundeezeeApp', [
                     }
                 }
             })
+            .state('schooladminregistration', {
+                url: "/schooladminregistration",
+                views: {
+                    "leftnav": {
+                        templateUrl: "./partials/main/leftnav.html"
+                    },
+                    "maincontent": {
+                        templateUrl: "partials/schooladmin/schooladmin-registration.html",
+                        controller: "SchoolAdminRegistrationCtrl"
+                    }
+                }
+            })
             .state('ptaregistrationCosts', {
                 url: "/pta-registration-costs",
                 views: {
@@ -106,7 +118,7 @@ angular.module('fundeezeeApp', [
                         templateUrl: "partials/schooladmin/schooladmin-contributionbuilder.html",
                         controller: "ContributionBuilderCtrl"
                     }
-                },
+                }
 
             })
 

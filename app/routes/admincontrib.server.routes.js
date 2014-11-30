@@ -12,6 +12,10 @@ module.exports = function(app) {
     app.route('/api/schooladmincontrib/')
         .post(contrib.createSchoolAdminContribForm);
 
+    // update existing school admin contrib form
+    app.route('/api/schooladmincontrib/')
+        .put(contrib.updateSchoolAdminContribForm);
+
     app.route('/api/schooladmincontrib/findbyusername/:username')
         .get(contrib.findbyUsername);
 
