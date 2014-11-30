@@ -24,13 +24,21 @@
         <H3>{{ptaMembershipCosts[0].schoolName}}</H3>
         <H3>{{ptaMembershipCosts[0].membership.form_name}}</H3>
         <form name="ptaMembershipForm" id="ptaMembershipForm" role="form" novalidate>
-            <label data-ng-repeat="field in ptaMembershipCosts[0].membership.form_fields">
+<!--            <div ng-repeat="field in ptaMembershipCosts[0].membership.form_fields">
+                <field-directive field="field"> </field-directive>
+            </div>-->
+            <div data-ng-repeat="field in ptaMembershipCosts[0].membership.form_fields">
                 <input name="membership"
                         type="radio"
                         value="{{field.field_options[0].option_value}}" />
                 {{field.field_title}} {{field.field_options[0].option_value | currency}}
 
-            </label>
+            </div>
+            <br>
+            <H3>{{ptaMembershipCosts[0].contribution.form_name}}</H3>
+            <div ng-repeat="field in ptaMembershipCosts[0].contribution.form_fields">
+                <field-directive field="field"> </field-directive>
+            </div>
         </form>
     </div>
 </div>
