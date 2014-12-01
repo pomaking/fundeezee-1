@@ -20,26 +20,27 @@
     <div class="col-lg-6">
 
         <form name="schoolAdminMembershipForm" id="schoolAdminMembershipForm" role="form" novalidate>
-            <blockquote>
-                <p>Create or update your PTA Membership Costs form: <br/>
-                    1. Enter the title you want displayed for the form.<br/>
-                    2. Membership allows registrants to choose one type (eg. Gold, Silver or Bronze).  You are creating these options on this page.<br/>
-                    3. After you finish creating the form, you can preview the form by clicking the 'Preview Form' button.<br/>
-                    4. You can also setup Contributions on the following form if you want.  Just select the 'Add Contributions' button.</p>
-            </blockquote>
+                <div class="help-text">
+                    Create or update your PTA Membership Costs form: <br/>
+                    <ul>
+                        <li>1. Enter the title you want displayed for the form.</li>
+                        <li>2. Create Membership Levels: Membership allows registrants to choose one type (eg. Gold, Silver or Bronze).</li>
+                        <li>3. After you finish creating the form, you can preview the form section by clicking the 'Preview Form' button.</li>
+                        <li>4. You can also setup Contributions on the following form if you want.  Just select the 'Add Contributions' button.</li>
+                    </ul>
+                  </div>
             <div class="well">
                 <div class="form-fields" ng-hide="previewMode">
-                    <div class="form-properties">
-                        <h3>Begin...  provide a title like 'Membership'</h3>
-                        <div class="row">
-                            <!--<div class="span2">Add the label for the Membership Form:</div>-->
-                            <div class="span4"><input type="text" name="form-name" ng-disabled="previewMode" ng-model="form.form_name"></div>
-                        </div>
+
+                    <div class="form-group">
+                        <label for="form-name">Enter Form Name</label>
+                        <input type="text" id="form-name" name="form-name" ng-disabled="previewMode" ng-model="form.form_name">
                     </div>
+
                     <hr>
-                    <h4>Add Membership Levels</h4>
+                    <h5>Create Membership Levels</h5>
                     <div class="add-field col-lg-12">
-                        <input type="hidden"  ng-model="addField.new" value="radio"></input>
+                        <input type="hidden" ng-model="addField.new" value="radio"></input>
                         <button type="submit" class="btn pull-left" ng-click="addNewField()"><i class="icon-plus"></i> Add</button>
                     </div>
                     <br>
