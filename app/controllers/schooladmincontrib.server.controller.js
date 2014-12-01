@@ -66,12 +66,12 @@ exports.createSchoolAdminContribForm = function(req, res) {
 };
 
 exports.updateSchoolAdminContribForm = function(req, res) {
-    // create an instance/object out of the model
+    // alternative if needed...
+    // var query = { schoolName: req.body.schoolName, state: req.body.state };
+    // Model.findOneAndUpdate(query, { name: 'jason borne' }, options, callback)
     var newAccount = new schoolcontrib(req.body);
     console.dir('update school admin (by ID): ' + JSON.stringify(req.body._id));
 
-    // 'save' the instance to mongodb
-    // collection.update(criteria, update[[, options], callback]);
     // Model.findByIdAndUpdate(id, [update], [options], [callback])
     schoolcontrib.findByIdAndUpdate(req.body._id, req.body, {
         "multi" : false,  // update only one document
