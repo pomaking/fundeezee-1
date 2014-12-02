@@ -65,22 +65,30 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 	};
 	
 	var createAcctCallback = function (data) {
-        console.log('saving fe account');
+        //console.log('saving fe account');
 	};
 
+    $scope.p
+
     var findCostsCallback = function (data) {
-
-
         $state.go('ptaregistrationCosts', {});
 
         console.log(JSON.stringify($scope.ptaMembershipCosts));
     };
 
-    $scope.ptaMembershipCosts = ptaAcctService.getCosts();
+    $scope.ptaMembershipCosts = ptaAcctService.getScopeCosts();
 
     $scope.getMembershipCosts = function(){
-        ptaAcctService.getCosts();
+        ptaAcctService.getScopeCosts();
     }
+
+    $scope.ptaSelectedCosts = function(ptaMembershipCosts, ptaMembershipForm){
+        console.dir('ptaregistrationCtrl.ptaSelectedCosts method ' + JSON.stringify(ptaMembershipCosts));
+        //ptaMembershipCosts.schoolName =
+        //ptaMembershipCosts.state =
+
+        $state.go('ptaregistrationPayment', {});
+    };
 
     // populate relationship to school
     $scope.schoolRelationship = [

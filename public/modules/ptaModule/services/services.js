@@ -49,6 +49,50 @@ ptaServices.service('ptaAcctService', function($http) {
 
     };
 
+    var getScopeCosts = function(){
+        if (JSON.stringify(ptaCosts) == '{}')
+            return;
+
+        var scopeObj = {};
+        scopeObj._id = ptaCosts[0]._id;
+        scopeObj.userName = ptaCosts[0].username;
+        scopeObj.schoolName = ptaCosts[0].schoolName;
+        scopeObj.state = ptaCosts[0].state;
+        scopeObj.selectedMembership = {};
+        scopeObj.selectedContribution = [];
+
+        scopeObj.membership = [];
+        scopeObj.contribution = [];
+
+// iterate over each element in the array
+        for (var i = 0; i < ptaCosts[0].membership.form_fields.length; i++){
+            var x = {
+                "field_id" : ptaCosts[0].membership.form_fields[i]._id,
+                "field_title" : ptaCosts[0].membership.form_fields[i].field_title,
+                "field_type" : ptaCosts[0].membership.form_fields[i].field_type,
+                "field_value" : ptaCosts[0].membership.form_fields[i].field_value,
+                "field_cost" :  ptaCosts[0].membership.form_fields[i].field_options[0].option_value};
+            scopeObj.membership.push(x);
+        }
+
+        for (var i = 0; i < ptaCosts[0].contribution.form_fields.length; i++){
+            var x = {
+                "field_id" : ptaCosts[0].contribution.form_fields[i]._id,
+                "field_title" : ptaCosts[0].contribution.form_fields[i].field_title,
+                "field_type" : ptaCosts[0].contribution.form_fields[i].field_type,
+                "field_value" : ptaCosts[0].contribution.form_fields[i].field_value,
+                "field_cost" : ptaCosts[0].contribution.form_fields[i].field_value};
+
+            scopeObj.contribution.push(x);
+
+            var y = ptaCosts[0].contribution.form_fields[i].field_title + ptaCosts[0].contribution.form_fields[i].field_value;
+            scopeObj.selectedContribution.push(y);
+        }
+
+        console.dir(JSON.stringify(scopeObj));
+        return scopeObj;
+    }
+
     var getCosts = function () {
         return ptaCosts;
     }
@@ -56,7 +100,8 @@ ptaServices.service('ptaAcctService', function($http) {
         return {
             createAcct: createAcct,
             findCostsbySchoolName: findCostsbySchoolName,
-            getCosts: getCosts
+            getCosts: getCosts,
+            getScopeCosts: getScopeCosts
         };
 });
 
