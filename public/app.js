@@ -85,6 +85,7 @@ angular.module('fundeezeeApp', [
                 }
             })
             .state('schooladminregistration', {
+                // school admin registration form... the form a person fills out to be an admin for a school
                 url: "/schooladminregistration",
                 views: {
                     "leftnav": {
@@ -121,6 +122,7 @@ angular.module('fundeezeeApp', [
                 }
             })
             .state('schooladmincontribution', {
+                // the dynamic form to add/remove **contribution** types
                 url: "/schooladmincontribution-create",
                 views: {
                     "leftnav": {
@@ -133,8 +135,8 @@ angular.module('fundeezeeApp', [
                 }
 
             })
-
             .state('schooladminmembership', {
+                // the dynamic form to add/remove membership types
                 url: "/schooladminmembership-create",
                 views: {
                     "leftnav": {
