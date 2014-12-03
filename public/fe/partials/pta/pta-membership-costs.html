@@ -41,6 +41,16 @@
                        value="{{field.field_id}}"/>
                  {{field.field_title}} {{field.field_cost | currency}}
             </div>
+            <div ng-repeat="field in ptaMembershipCosts.textContribution">
+                <label> {{field.field_title}}
+                <input name="{{field.field_cost}}" data-ng-model="ptaMembershipCosts.selectedTextContribution[$index]" placeholder="Enter a value"
+                       type="{{field.field_type}}"
+                       ng-true-value="{{field.field_id}}+'-'"
+                       ng-false-value=""
+                       style="width: 100px"
+                       value=""/>
+                </label>
+            </div>
             <br>
             <button ng-click="ptaSelectedCosts(ptaMembershipCosts, ptaMembershipForm)" type="button" class="btn btn-default">Proceed to Checkout</button>
         </form>

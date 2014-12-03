@@ -111,6 +111,7 @@ ptaServices.service('ptaAcctService', function($http) {
         createAcct: createAcct,
         findCostsbySchoolName: findCostsbySchoolName,
         getCosts: getCosts,
+        getScopeCosts: getScopeCosts,
         getSelectedPTACosts: getSelectedPTACosts
     };
 });
