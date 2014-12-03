@@ -8,6 +8,7 @@ ptaServices.service('ptaAcctService', function($http) {
 
     var feAccount = {};
     var ptaCosts = {};
+    var selectedPTACosts = {};
     var schoolName = '';
     var schoolState = '';
 
@@ -60,9 +61,11 @@ ptaServices.service('ptaAcctService', function($http) {
         scopeObj.state = ptaCosts[0].state;
         scopeObj.selectedMembership = {};
         scopeObj.selectedContribution = [];
+        scopeObj.selectedTextContribution = [];
 
         scopeObj.membership = [];
         scopeObj.contribution = [];
+        scopeObj.textContribution = [];
 
 // iterate over each element in the array
         for (var i = 0; i < ptaCosts[0].membership.form_fields.length; i++){
@@ -83,13 +86,16 @@ ptaServices.service('ptaAcctService', function($http) {
                 "field_value" : ptaCosts[0].contribution.form_fields[i].field_value,
                 "field_cost" : ptaCosts[0].contribution.form_fields[i].field_value};
 
-            scopeObj.contribution.push(x);
-
-            var y = ptaCosts[0].contribution.form_fields[i].field_title + ptaCosts[0].contribution.form_fields[i].field_value;
-            scopeObj.selectedContribution.push(y);
+            if(ptaCosts[0].contribution.form_fields[i].field_type == 'checkbox')
+                scopeObj.contribution.push(x);
+            else
+                scopeObj.textContribution.push(x);
+            //var y = ptaCosts[0].contribution.form_fields[i].field_title + ptaCosts[0].contribution.form_fields[i].field_value;
+            //scopeObj.selectedContribution.push(y);
         }
 
-        console.dir(JSON.stringify(scopeObj));
+        //console.dir(JSON.stringify(scopeObj));
+        selectedPTACosts = scopeObj;
         return scopeObj;
     }
 
@@ -97,12 +103,16 @@ ptaServices.service('ptaAcctService', function($http) {
         return ptaCosts;
     }
 
-        return {
-            createAcct: createAcct,
-            findCostsbySchoolName: findCostsbySchoolName,
-            getCosts: getCosts,
-            getScopeCosts: getScopeCosts
-        };
+    var getSelectedPTACosts = function(){
+        return selectedPTACosts;
+    }
+
+    return {
+        createAcct: createAcct,
+        findCostsbySchoolName: findCostsbySchoolName,
+        getCosts: getCosts,
+        getSelectedPTACosts: getSelectedPTACosts
+    };
 });
 
 
