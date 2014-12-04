@@ -20,16 +20,18 @@
     <div class="col-lg-6">
 
         <form name="schoolAdminMembershipForm" id="schoolAdminMembershipForm" role="form" novalidate>
-                <div class="help-text">
-                    Choose which types of memberships your PTA would like to offer and the cost: <br/>
-                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sIndividual"><label>Individual Membership</label>
-                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFamily"><label>Family Membership</label>
-                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sBusiness"><label>Individual Membership</label>
-                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFaculty"><label>Individual Membership</label>
-                  </div>
-            <div class="well">
-                <div class="form-fields" ng-hide="previewMode">
 
+            <div class="well">
+                <div>Choose which types of memberships your PTA would like to offer and the cost: </div>
+                <div>
+                    <ul class="admin-membership-types">
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sIndividual"><span>Individual Membership</span></li>
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFamily"><span>Family Membership</span></li>
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFaculty"><span>Faculty Membership</span></li>
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sBusiness"><span>Business Membership</span></li>
+                    </ul>
+                </div>
+                <div class="form-fields" ng-hide="previewMode">
                     <div class="form-group">
                         <label for="form-name">Enter Form Name</label>
                         <input type="text" id="form-name" name="form-name" ng-disabled="previewMode" ng-model="form.form_name">
