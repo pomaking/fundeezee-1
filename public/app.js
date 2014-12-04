@@ -85,7 +85,7 @@ angular.module('fundeezeeApp', [
                 }
             })
             .state('schooladminregistration', {
-                // school admin registration form... the form a person fills out to be an admin for a school
+                // school admin registration form start... the form a person fills out to be an admin for a school
                 url: "/schooladminregistration",
                 views: {
                     "leftnav": {
@@ -93,6 +93,19 @@ angular.module('fundeezeeApp', [
                     },
                     "maincontent": {
                         templateUrl: "partials/schooladmin/schooladmin-registration.html",
+                        controller: "SchoolAdminRegistrationCtrl"
+                    }
+                }
+            })
+            .state('schooladminregistration-bank', {
+                // school admin registration form bank account (pg2)
+                url: "/schooladminregistration-bank",
+                views: {
+                    "leftnav": {
+                        templateUrl: "./partials/main/leftnav.html"
+                    },
+                    "maincontent": {
+                        templateUrl: "partials/schooladmin/schooladmin-registerbank.html",
                         controller: "SchoolAdminRegistrationCtrl"
                     }
                 }

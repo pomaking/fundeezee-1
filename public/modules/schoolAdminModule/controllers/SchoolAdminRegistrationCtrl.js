@@ -1,6 +1,11 @@
 'use strict';
 
-schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope', '$http', 'ptaAcctService', function($scope, $http, ptaAcctService) {
+schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope', '$http', '$state', 'ptaAcctService', 'contributionBuilderService', function($scope, $http, $state, ptaAcctService, contributionBuilderService) {
+
+    $scope.adminAcct = {};
+    // PTA students data - should be added to $scope.adminAcct
+    $scope.additionalAdmin = [];
+
 	// getSchools API URL
 	var url = 'https://inventory.data.gov/api/action/datastore_search?';
 	
@@ -23,23 +28,38 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
 	  // alert(JSON.stringify(response.data.result.records));
     });
   };
-	
-	$scope.schoolAdminRegistrationSubmit = function (ptaDataObj, schoolAdminRegForm) {
-        var x = ptaDataObj.schoolName.indexOf('(');
-        $scope.schoolState =  ptaDataObj.schoolName.substring(x+1,x+3);
-        $scope.schoolName = ptaDataObj.schoolName.substring(0, x).trim();
 
-        ptaDataObj.relationshipTitle = 'schoolAdmin';
-        ptaDataObj.schoolName = $scope.schoolName;
-        ptaDataObj.schoolState = $scope.schoolState;
+    // add child
+    $scope.addAdmin = function (adminAcct, schoolAdminBankForm) {
 
-		$scope.ptaRegistrationJSON = {'FEAccount': ptaDataObj};
-		// send create acct form
-	    ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
+        $scope.additionalAdmin.push(adminAcct);
+
+        console.dir(JSON.stringify($scope.populatedPtaStudents));
+    };
+
+	$scope.schoolAdminRegistrationSubmit = function (data, schoolAdminRegForm) {
+        var x = data.schoolName.indexOf('(');
+        $scope.adminAcct.schoolState =  data.schoolName.substring(x+1,x+3);
+        $scope.adminAcct.schoolName = data.schoolName.substring(0, x).trim();
+
+        $scope.adminAcct.relationshipTitle = 'schoolAdmin';
+
+		console.dir( JSON.stringify($scope.adminAcct) );
+        $state.go('schooladminregistration-bank');
 	};
+
+    $scope.schoolAdminRegisterBank = function (data, schoolAdminRegForm) {
+        console.dir( JSON.stringify(data) );
+        $scope.adminAcct = data;
+        $scope.adminAcct.additionalAdmin = [];
+        $scope.adminAcct.additionalAdmin.push($scope.additionalAdmin);
+        console.dir( JSON.stringify($scope.adminAcct) );
+        contributionBuilderService.adminAcct(createBankAcctCallback, $scope.adminAcct);
+
+    };
 	
-	var createAcctCallback = function (data) {
-		alert(data.FEAccount.id);
+	var createBankAcctCallback = function (data) {
+        $state.go('schooladminmembership');
 	};
 	
 	

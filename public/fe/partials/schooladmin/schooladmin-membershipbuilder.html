@@ -21,13 +21,11 @@
 
         <form name="schoolAdminMembershipForm" id="schoolAdminMembershipForm" role="form" novalidate>
                 <div class="help-text">
-                    Create or update your PTA Membership Costs form: <br/>
-                    <ul>
-                        <li>1. Enter the title you want displayed for the form.</li>
-                        <li>2. Create Membership Levels: Membership allows registrants to choose one type (eg. Gold, Silver or Bronze).</li>
-                        <li>3. After you finish creating the form, you can preview the form section by clicking the 'Preview Form' button.</li>
-                        <li>4. You can also setup Contributions on the following form if you want.  Just select the 'Add Contributions' button.</li>
-                    </ul>
+                    Choose which types of memberships your PTA would like to offer and the cost: <br/>
+                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sIndividual"><label>Individual Membership</label>
+                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFamily"><label>Family Membership</label>
+                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sBusiness"><label>Individual Membership</label>
+                    <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFaculty"><label>Individual Membership</label>
                   </div>
             <div class="well">
                 <div class="form-fields" ng-hide="previewMode">
@@ -40,7 +38,7 @@
                     <hr>
                     <h5>Create Membership Levels</h5>
                     <div class="add-field col-lg-12">
-                        <input type="hidden" ng-model="addField.new" value="radio"></input>
+                        <input type="hidden" ng-model="addField.new" value="radio">
                         <button type="submit" class="btn pull-left" ng-click="addNewField()"><i class="icon-plus"></i> Add</button>
                     </div>
                     <br>
@@ -61,29 +59,11 @@
                                     <div class="span6">
                                         <div ng-repeat="option in field.field_options">
                                             <input type="text" ng-model="option.option_value" title="{{option.option_value}}">
-                                            <!--<input type="hidden" ng-model="option.option_value" value="{{option.option_title}}">-->
-                                            <!--<a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, option)"><i class="icon-minus icon-white"></i></a>-->
-                                            <!--<span class="label label-inverse">Value: {{ option.option_value }}</span>-->
                                         </div>
-                                        <!--<button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="icon-plus icon-white"></i> Add Option</button>-->
-                                    </div>
-                                        <!--<div class="span2">Field Default Value:</div>-->
-                                        <!--<div class="span4"><input type="text" ng-model="field.field_value" value="{{field.field_value}}"></div>-->
 
                                     </div>
 
                                 </div>
-                                <!--<div class="row" ng-show="showAddOptions(field)">
-                                    <div class="span2">Field Options:</div>
-                                    <div class="span6">
-                                        <div ng-repeat="option in field.field_options">
-                                            <input type="text" ng-model="option.option_title" value="{{option.option_title}}">
-                                            <a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, option)"><i class="icon-minus icon-white"></i></a>
-                                            <span class="label label-inverse">Value: {{ option.option_value }}</span>
-                                        </div>
-                                        <button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="icon-plus icon-white"></i> Add Option</button>
-                                    </div>
-                                </div>-->
                                 <div class="clear"></div> <hr>
                                 <div class="row">
                                     <div class="span2">Required:</div>

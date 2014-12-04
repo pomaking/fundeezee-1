@@ -12,6 +12,8 @@ ptaServices.service('ptaAcctService', function($http) {
     var schoolName = '';
     var schoolState = '';
 
+
+
     $http.defaults.useXDomain = true;
 
         var createAcct = function (callback, ptaForm) {
@@ -106,6 +108,8 @@ ptaServices.service('ptaAcctService', function($http) {
     var getSelectedPTACosts = function(){
         return selectedPTACosts;
     }
+
+
 
     return {
         createAcct: createAcct,

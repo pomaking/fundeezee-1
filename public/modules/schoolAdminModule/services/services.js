@@ -5,7 +5,7 @@
 var ptaAdminServices = angular.module('fundeezee.schoolAdminModule.services', []);
 
 ptaAdminServices.service('contributionBuilderService', function($http) {
-
+    var adminAcct = {};
     var formsJsonPath = './data/sample_forms.json';
 
     var schoolAdminMembership = {};
@@ -77,6 +77,13 @@ ptaAdminServices.service('contributionBuilderService', function($http) {
             error(function (data) {
                 alert('there was an error creating an account');
             });
+        },
+        getAdminAcct: function(){
+            return adminAcct;
+        },
+        adminAcct: function(callback, data){
+            adminAcct = data;
+            callback();
         }
 
     };

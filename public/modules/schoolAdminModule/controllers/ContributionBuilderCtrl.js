@@ -3,6 +3,7 @@
 schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$dialogs', '$state', 'contributionBuilderService', function($scope, $dialogs, $state, contributionBuilderService) {
     // preview form mode
     $scope.previewMode = false;
+    $scope.schooldAdminMembership = {};
 
     // new form
     $scope.form = {};
