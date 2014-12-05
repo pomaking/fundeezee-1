@@ -25,12 +25,13 @@
                 <div>Choose which types of memberships your PTA would like to offer and the cost: </div>
                 <div>
                     <ul class="admin-membership-types">
-                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sIndividual"><span>Individual Membership</span></li>
-                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFamily"><span>Family Membership</span></li>
-                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sFaculty"><span>Faculty Membership</span></li>
-                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="schooldAdminMembership.sBusiness"><span>Business Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.IndividualCost"> <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Individual"><span>Individual Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.FamilyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Family"><span>Family Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.FacultyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Faculty"><span>Faculty Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.BusinessCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Business"><span>Business Membership</span></li>
                     </ul>
                 </div>
+                <br>
                 <div class="form-fields" ng-hide="previewMode">
                     <div class="form-group">
                         <label for="form-name">Enter Form Name</label>
@@ -117,8 +118,8 @@
                         <button class="btn btn-primary btn-large right" type="button" ng-click="previewOff()"><i class="icon-arrow-left icon-white"></i> Back to Create Mode</button>
                     </p>
                 </div>
-                <button ng-click="schoolAdminContribCreate(form, schoolAdminMembershipForm)" type="button" class="btn btn-primary">Add a Contributions Section</button>
-                <button ng-click="schoolAdminMembershipSubmit(form, schoolAdminMembershipForm)" type="button" class="btn btn-primary">I'm Done, Save</button>
+                <button ng-click="schoolAdminContribCreate(form, staticMembership, schoolAdminMembershipForm)" type="button" class="btn btn-primary">Add a Contributions Section</button>
+                <button ng-click="schoolAdminMembershipSubmit(form, staticMembership, schoolAdminMembershipForm)" type="button" class="btn btn-primary">I'm Done, Save</button>
             </div>
             <!-- END testing form builder -->
 

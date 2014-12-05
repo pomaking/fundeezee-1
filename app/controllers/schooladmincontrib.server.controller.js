@@ -30,9 +30,9 @@ exports.findbyUsername = function(req, res)  {
 exports.findbySchoolName = function(req, res)  {
     var schoolName = req.params.schoolname.substring(1).trim();
     var stateAbbr = req.params.schoolstate.substring(1).trim();
-    console.dir('params: schoolName ' + schoolName + ' stateAbbr' + stateAbbr);
+    console.log('params: schoolName ' + schoolName + ' stateAbbr' + stateAbbr);
 
-    schoolcontrib.find({ 'schoolName': schoolName, 'state' : stateAbbr }, function(err, schoolContribforms) {
+    schoolcontrib.find({ 'schoolName':schoolName, 'schoolState':  stateAbbr }, function(err, schoolContribforms) {
         if (err)
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -75,7 +75,7 @@ exports.updateSchoolAdminContribForm = function(req, res) {
     // Model.findByIdAndUpdate(id, [update], [options], [callback])
     schoolcontrib.findByIdAndUpdate(req.body._id, req.body, {
         "multi" : false,  // update only one document
-        "upsert" : false  // insert a new document, if no existing document match the query
+        "upsert" : true  // insert a new document, if no existing document match the query
     }, function(err) {
         if (err) {
             return res.status(400).send({

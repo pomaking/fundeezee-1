@@ -64,6 +64,11 @@ ptaAdminServices.service('contributionBuilderService', function($http) {
                 return response.data;
             });
         },
+        addEscrowAcct: function(callback, data){
+            console.dir('addEscrowAccount: ' + JSON.stringify(data));
+
+            callback();
+        },
         createContribForm: function(callback, schoolAdminDataObj) {
             var postData = schoolAdminDataObj;
             $http({
@@ -79,10 +84,12 @@ ptaAdminServices.service('contributionBuilderService', function($http) {
             });
         },
         getAdminAcct: function(){
+            console.log('getAdminAcct: ' + JSON.stringify(adminAcct) );
             return adminAcct;
         },
-        adminAcct: function(callback, data){
+        setAdminAcct: function(callback, data){
             adminAcct = data;
+            console.log('setAdminAcct: ' + JSON.stringify(adminAcct) );
             callback();
         }
 

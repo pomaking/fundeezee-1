@@ -37,24 +37,28 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
         console.dir(JSON.stringify($scope.populatedPtaStudents));
     };
 
+
+
 	$scope.schoolAdminRegistrationSubmit = function (data, schoolAdminRegForm) {
         var x = data.schoolName.indexOf('(');
         $scope.adminAcct.schoolState =  data.schoolName.substring(x+1,x+3);
         $scope.adminAcct.schoolName = data.schoolName.substring(0, x).trim();
+        $scope.adminAcct.username  = 'kate198@smith.com';
 
-        $scope.adminAcct.relationshipTitle = 'schoolAdmin';
-
-		console.dir( JSON.stringify($scope.adminAcct) );
-        $state.go('schooladminregistration-bank');
+        contributionBuilderService.setAdminAcct(setAdminAcctCallback, $scope.adminAcct);
 	};
 
+    var setAdminAcctCallback = function(){
+        $state.go('schooladminregistration-bank');
+    }
+
     $scope.schoolAdminRegisterBank = function (data, schoolAdminRegForm) {
-        console.dir( JSON.stringify(data) );
-        $scope.adminAcct = data;
-        $scope.adminAcct.additionalAdmin = [];
-        $scope.adminAcct.additionalAdmin.push($scope.additionalAdmin);
-        console.dir( JSON.stringify($scope.adminAcct) );
-        contributionBuilderService.adminAcct(createBankAcctCallback, $scope.adminAcct);
+        contributionBuilderService.addEscrowAcct(createBankAcctCallback, data);
+
+        // add users if create escrow successful
+        if($scope.additionalAdmin.length > 0) {
+            data.push($scope.additionalAdmin);
+        }
 
     };
 	

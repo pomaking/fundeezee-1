@@ -4,9 +4,21 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var SchoolAdminContribFormSchema = new Schema(
-        {'userName': String,
+        {
+
         'schoolName':String,
-        'state':String,
+        'schoolState':String,
+        'ptaName': String,
+        'Individual':Boolean,
+        'Family':Boolean,
+        'Faculty':Boolean,
+        'Business':Boolean,
+        'IndividualCost':Number,
+        'FamilyCost':Number,
+        'FacultyCost':Number,
+        'BusinessCost':Number,
+        'taxExempt': Boolean,
+
         'membership':{
         "form_id": Number,
             "form_name": String,

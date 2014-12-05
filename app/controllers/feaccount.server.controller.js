@@ -27,9 +27,10 @@ var mongoose = require('mongoose'),
 
     exports.findbySchoolName = function(req, res) {
         var schoolName = req.params.schoolname.substring(1);
+        var schoolAbbr = req.params.schoolstate.substring(1);
 
         console.dir('schoolname ' + schoolName);
-        FEAccount.find({ 'FEAccount.schoolName': schoolName }, function(err, ptaregforms) {
+        FEAccount.find({ 'FEAccount.schoolName': schoolName, 'FEAccount.schoolState': schoolAbbr }, function(err, ptaregforms) {
             if (err)
                 return res.status(400).send({
                     message: errorHandler.getErrorMessage(err)
@@ -64,7 +65,7 @@ var mongoose = require('mongoose'),
         var stateAbbr = req.params.stateAbbr.substring(1).trim();
 
         console.dir('stateAbbr ' + stateAbbr);
-        FEAccount.find({ 'FEAccount.state': stateAbbr }, function(err, ptaregforms) {
+        FEAccount.find({ 'FEAccount.schoolState': stateAbbr }, function(err, ptaregforms) {
             if (err)
                 return res.status(400).send({
                     message: errorHandler.getErrorMessage(err)

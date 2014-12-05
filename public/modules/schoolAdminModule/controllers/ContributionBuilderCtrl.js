@@ -3,10 +3,11 @@
 schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$dialogs', '$state', 'contributionBuilderService', function($scope, $dialogs, $state, contributionBuilderService) {
     // preview form mode
     $scope.previewMode = false;
-    $scope.schooldAdminMembership = {};
 
     // new form
     $scope.form = {};
+    $scope.staticMembership = {};
+
     $scope.form.form_id = 1;
     $scope.form.form_name = 'Membership';
     $scope.form.form_fields = [];
@@ -120,7 +121,7 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
     }
 
     $scope.schoolAdminContribSubmit = function (schoolAdminContribObj, schoolAdminRegForm) {
-        var schoolAdminCreateFormJSON = {'userName':'kate100@smith.com', 'schoolName':'SHELBY ELEMENTARY SCHOOL', 'state':'GA',  'membership': contributionBuilderService.schooldAdminMembershipObj, 'contribution': schoolAdminContribObj};
+        var schoolAdminCreateFormJSON = { 'membership': contributionBuilderService.schooldAdminMembershipObj, 'contribution': schoolAdminContribObj};
         console.dir(JSON.stringify(schoolAdminCreateFormJSON));
 
         // send create acct form
@@ -136,8 +137,25 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
         $state.go('schooladmincontribution', {}, {reload: true});
     }
 
-    $scope.schoolAdminMembershipSubmit = function (schoolAdminMembershipObj, schoolAdminRegForm) {
-        var schoolAdminCreateFormJSON = {'userName':'kate198@smith.com', 'schoolName':'SHELTON ELEMENTARY SCHOOL', 'state':'GA',  'membership': schoolAdminMembershipObj};
+    $scope.schoolAdminMembershipSubmit = function (schoolAdminMembershipObj, membership, schoolAdminRegForm) {
+        var schoolAdminCreateFormJSON = {'membership': schoolAdminMembershipObj};
+        var aa = contributionBuilderService.getAdminAcct();
+
+        schoolAdminCreateFormJSON.schoolName = aa.schoolName;
+        schoolAdminCreateFormJSON.schoolState = aa.schoolState;
+        schoolAdminCreateFormJSON.taxExempt = aa.taxExempt;
+        schoolAdminCreateFormJSON.ptaName = aa.ptaOrgName;
+
+        schoolAdminCreateFormJSON.Individual = membership.Individual;
+        schoolAdminCreateFormJSON.Family = membership.Family;
+        schoolAdminCreateFormJSON.Faculty = membership.Faculty;
+        schoolAdminCreateFormJSON.Business = membership.Business;
+
+        schoolAdminCreateFormJSON.IndividualCost = membership.IndividualCost;
+        schoolAdminCreateFormJSON.FamilyCost = membership.FamilyCost;
+        schoolAdminCreateFormJSON.FacultyCost = membership.FacultyCost;
+        schoolAdminCreateFormJSON.BusinessCost = membership.BusinessCost;
+
         console.dir(JSON.stringify(schoolAdminCreateFormJSON));
 
         // send create acct form

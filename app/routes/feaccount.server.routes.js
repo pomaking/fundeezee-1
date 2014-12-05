@@ -15,7 +15,7 @@ module.exports = function(app) {
     app.route('/api/ptaregistration/bystate/:stateAbbr')
         .get(feAccount.findbyStateAbbr);
 
-    app.route('/api/ptaregistration/byschool/:schoolname')
+    app.route('/api/ptaregistration/byschool/:schoolname/:schoolstate')
         .get(feAccount.findbySchoolName);
 
     app.route('/api/ptaregistration/username/:username')
