@@ -3,14 +3,14 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            PTA Registration
+            Select your Membership and contribute
         </h1>
         <ol class="breadcrumb">
             <li>
                 <i class="fa fa-dashboard"></i>  <a ui-sref="/">Home</a>
             </li>
             <li class="active">
-                <i class="fa fa-edit"></i> PTA Registration
+                <i class="fa fa-edit"></i> {{ptaMembershipCosts.ptaName}} Registration
             </li>
         </ol>
     </div>
@@ -19,11 +19,17 @@
 
 <div class="row">
     <div class="col-lg-6">
-        Please select your PTA registration and if any available, your contributions.
+        Please select your organization's registration and if any available, your contributions.
 
         <H3>{{ptaMembershipCosts.schoolName}}</H3>
         <H3>Membership</H3>
+
         <form name="ptaMembershipForm" id="ptaMembershipForm" role="form" novalidate>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedInd" selected>Individual {{ptaMembershipCosts.Individual}} {{ptaMembershipCosts.IndividualCost | currency}} </div>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedFam">Family {{ptaMembershipCosts.Family}} {{ptaMembershipCosts.FamilyCost | currency}} </div>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedFac">Faculty {{ptaMembershipCosts.Faculty}} {{ptaMembershipCosts.FacultyCost | currency}} </div>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedBus">Business {{ptaMembershipCosts.Business}} {{ptaMembershipCosts.BusinessCost | currency}} </div>
+
             <div data-ng-repeat="field in ptaMembershipCosts.membership">
                 <input name="membership" data-ng-model="ptaMembershipCosts.selectedMembership"
                         type="radio"

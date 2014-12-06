@@ -73,7 +73,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     var findCostsCallback = function (data) {
         $state.go('ptaregistrationCosts', {});
 
-        console.log(JSON.stringify($scope.ptaMembershipCosts));
+        //console.log(JSON.stringify($scope.ptaMembershipCosts));
     };
 
     $scope.ptaMembershipCosts = ptaAcctService.getScopeCosts();

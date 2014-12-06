@@ -44,15 +44,8 @@
                 <label>Email Address</label>
                 <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.userName" name="userName">
             </div>
-            <div class="form-group">
-                <label>Relationship to School</label>
-                <select class="form-control" ng-model="ptaAcctObj.relationshipTitle" name="relationshipTitle">
-                    <option value="parent">Parent</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="schoolAdmin">School Admin</option>
-                </select>
-            </div>
-            <div class="form-group">
+
+            <!--<div class="form-group">
                 <label>May we contact you by Email?</label>
                 <div class="radio">
                     <label class="radio-inline">
@@ -66,7 +59,7 @@
                         No
                     </label>
                 </div>
-            </div>
+            </div>-->
 
             <button ng-click="ptaRegistrationSubmit(ptaAcctObj, ptaRegForm)" type="button" class="btn btn-default">Register</button>
         </form>
