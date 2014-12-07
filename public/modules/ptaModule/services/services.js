@@ -11,8 +11,7 @@ ptaServices.service('ptaAcctService', function($http) {
     var selectedPTACosts = {};
     var schoolName = '';
     var schoolState = '';
-
-
+    var reviewChoice = {};
 
     $http.defaults.useXDomain = true;
 
@@ -119,14 +118,22 @@ ptaServices.service('ptaAcctService', function($http) {
         return selectedPTACosts;
     }
 
+    var getReviewChoice = function(){
+        return reviewChoice;
+    }
 
+    var setReviewChoice = function(data){
+        reviewChoice = data;
+    }
 
     return {
         createAcct: createAcct,
         findCostsbySchoolName: findCostsbySchoolName,
         getCosts: getCosts,
         getScopeCosts: getScopeCosts,
-        getSelectedPTACosts: getSelectedPTACosts
+        getSelectedPTACosts: getSelectedPTACosts,
+        getReviewChoice: getReviewChoice,
+        setReviewChoice: setReviewChoice
     };
 });
 

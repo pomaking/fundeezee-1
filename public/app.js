@@ -130,7 +130,7 @@ angular.module('fundeezeeApp', [
                     },
                     "maincontent": {
                         templateUrl: "/partials/pta/pta-membership-reviewchoice.html",
-                        controller: "PTARegistrationPaymentCtrl"
+                        controller: "PTAMembershipPayCtrl"
                     }
                 }
             })

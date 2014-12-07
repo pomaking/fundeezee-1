@@ -84,10 +84,11 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 
     $scope.ptaSelectedCosts = function(ptaMembershipCosts, ptaMembershipForm){
         console.dir('ptaregistrationCtrl.ptaSelectedCosts method ' + JSON.stringify(ptaMembershipCosts));
+        ptaAcctService.setReviewChoice(ptaMembershipCosts);
         //ptaMembershipCosts.schoolName =
         //ptaMembershipCosts.state =
 
-        $state.go('ptaregistrationPayment', {});
+        $state.go('ptaregistrationreviewchoice', {});
     };
 
     // populate relationship to school
