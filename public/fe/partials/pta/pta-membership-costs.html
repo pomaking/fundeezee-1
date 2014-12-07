@@ -25,17 +25,13 @@
         <H3>Membership</H3>
 
         <form name="ptaMembershipForm" id="ptaMembershipForm" role="form" novalidate>
-            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedInd" selected>Individual {{ptaMembershipCosts.Individual}} {{ptaMembershipCosts.IndividualCost | currency}} </div>
-            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedFam">Family {{ptaMembershipCosts.Family}} {{ptaMembershipCosts.FamilyCost | currency}} </div>
-            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedFac">Faculty {{ptaMembershipCosts.Faculty}} {{ptaMembershipCosts.FacultyCost | currency}} </div>
-            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedBus">Business {{ptaMembershipCosts.Business}} {{ptaMembershipCosts.BusinessCost | currency}} </div>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedInd" ng-selected="selected">Individual {{ptaMembershipCosts.individual}} {{ptaMembershipCosts.individualCost | currency}} </div>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedFam">Family {{ptaMembershipCosts.family}} {{ptaMembershipCosts.familyCost | currency}} </div>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedFac">Faculty {{ptaMembershipCosts.faculty}} {{ptaMembershipCosts.facultyCost | currency}} </div>
+            <div><input type="radio" name="membership" data-ng-model="ptaMembershipCosts.selectedBus">Business {{ptaMembershipCosts.business}} {{ptaMembershipCosts.businessCost | currency}} </div>
 
             <div data-ng-repeat="field in ptaMembershipCosts.membership">
-                <input name="membership" data-ng-model="ptaMembershipCosts.selectedMembership"
-                        type="radio"
-                        value="{{field.field_id}}" />
-                {{field.field_title}} {{field.field_cost | currency}}
-
+                <input type="radio" ng-model="ptaMembershipCosts.selectedMembership" name="membership" value="{{field.field_id}}" />{{field.field_title}} {{field.field_cost | currency}}
             </div>
             <br>
             <H3>Costs</H3>

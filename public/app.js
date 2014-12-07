@@ -122,6 +122,18 @@ angular.module('fundeezeeApp', [
                     }
                 }
             })
+            .state('ptaregistrationreviewchoice', {
+                url: "/pta-registration-reviewchoice",
+                views: {
+                    "leftnav": {
+                        templateUrl: "/partials/main/leftnav.html"
+                    },
+                    "maincontent": {
+                        templateUrl: "/partials/pta/pta-membership-reviewchoice.html",
+                        controller: "PTARegistrationPaymentCtrl"
+                    }
+                }
+            })
             .state('ptaregistrationPayment', {
                 url: "/pta-registration-payment",
                 views: {

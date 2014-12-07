@@ -163,10 +163,10 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
 
         if(membership.membershipTerm == 'A') {
             year = year + 1;
-            schoolAdminCreateFormJSON.endDate = membership.endDate+'/'+year;
+            schoolAdminCreateFormJSON.endDate = membership.endDate;
         } else {
 
-            schoolAdminCreateFormJSON.endDate = '12/31'+year;
+            schoolAdminCreateFormJSON.endDate = '12/31/2001';
         }
 
         console.dir('school admin submit: ' + JSON.stringify(schoolAdminCreateFormJSON));
