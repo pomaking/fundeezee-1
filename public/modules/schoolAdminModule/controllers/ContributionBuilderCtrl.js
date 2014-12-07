@@ -146,17 +146,30 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
         schoolAdminCreateFormJSON.taxExempt = aa.taxExempt;
         schoolAdminCreateFormJSON.ptaName = aa.ptaOrgName;
 
-        schoolAdminCreateFormJSON.Individual = membership.Individual;
-        schoolAdminCreateFormJSON.Family = membership.Family;
-        schoolAdminCreateFormJSON.Faculty = membership.Faculty;
-        schoolAdminCreateFormJSON.Business = membership.Business;
+        schoolAdminCreateFormJSON.individual = membership.individual;
+        schoolAdminCreateFormJSON.family = membership.family;
+        schoolAdminCreateFormJSON.faculty = membership.faculty;
+        schoolAdminCreateFormJSON.business = membership.business;
 
-        schoolAdminCreateFormJSON.IndividualCost = membership.IndividualCost;
-        schoolAdminCreateFormJSON.FamilyCost = membership.FamilyCost;
-        schoolAdminCreateFormJSON.FacultyCost = membership.FacultyCost;
-        schoolAdminCreateFormJSON.BusinessCost = membership.BusinessCost;
+        schoolAdminCreateFormJSON.individualCost = membership.individualCost;
+        schoolAdminCreateFormJSON.familyCost = membership.familyCost;
+        schoolAdminCreateFormJSON.facultyCost = membership.facultyCost;
+        schoolAdminCreateFormJSON.businessCost = membership.businessCost;
 
-        console.dir(JSON.stringify(schoolAdminCreateFormJSON));
+        schoolAdminCreateFormJSON.membershipTerm = membership.membershipTerm;
+
+        var currentTime = new Date();
+        var year = currentTime.getFullYear();
+
+        if(membership.membershipTerm == 'A') {
+            year = year + 1;
+            schoolAdminCreateFormJSON.endDate = membership.endDate+'/'+year;
+        } else {
+
+            schoolAdminCreateFormJSON.endDate = '12/31'+year;
+        }
+
+        console.dir('school admin submit: ' + JSON.stringify(schoolAdminCreateFormJSON));
 
         // send create acct form
         contributionBuilderService.createContribForm(schoolAdminContribCreateCallback, schoolAdminCreateFormJSON);

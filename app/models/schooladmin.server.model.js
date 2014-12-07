@@ -9,14 +9,21 @@ var SchoolAdminContribFormSchema = new Schema(
         'schoolName':String,
         'schoolState':String,
         'ptaName': String,
-        'Individual':Boolean,
-        'Family':Boolean,
-        'Faculty':Boolean,
-        'Business':Boolean,
-        'IndividualCost':Number,
-        'FamilyCost':Number,
-        'FacultyCost':Number,
-        'BusinessCost':Number,
+        'membershipTerm': {
+             type: String
+        },
+        'endDate': {
+            type: Date,
+            required: true
+        },
+        'individual':Boolean,
+        'family':Boolean,
+        'faculty':Boolean,
+        'business':Boolean,
+        'individualCost':Number,
+        'familyCost':Number,
+        'facultyCost':Number,
+        'businessCost':Number,
         'taxExempt': Boolean,
 
         'membership':{

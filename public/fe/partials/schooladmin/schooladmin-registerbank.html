@@ -31,10 +31,8 @@
             </div>
             <div>
                 <label>Account Type</label>
-                <select>
-                    <option ng-model="adminAcct.bankAcctType" value="checking" selected>Checking</option>
-                    <option ng-model="adminAcct.bankAcctType" value="saving">Saving</option>
-                </select>
+                    <input type="radio" ng-model="adminAcct.bankAcctType" value="checking"> Checking <br/>
+                    <input type="radio" ng-model="adminAcct.bankAcctType" value="saving"> Saving <br/>
             </div>
 
             <h3>Add administrators</h3>

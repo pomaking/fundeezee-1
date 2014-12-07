@@ -66,14 +66,14 @@ ptaServices.service('ptaAcctService', function($http) {
         scopeObj.selectedTextContribution = [];
         scopeObj.taxExempt = ptaCosts[0].taxExempt;
         scopeObj.ptaName =  ptaCosts[0].ptaName;
-        scopeObj.Individual =   ptaCosts[0].Individual;
-        scopeObj.Family =  ptaCosts[0].Family;
-        scopeObj.Faculty =  ptaCosts[0].Faculty;
-        scopeObj.Business =  ptaCosts[0].Business;
-        scopeObj.IndividualCost = ptaCosts[0].IndividualCost;
-        scopeObj.FamilyCost =  ptaCosts[0].FamilyCost;
-        scopeObj.FacultyCost =  ptaCosts[0].FacultyCost;
-        scopeObj.BusinessCost =  ptaCosts[0].BusinessCost;
+        scopeObj.individual =   ptaCosts[0].individual;
+        scopeObj.family =  ptaCosts[0].family;
+        scopeObj.faculty =  ptaCosts[0].faculty;
+        scopeObj.business =  ptaCosts[0].business;
+        scopeObj.individualCost = ptaCosts[0].individualCost;
+        scopeObj.familyCost =  ptaCosts[0].familyCost;
+        scopeObj.facultyCost =  ptaCosts[0].facultyCost;
+        scopeObj.businessCost =  ptaCosts[0].businessCost;
 
         scopeObj.membership = [];
         scopeObj.contribution = [];

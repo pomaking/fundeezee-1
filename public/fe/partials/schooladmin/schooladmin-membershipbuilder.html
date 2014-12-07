@@ -18,17 +18,17 @@
 
 <div class="row">
     <div class="col-lg-6">
-
+        <h3>Membership Types</h3>
         <form name="schoolAdminMembershipForm" id="schoolAdminMembershipForm" role="form" novalidate>
 
             <div class="well">
-                <div>Choose which types of memberships your PTA would like to offer and the cost: </div>
+                <div>Select the membership types you would like to add and then fill in an amount: </div>
                 <div>
                     <ul class="admin-membership-types">
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.IndividualCost"> <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Individual"><span>Individual Membership</span></li>
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.FamilyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Family"><span>Family Membership</span></li>
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.FacultyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Faculty"><span>Faculty Membership</span></li>
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.BusinessCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.Business"><span>Business Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.individualCost"> <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.individual"><span>Individual Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.familyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.family"><span>Family Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.facultyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.faculty"><span>Faculty Membership</span></li>
+                        <li><input type="text" style="width:30px;" ng-model="staticMembership.businessCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.business"><span>Business Membership</span></li>
                     </ul>
                 </div>
                 <br>
@@ -118,7 +118,19 @@
                         <button class="btn btn-primary btn-large right" type="button" ng-click="previewOff()"><i class="icon-arrow-left icon-white"></i> Back to Create Mode</button>
                     </p>
                 </div>
-                <button ng-click="schoolAdminContribCreate(form, staticMembership, schoolAdminMembershipForm)" type="button" class="btn btn-primary">Add a Contributions Section</button>
+                <br>
+                <h3>Membership Terms</h3>
+                <div class="span4">
+                    <input type="radio" ng-model="staticMembership.membershipTerm" value="C">  Calendar Term <br/>
+                    <input type="radio" ng-model="staticMembership.membershipTerm" value="A"> Academic Term <br/>
+
+                        <input type="text" ng-model="staticMembership.endDate">
+
+                </div>
+                <div>
+
+
+                <!--<button ng-click="schoolAdminContribCreate(form, staticMembership, schoolAdminMembershipForm)" type="button" class="btn btn-primary">Add a Contributions Section</button>-->
                 <button ng-click="schoolAdminMembershipSubmit(form, staticMembership, schoolAdminMembershipForm)" type="button" class="btn btn-primary">I'm Done, Save</button>
             </div>
             <!-- END testing form builder -->
