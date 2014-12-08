@@ -2,6 +2,8 @@
 
 ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$state', 'ptaAcctService', function($scope, $http, $state, ptaAcctService) {
     $scope.reviewChoice = {};
+    $scope.feUser = {};
+
 
     var ptaPaymentSubmit = function (ptaMembershipSelectedCosts, ptaPaymentForm) {
 
@@ -38,6 +40,7 @@ ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$st
     }
 
     $scope.reviewChoice = assembleReview();
+    $scope.feUser = ptaAcctService.getFEAccount();
 
 }]);
 

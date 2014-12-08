@@ -119,11 +119,17 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getReviewChoice = function(){
+        console.log('getReviewChoice ' + JSON.stringify(reviewChoice));
         return reviewChoice;
     }
 
     var setReviewChoice = function(data){
         reviewChoice = data;
+    }
+
+    var getFEAccount = function(){
+        console.log('getFEAccount ' + JSON.stringify(feAccount));
+        return feAccount;
     }
 
     return {
@@ -133,7 +139,8 @@ ptaServices.service('ptaAcctService', function($http) {
         getScopeCosts: getScopeCosts,
         getSelectedPTACosts: getSelectedPTACosts,
         getReviewChoice: getReviewChoice,
-        setReviewChoice: setReviewChoice
+        setReviewChoice: setReviewChoice,
+        getFEAccount: getFEAccount
     };
 });
 
