@@ -12,6 +12,7 @@ ptaServices.service('ptaAcctService', function($http) {
     var schoolName = '';
     var schoolState = '';
     var reviewChoice = {};
+    var choice = {};
 
     $http.defaults.useXDomain = true;
 
@@ -111,6 +112,7 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getCosts = function () {
+        console.log('getCosts: ' + JSON.stringify(ptaCosts));
         return ptaCosts;
     }
 
@@ -123,6 +125,15 @@ ptaServices.service('ptaAcctService', function($http) {
         return reviewChoice;
     }
 
+    var setChoice = function(data){
+        choice = data;
+    }
+
+    var getChoice = function(){
+        console.log('getChoice ' + JSON.stringify(choice));
+        return choice;
+    }
+
     var setReviewChoice = function(data){
         reviewChoice = data;
     }
@@ -130,6 +141,13 @@ ptaServices.service('ptaAcctService', function($http) {
     var getFEAccount = function(){
         console.log('getFEAccount ' + JSON.stringify(feAccount));
         return feAccount;
+    }
+
+    var checkout = function() {
+             $http.post(formsJsonPath)
+             .then(function (response) {
+             return response.data;
+            });
     }
 
     return {
@@ -140,7 +158,10 @@ ptaServices.service('ptaAcctService', function($http) {
         getSelectedPTACosts: getSelectedPTACosts,
         getReviewChoice: getReviewChoice,
         setReviewChoice: setReviewChoice,
-        getFEAccount: getFEAccount
+        getChoice: getChoice,
+        setChoice: setChoice,
+        getFEAccount: getFEAccount,
+        checkout : checkout
     };
 });
 

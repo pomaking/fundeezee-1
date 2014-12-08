@@ -5,7 +5,13 @@ ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$st
     $scope.feUser = {};
 
 
-    var ptaPaymentSubmit = function (ptaMembershipSelectedCosts, ptaPaymentForm) {
+   $scope.checkout = function (ptaMembershipSelectedCosts, ptaPaymentForm) {
+        // call balancedjs - placeholder for now
+        console.log('ctrl.checkout');
+        ptaAcctService.checkout();
+        //
+
+
 
     };
 
@@ -35,12 +41,14 @@ ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$st
             review.mCost  = x.businessCost;
             review.tCost = x.businessCost + 1;
         }
+        ptaAcctService.setChoice(review);
         return review;
 
     }
 
     $scope.reviewChoice = assembleReview();
     $scope.feUser = ptaAcctService.getFEAccount();
+    //$scope.feCost = ptaAcctService.getCosts();
 
 }]);
 
