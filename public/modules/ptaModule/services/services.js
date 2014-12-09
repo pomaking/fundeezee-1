@@ -143,9 +143,12 @@ ptaServices.service('ptaAcctService', function($http) {
         return feAccount;
     }
 
+    // need to assemble the balalnced payment adn persist to the db
     var checkout = function() {
-             $http.post(formsJsonPath)
+        var balancedPayment = {};
+             $http.post(balancedPayment)
              .then(function (response) {
+
              return response.data;
             });
     }
