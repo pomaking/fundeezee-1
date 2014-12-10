@@ -18,43 +18,113 @@
 <!-- /.row -->
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-8">
         Please select your organization's registration and if any available, your contributions.
 
         <H3>{{ptaMembershipCosts.schoolName}}</H3>
         <H3>Membership</H3>
 
         <form name="ptaMembershipForm" id="ptaMembershipForm" role="form" novalidate>
-            <div><input type="radio" value="individual" name="membership"  data-ng-model="ptaMembershipCosts.selectedMembership">Individual {{ptaMembershipCosts.individual}} {{ptaMembershipCosts.individualCost | currency}} </div>
-            <div><input type="radio" value="family" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Family {{ptaMembershipCosts.family}} {{ptaMembershipCosts.familyCost | currency}} </div>
-            <div><input type="radio" value="faculty" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Faculty {{ptaMembershipCosts.faculty}} {{ptaMembershipCosts.facultyCost | currency}} </div>
-            <div><input type="radio" value="business" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Business {{ptaMembershipCosts.business}} {{ptaMembershipCosts.businessCost | currency}} </div>
+            <div ng-show="ptaMembershipCosts.individualCost > 0"><input type="radio" ng-change="changePartial()" value="individual" name="membership"  data-ng-model="ptaMembershipCosts.selectedMembership">Individual {{ptaMembershipCosts.individual}} {{ptaMembershipCosts.individualCost | currency}} </div>
+            <div ng-show="ptaMembershipCosts.familyCost > 0"><input type="radio" ng-change="changePartial()" value="family" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Family {{ptaMembershipCosts.family}} {{ptaMembershipCosts.familyCost | currency}} </div>
+            <div ng-show="ptaMembershipCosts.facultyCost > 0"><input type="radio" ng-change="changePartial()" value="faculty" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Faculty {{ptaMembershipCosts.faculty}} {{ptaMembershipCosts.facultyCost | currency}} </div>
+            <div ng-show="ptaMembershipCosts.businessCost > 0"><input type="radio"  ng-change="changePartial()" value="business" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Business {{ptaMembershipCosts.business}} {{ptaMembershipCosts.businessCost | currency}} </div>
 
             <div data-ng-repeat="field in ptaMembershipCosts.membership">
                 <input type="radio" ng-model="ptaMembershipCosts.selectedMembership" name="membership" value="{{field.field_id}}" />{{field.field_title}} {{field.field_cost | currency}}
             </div>
+
+            <div id="ptaIndMembershipform" class="col-md-12" ng-show="partialIndShow">
+                <div class="form-group required">
+                    <label>First Name</label>
+                    <input class="form-control" placeholder="First name" type="text" ng-model="ptaAcctObj.firstName" name="firstName">
+                </div>
+                <div class="form-group required">
+                    <label>Last Name</label>
+                    <input class="form-control" placeholder="last name" type="text" ng-model="ptaAcctObj.lastName" name="lastName">
+                </div>
+                <div class="form-group required">
+                    <label>Email Address</label>
+                    <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.userName" name="userName">
+                </div>
+            </div>
+
+            <div id="ptaMultipleMembershipform" ng-show="partialMultiShow">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+
+                        <div class="form-group required">
+                            <label>First Name</label>
+                            <input class="form-control" placeholder="First name" type="text" ng-model="ptaAcctObj.firstName" name="firstName">
+                        </div>
+                        <div class="form-group required">
+                            <label>Last Name</label>
+                            <input class="form-control" placeholder="last name" type="text" ng-model="ptaAcctObj.lastName" name="lastName">
+                        </div>
+                        <div class="form-group required">
+                            <label>Email Address</label>
+                            <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.userName" name="userName">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!--<div class="form-group">
+                            <label>Prefix</label>
+                            <select ng-model="ptaAcctObj.prefix2">
+                                <option value="">Choose a Prefix</option>
+                                <option ng-repeat="pre in prefix" value="{{pre}}">{{pre}}</option>
+                            </select>
+                        </div>-->
+                        <div class="form-group required">
+                            <label>First Name</label>
+                            <input class="form-control" placeholder="First name" type="text" ng-model="ptaSecondaryAcct.firstName" name="firstName">
+                        </div>
+                        <div class="form-group required">
+                            <label>Last Name</label>
+                            <input class="form-control" placeholder="last name" type="text" ng-model="ptaSecondaryAcct.lastName" name="lastName">
+                        </div>
+                        <div class="form-group required">
+                            <label>Email Address</label>
+                            <input class="form-control" placeholder="Email address" type="text" ng-model="ptaSecondaryAcct.userName" name="userName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="ptaAddStudentForm" name="ptaAddStudentForm" ng-show="partialChldrenShow" role="form" novalidate>
+                <div class="form-group">
+                    <label>Student Names</label>
+                    <div id="itemRows">
+                        <label>First Name:</label> <input type="text" ng-model="ptaStudents.studentFirstName" name="studentFirstName" />
+                        <label>Last Name: </label><input type="text" ng-model="ptaStudents.studentLastName" name="studentLastName" />
+                        <label>Teacher Name: </label><input type="text" ng-model="ptaStudents.studentTeacherName" name="studentTeacherName" />
+                        <button ng-click="ptaAddStudent(ptaStudents, ptaAddStudentForm);" type="button" class="btn btn-primary" value="Add Student">Add Student</button>
+                    </div>
+                </div>
+            </form>
+
+
             <br>
-            <H3>Costs</H3>
+            <!--  <H3>Contributions</H3>-->
             <div ng-repeat="field in ptaMembershipCosts.contribution">
                 <input name="{{field.field_cost}}" data-ng-model="ptaMembershipCosts.selectedContribution[$index]"
                        type="{{field.field_type}}"
-                        ng-true-value="{{field.field_id}}"
-                        ng-false-value=""
+                       ng-true-value="{{field.field_id}}"
+                       ng-false-value=""
                        value="{{field.field_id}}"/>
-                 {{field.field_title}} {{field.field_cost | currency}}
+                {{field.field_title}} {{field.field_cost | currency}}
             </div>
             <div ng-repeat="field in ptaMembershipCosts.textContribution">
                 <label> {{field.field_title}}
-                <input name="{{field.field_cost}}" data-ng-model="ptaMembershipCosts.selectedTextContribution[$index]" placeholder="Enter a value"
-                       type="{{field.field_type}}"
-                       ng-true-value="{{field.field_id}}+'-'"
-                       ng-false-value=""
-                       style="width: 100px"
-                       value=""/>
+                    <input name="{{field.field_cost}}" data-ng-model="ptaMembershipCosts.selectedTextContribution[$index]" placeholder="Enter a value"
+                           type="{{field.field_type}}"
+                           ng-true-value="{{field.field_id}}+'-'"
+                           ng-false-value=""
+                           style="width: 100px"
+                           value=""/>
                 </label>
             </div>
             <br>
-            <button ng-click="ptaSelectedCosts(ptaMembershipCosts, ptaMembershipForm)" type="button" class="btn btn-default">Proceed to Checkout</button>
+            <button ng-click="ptaSelectedCosts(ptaAcctObj, ptaSecondaryAcct, ptaMembershipCosts, ptaMembershipForm)" type="button" class="btn btn-default">Proceed to Checkout</button>
         </form>
     </div>
 </div>

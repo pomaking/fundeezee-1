@@ -53,7 +53,10 @@ ptaServices.service('ptaAcctService', function($http) {
     };
 
     var getScopeCosts = function(){
+        console.log(ptaCosts);
         if (JSON.stringify(ptaCosts) == '{}')
+            return
+        if (JSON.stringify(ptaCosts) == '[]')
             return;
 
         var scopeObj = {};
@@ -143,6 +146,24 @@ ptaServices.service('ptaAcctService', function($http) {
         return feAccount;
     }
 
+    var setSchoolName = function(data){
+        schoolName = data;
+    }
+
+    var getSchoolName = function(){
+        console.log('schoolName: ' + schoolName);
+        return schoolName;
+    }
+
+    var setSchoolState = function(data){
+        schoolState = data;
+    }
+
+    var getSchoolState = function(){
+        console.log('schoolstate: ' + schoolState);
+        return schoolState;
+    }
+
     // need to assemble the balalnced payment adn persist to the db
     var checkout = function() {
         var balancedPayment = {};
@@ -164,7 +185,11 @@ ptaServices.service('ptaAcctService', function($http) {
         getChoice: getChoice,
         setChoice: setChoice,
         getFEAccount: getFEAccount,
-        checkout : checkout
+        checkout : checkout,
+        setSchoolName: setSchoolName,
+        getSchoolName: getSchoolName,
+        setSchoolState : setSchoolState,
+        getSchoolState : getSchoolState
     };
 });
 

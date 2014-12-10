@@ -6,13 +6,11 @@ var mongoose = require('mongoose'),
 
 var FEAccountSchema = new Schema({
     FEAccount:{
+        id: String,
         schoolName: {
             type: String
         },
         schoolState: String,
-        firstName: String,
-        lastName: String,
-        userName: String,
         relationshipTitle: {
             type: String
         },
@@ -38,6 +36,12 @@ var FEAccountSchema = new Schema({
             type: Date,
             default: Date.now
         }
+    },
+    SecondaryAcct: {
+        secondaryId: String,
+        firstName: String,
+        lastName: String,
+        userName: String
     },
     StudentInfo:[{
         studentFirstName: String,

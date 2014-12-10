@@ -11,7 +11,18 @@ var mongoose = require('mongoose'),
 
     exports.createfeaccount = function(req, res) {
         // create an instance/object out of the model
-        var newAccount = new FEAccount(req.body);
+        var feAcct = {};
+        feAcct = req.body;
+        console.dir('createfeaccount: ' + JSON.stringify(feAcct));
+        var id = mongoose.Types.ObjectId();
+        feAcct.FEAccount.id = id;
+
+        if(feAcct.secondaryAcct != {}) {
+            id = mongoose.Types.ObjectId();
+            feAcct.SecondaryAcct.secondaryId = id;
+        }
+
+        var newAccount = new FEAccount(feAcct);
 
         // 'save' the instance to mongodb
         newAccount.save(function(err) {

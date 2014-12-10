@@ -13,8 +13,7 @@ var FEPTAPaymentSchema = new Schema(
         selectedMembershipCost: Number,
         selectedContribution: [],
         selectedTextContribution: [],
-        username: [String],
-        feAccountUser : { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
+        feAccountUser : { type: mongoose.Schema.Types.ObjectId, ref: 'FEAccount' },
         createDate:{
             type: Date,
             default: Date.now
