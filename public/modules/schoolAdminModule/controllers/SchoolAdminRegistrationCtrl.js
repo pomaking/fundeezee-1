@@ -29,14 +29,6 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
     });
   };
 
-    // add child
-    $scope.addAdmin = function (adminAcct, schoolAdminBankForm) {
-
-        $scope.additionalAdmin.push(adminAcct);
-
-        console.dir(JSON.stringify($scope.populatedPtaStudents));
-    };
-
     $scope.admin = {};
     $scope.admin.data = [];
 
@@ -71,8 +63,8 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
         contributionBuilderService.addEscrowAcct(createBankAcctCallback, data);
 
         // add users if create escrow successful
-        if($scope.additionalAdmin.length > 0) {
-            data.push($scope.additionalAdmin);
+        if($scope.admin.length > 0) {
+           // create admins....
         }
 
     };
