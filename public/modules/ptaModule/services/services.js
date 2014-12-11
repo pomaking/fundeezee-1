@@ -53,7 +53,7 @@ ptaServices.service('ptaAcctService', function($http) {
     };
 
     var getScopeCosts = function(){
-        console.log(ptaCosts);
+        // console.log(ptaCosts);
         if (JSON.stringify(ptaCosts) == '{}')
             return
         if (JSON.stringify(ptaCosts) == '[]')

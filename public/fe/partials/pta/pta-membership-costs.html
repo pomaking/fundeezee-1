@@ -91,15 +91,14 @@
             </div>
 
             <form id="ptaAddStudentForm" name="ptaAddStudentForm" ng-show="partialChldrenShow" role="form" novalidate>
-                <div class="form-group">
-                    <label>Student Names</label>
-                    <div id="itemRows">
-                        <label>First Name:</label> <input type="text" ng-model="ptaStudents.studentFirstName" name="studentFirstName" />
-                        <label>Last Name: </label><input type="text" ng-model="ptaStudents.studentLastName" name="studentLastName" />
-                        <label>Teacher Name: </label><input type="text" ng-model="ptaStudents.studentTeacherName" name="studentTeacherName" />
-                        <button ng-click="ptaAddStudent(ptaStudents, ptaAddStudentForm);" type="button" class="btn btn-primary" value="Add Student">Add Student</button>
-                    </div>
-                </div>
+                <ul class="">
+                    <input type="text" value="ItemGrade" ng-model="newItemGrade" placeholder="enter a grade...K-12">
+                    <input type="text" value="ItemName" ng-model="newItemName" placeholder="name of new student...">
+                    <button ng-click="addItem()">Add Student</button>
+                    <li ng-repeat="item in students.data" id="item{{item.id}}">
+                        {{item.studentName}}  <a ng-click="deleteItem($index)" class="delete-item">x</a>
+                    </li>
+                </ul>
             </form>
 
 

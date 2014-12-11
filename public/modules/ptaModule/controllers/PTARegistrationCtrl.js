@@ -7,7 +7,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     var schoolState = '';
     var ptaAcctObj = {};
 /*    $scope.prefix = ['Mr.', 'Mrs.', 'Ms.'];*/
-
+    $scope.ptaAddStudentForm = {};
     $scope.ptaPrimaryAcct = {};
     $scope.partialMultiShow = false;
     $scope.partialIndShow = false;
@@ -25,11 +25,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
             for(var i=0;i < response.data.result.records.length;i++){
                 schools.push(response.data.result.records[i].SCHNAM09+' ('+response.data.result.records[i].LSTATE09+')');
             }
-
-            //return response.data.result.records;
             return schools;
-
-            // alert(JSON.stringify(response.data.result.records));
         });
     };
 
@@ -64,25 +60,28 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
             }
         }
 
-        if(x == 'family' || x == 'faculty'){
+        if(x == 'family' || x == 'faculty') {
             $scope.partialMultiShow = true;
             $scope.partialIndShow = false;
             $scope.partialChldrenShow = false;
         }
-
     }
 
-    // add child
-    $scope.ptaAddStudent = function (ptaStudents, ptaAddStudentForm) {
-        $scope.populatedPtaStudents.push(ptaStudents);
+    $scope.students = {};
+    $scope.students.data = [];
 
-        console.dir(JSON.stringify($scope.populatedPtaStudents));
-
-        // clear array so that we can add more from bound scope object
-        // $scope.ptaStudents = '';
-
-        // $scope.ptaAddStudentForm.$setPristine();
-    };
+    $scope.deleteItem = function (index) {
+        $scope.students.data.splice(index, 1);
+        console.dir(JSON.stringify($scope.students.data));
+    }
+    $scope.addItem = function (index) {
+        $scope.students.data.push({
+            nbr: $scope.students.data.length + 1,
+            studentName: $scope.newItemName,
+            gradeLevel: $scope.newItemGrade
+        });
+        console.dir(JSON.stringify($scope.students.data));
+    }
 
     $scope.ptaRegistrationSubmit = function (ptaAcctObj, ptaRegForm) {
         var x = ptaAcctObj.schoolName.indexOf('(');
@@ -98,12 +97,8 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
         //console.log('saving fe account');
     };
 
-
-
     var findCostsCallback = function (data) {
         $state.go('ptaregistrationCosts', {});
-
-        //console.log(JSON.stringify($scope.ptaMembershipCosts));
     };
 
     $scope.ptaMembershipCosts = ptaAcctService.getScopeCosts();
@@ -114,20 +109,19 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 
     $scope.ptaSelectedCosts = function(ptaAcctObj, ptaSecondaryAcct, ptaMembershipCosts, ptaMembershipForm){
         console.dir('ptaregistrationCtrl.ptaSelectedCosts method ' + JSON.stringify(ptaMembershipCosts));
-        console.dir('ptaregistrationCtrl.ptaAcctObj ' + JSON.stringify(ptaAcctObj));
+
         console.dir('ptaregistrationCtrl.ptaSecondaryAcct ' + JSON.stringify(ptaSecondaryAcct));
         ptaAcctObj.schoolName = ptaAcctService.getSchoolName();
         ptaAcctObj.schoolState = ptaAcctService.getSchoolState();
         ptaAcctObj.relationshipTitle = ptaMembershipCosts.selectedMembership;
+        console.dir('ptaregistrationCtrl.ptaAcctObj ' + JSON.stringify(ptaAcctObj));
 
-
-        $scope.ptaRegistrationJSON = {"FEAccount": ptaAcctObj, "SecondaryAcct" : ptaSecondaryAcct,  "StudentInfo": $scope.populatedPtaStudents};
+        $scope.ptaRegistrationJSON = {"FEAccount": ptaAcctObj, "SecondaryAcct" : ptaSecondaryAcct,  "StudentInfo":  $scope.students.data};
         // send create acct form
         ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 
         ptaAcctService.setReviewChoice(ptaMembershipCosts);
-        //ptaMembershipCosts.schoolName =
-        //ptaMembershipCosts.state =
+
 
         $state.go('ptaregistrationreviewchoice', {});
     };

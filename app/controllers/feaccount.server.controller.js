@@ -17,7 +17,7 @@ var mongoose = require('mongoose'),
         var id = mongoose.Types.ObjectId();
         feAcct.FEAccount.id = id;
 
-        if(feAcct.secondaryAcct != {}) {
+        if(feAcct.SecondaryAcct) {
             id = mongoose.Types.ObjectId();
             feAcct.SecondaryAcct.secondaryId = id;
         }

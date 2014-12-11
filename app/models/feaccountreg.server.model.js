@@ -7,6 +7,9 @@ var mongoose = require('mongoose'),
 var FEAccountSchema = new Schema({
     FEAccount:{
         id: String,
+        firstName: String,
+        lastName: String,
+        userName: String,
         schoolName: {
             type: String
         },
@@ -44,8 +47,8 @@ var FEAccountSchema = new Schema({
         userName: String
     },
     StudentInfo:[{
-        studentFirstName: String,
-        studentLastName: String,
+        nbr: Number,
+        studentName: String,
         studentTeacherName: String,
         gradeLevel: Number}]
 });
