@@ -43,26 +43,7 @@ exports.findbySchoolName = function(req, res) {
     });
 };
 
-// trying to synch with git
-/*
- ptaPayment.find({ 'schoolName': 'JOHNS CREEK ELEMENTARY', 'schoolState': 'GA' })
- .populate('feAccountUser').exec( function(err, ptaregforms) {
- if (err)
- return res.status(400).send({
- message: errorHandler.getErrorMessage(err)
- }
- );
- if (!ptaregforms)
- return res.status(404).send({
- message: errorHandler.getErrorMessage(err)
- }
- );
- console.log(ptaregforms);
 
- });
-
-
- */
 /**
  * Show the current article
  */
