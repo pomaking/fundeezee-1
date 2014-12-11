@@ -19,15 +19,15 @@
 
         <form name="schoolAdminBankForm" id="schoolAdminBankForm" role="form" novalidate>
             <div>
-                <label>Name on Account</label> <input type="text" ng-model="adminAcct.bankAcctNickname" class="form-control">
+                <label>Name on Account</label> <input placeholder="Jane Doe" type="text" ng-model="adminAcct.bankAcctNickname" class="form-control">
             </div>
             <br>
             <div class="form-group">
-                <label>Routing Number</label> <input class="form-control" placeholder="123456789" type="number" ng-model="adminAcct.bankRouting" name="ptaRouting">
+                <label>Routing Number</label> <input class="form-control" placeholder="322271267" type="number" ng-model="adminAcct.bankRouting" name="ptaRouting">
             </div>
 
             <div class="form-group">
-                <label>Account Number</label> <input type="text" ng-model="adminAcct.bankAcct">
+                <label>Account Number</label> <input placeholder="9900000000" type="text" ng-model="adminAcct.bankAcct">
             </div>
             <div>
                 <label>Account Type</label>
@@ -36,19 +36,31 @@
             </div>
 
             <h3>Add administrators</h3>
-            <form id="addAdminForm" name="addAdminForm" role="form" novalidate>
-            <div class="form-group">
-                <label>Add Adminitrators</label>
-                <div id="itemRows">
-                    <label>First Name:</label> <input type="text" ng-model="additionalAdmin.firstName" name="firstName" />
-                    <label>Last Name: </label><input type="text" ng-model="additionalAdmin.lastName" name="lastName" /><br>
-                    <label>Email: </label><input type="text" ng-model="additionalAdmin.userName" name="userName" /><br>
-                    <label>Phone: </label><input type="text" ng-model="additionalAdmin.phone" name="phone" /><br>
-                    <button ng-click="addAdmin(additionalAdmin, addAdminForm);" type="button" class="btn btn-primary" value="Add Student">Add Admin</button>
-                </div>
-            </div>
+            <form id="ptaAddAdminForm" name="ptaAddAdminForm" partialChldrenShow" role="form" novalidate>
+                <ul class="">
+                    <input type="text" value="ItemGrade" ng-model="adminFirst" placeholder="Enter first name">
+                    <input type="text" value="ItemName" ng-model="adminLast" placeholder="Last name">
+                    <button ng-click="addItem()">Add School Admin</button>
+                    <li ng-repeat="item in admin.data" id="item{{item.id}}">
+                        {{item.fistName}}  {{item.lastName}}  <a ng-click="deleteItem($index)" class="delete-item">x</a>
+                    </li>
+                </ul>
             </form>
             <button ng-click="schoolAdminRegisterBank(adminAcct, schoolAdminBankForm)" type="button" class="btn btn-default">Continue</button>
+
+            <div class="row">
+                <div id="response" class="col-lg-12" style="display: none;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Response</h3>
+                        </div>
+                        <div class="panel-body">
+                            <pre></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </form>
     </div>

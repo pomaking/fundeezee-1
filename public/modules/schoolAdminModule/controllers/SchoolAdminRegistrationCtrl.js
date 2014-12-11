@@ -37,6 +37,21 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
         console.dir(JSON.stringify($scope.populatedPtaStudents));
     };
 
+    $scope.admin = {};
+    $scope.admin.data = [];
+
+    $scope.deleteItem = function (index) {
+        $scope.admin.data.splice(index, 1);
+        //console.dir(JSON.stringify($scope.admin.data));
+    }
+    $scope.addItem = function (index) {
+        $scope.admin.data.push({
+            nbr: $scope.admin.data.length + 1,
+            fistName: $scope.adminFirst,
+            lastName: $scope.adminLast
+        });
+        console.dir(JSON.stringify($scope.admin.data));
+    }
 
 
 	$scope.schoolAdminRegistrationSubmit = function (data, schoolAdminRegForm) {

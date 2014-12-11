@@ -1,5 +1,6 @@
 {
 	"name": "meanjs",
+    "main": "server.js",
 	"description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
 	"version": "0.3.3",
 	"private": false,
