@@ -47,11 +47,16 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
     $scope.addItem = function (index) {
         $scope.admin.data.push({
             nbr: $scope.admin.data.length + 1,
-            fistName: $scope.adminFirst,
+            firstName: $scope.adminFirst,
             lastName: $scope.adminLast,
             userName: $scope.adminUserName
         });
         console.dir(JSON.stringify($scope.admin.data));
+
+        $scope.adminFirst = '';
+        $scope.adminLast = '';
+        $scope.adminUserName = '';
+
     }
 
 
@@ -68,14 +73,30 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
         $state.go('schooladminregistration-bank');
     }
 
+
+    var createAcctCallback = function(){};
     $scope.schoolAdminRegisterBank = function (data, schoolAdminRegForm) {
         contributionBuilderService.addEscrowAcct(createBankAcctCallback, data);
 
         // add users if create escrow successful
         if($scope.admin.data.length > 0) {
+            var x = $scope.adminAcct.schoolName.indexOf('(');
+            var state = $scope.adminAcct.schoolName.substring(x+1,x+3);
+            var name = $scope.adminAcct.schoolName.substring(0, x).trim();
            // create admins....
             for( var i = 0; i<$scope.admin.data.length; i++){
                 console.dir( JSON.stringify( $scope.admin.data[i] ) );
+                var ptaAcctObj = {};
+                ptaAcctObj.firstName = $scope.admin.data[i].firstName;
+                ptaAcctObj.lastName = $scope.admin.data[i].lastName;
+                ptaAcctObj.userName = $scope.admin.data[i].userName;
+                ptaAcctObj.schoolName = state;
+                ptaAcctObj.schoolState = name;
+                ptaAcctObj.relationshipTitle = 'schoolAdmin';
+
+                var y = {"FEAccount": ptaAcctObj};
+                // send create acct form
+                ptaAcctService.createAcct(createAcctCallback, y);
             }
         }
 

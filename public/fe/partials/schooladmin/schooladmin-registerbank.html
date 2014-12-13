@@ -44,7 +44,7 @@
                     <div class="col-md-4"><label>Userame</label><input type="text"  value="username" ng-model="adminUserName" placeholder="Email address"></div>
                     <div class="col-md-5">
                         <li ng-repeat="item in admin.data" id="item{{item.id}}">
-                            {{item.fistName}}  {{item.lastName}}  <a ng-click="deleteItem($index)" class="delete-item">x</a>
+                            {{item.firstName}}  {{item.lastName}}  <a ng-click="deleteItem($index)" class="delete-item">x</a>
                         </li>
                     </div>
                     <div class="col-md-5 pull-right"><button style="margin-top: 10px;" ng-click="addItem()">Add School Admin</button></div>
