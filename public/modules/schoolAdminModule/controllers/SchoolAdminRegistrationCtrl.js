@@ -1,10 +1,19 @@
 'use strict';
 
 schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope', '$http', '$state', 'ptaAcctService', 'contributionBuilderService', function($scope, $http, $state, ptaAcctService, contributionBuilderService) {
+    $scope.admin = {};
+    $scope.admin.data = [];
 
     $scope.adminAcct = {};
     // PTA students data - should be added to $scope.adminAcct
     $scope.additionalAdmin = [];
+
+    var initCostsCallback = function(){
+        $scope.adminAcct = ptaAcctService.getCosts();
+    }
+
+
+    ptaAcctService.findCostsbySchoolName(initCostsCallback, 'JOHNS CREEK ELEMENTARY','GA');
 
 	// getSchools API URL
 	var url = 'https://inventory.data.gov/api/action/datastore_search?';
@@ -29,8 +38,7 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
     });
   };
 
-    $scope.admin = {};
-    $scope.admin.data = [];
+
 
     $scope.deleteItem = function (index) {
         $scope.admin.data.splice(index, 1);
@@ -40,7 +48,8 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
         $scope.admin.data.push({
             nbr: $scope.admin.data.length + 1,
             fistName: $scope.adminFirst,
-            lastName: $scope.adminLast
+            lastName: $scope.adminLast,
+            userName: $scope.adminUserName
         });
         console.dir(JSON.stringify($scope.admin.data));
     }
@@ -63,8 +72,11 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
         contributionBuilderService.addEscrowAcct(createBankAcctCallback, data);
 
         // add users if create escrow successful
-        if($scope.admin.length > 0) {
+        if($scope.admin.data.length > 0) {
            // create admins....
+            for( var i = 0; i<$scope.admin.data.length; i++){
+                console.dir( JSON.stringify( $scope.admin.data[i] ) );
+            }
         }
 
     };
@@ -72,6 +84,6 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
 	var createBankAcctCallback = function (data) {
         $state.go('schooladminmembership');
 	};
-	
-	
+
+    $scope.adminAcct = ptaAcctService.getCosts();
 }]);

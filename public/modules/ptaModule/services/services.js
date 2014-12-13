@@ -116,7 +116,9 @@ ptaServices.service('ptaAcctService', function($http) {
 
     var getCosts = function () {
         console.log('getCosts: ' + JSON.stringify(ptaCosts));
-        return ptaCosts;
+        if(ptaCosts[0])
+            ptaCosts[0].schoolName = ptaCosts[0].schoolName + ' (' + ptaCosts[0].schoolState + ')';
+        return ptaCosts[0];
     }
 
     var getSelectedPTACosts = function(){

@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
 
 var SchoolAdminContribFormSchema = new Schema(
         {
-
         'schoolName':String,
         'schoolState':String,
         'ptaName': String,
@@ -24,8 +23,8 @@ var SchoolAdminContribFormSchema = new Schema(
         'familyCost':Number,
         'facultyCost':Number,
         'businessCost':Number,
-        'taxExempt': Boolean,
-
+        'taxExempt': String,
+        'website': String,
         'membership':{
         "form_id": Number,
             "form_name": String,

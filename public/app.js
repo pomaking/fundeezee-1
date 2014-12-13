@@ -84,12 +84,25 @@ angular.module('fundeezeeApp', [
                     }
                 }
             })
+            .state('schooladminhome', {
+                // school admin registration form start... the form a person fills out to be an admin for a school
+                url: "/schooladminhome",
+                views: {
+                    "leftnav": {
+                        templateUrl: "./partials/main/admin-leftnav.html"
+                    },
+                    "maincontent": {
+                        templateUrl: "partials/schooladmin/schooladmin-home.html",
+                        controller: "SchoolAdminRegistrationCtrl"
+                    }
+                }
+            })
             .state('schooladminregistration', {
                 // school admin registration form start... the form a person fills out to be an admin for a school
                 url: "/schooladminregistration",
                 views: {
                     "leftnav": {
-                        templateUrl: "./partials/main/leftnav.html"
+                        templateUrl: "./partials/main/admin-leftnav.html"
                     },
                     "maincontent": {
                         templateUrl: "partials/schooladmin/schooladmin-registration.html",
@@ -151,7 +164,7 @@ angular.module('fundeezeeApp', [
                 url: "/schooladmincontribution-create",
                 views: {
                     "leftnav": {
-                        templateUrl: "./partials/main/leftnav.html"
+                        templateUrl: "./partials/main/admin-leftnav.html"
                     },
                     "maincontent": {
                         templateUrl: "partials/schooladmin/schooladmin-contributionbuilder.html",
