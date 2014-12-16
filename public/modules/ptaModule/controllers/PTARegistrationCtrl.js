@@ -111,12 +111,19 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
         console.dir('ptaregistrationCtrl.ptaSelectedCosts method ' + JSON.stringify(ptaMembershipCosts));
 
         console.dir('ptaregistrationCtrl.ptaSecondaryAcct ' + JSON.stringify(ptaSecondaryAcct));
-        ptaAcctObj.schoolName = ptaAcctService.getSchoolName();
-        ptaAcctObj.schoolState = ptaAcctService.getSchoolState();
-        ptaAcctObj.relationshipTitle = ptaMembershipCosts.selectedMembership;
-        console.dir('ptaregistrationCtrl.ptaAcctObj ' + JSON.stringify(ptaAcctObj));
+        var member = [];
+        var pta = {};
 
-        $scope.ptaRegistrationJSON = {"FEAccount": ptaAcctObj, "SecondaryAcct" : ptaSecondaryAcct,  "StudentInfo":  $scope.students.data};
+        pta.schoolName = ptaAcctService.getSchoolName();
+        pta.schoolState = ptaAcctService.getSchoolState();
+        pta.relationshipTitle = ptaMembershipCosts.selectedMembership;
+        pta.orgType = 'pta';
+        member.push(pta);
+
+        console.dir('ptaregistrationCtrl.ptaAcctObj ' + JSON.stringify(ptaAcctObj));
+        console.dir('ptaregistrationCtrl.memberhsip (pta) ' + JSON.stringify(member));
+
+        $scope.ptaRegistrationJSON = {"FEAccount": ptaAcctObj, "SecondaryAcct" : ptaSecondaryAcct, "Membership": member,  "StudentInfo":  $scope.students.data};
         // send create acct form
         ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 

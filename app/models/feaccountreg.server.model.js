@@ -5,11 +5,38 @@ var mongoose = require('mongoose'),
 
 
 var FEAccountSchema = new Schema({
-    FEAccount:{
+    FEAccount: {
         id: String,
         firstName: String,
         lastName: String,
         userName: String,
+        state: {
+            type: String,
+            trim: true
+        },
+        zip: String,
+        createDate: {
+            type: Date,
+            default: Date.now
+        }
+    },
+    SecondaryAcct: {
+        secondaryId: String,
+        firstName: String,
+        lastName: String,
+        userName: String,
+        state: {
+            type: String,
+            trim: true
+        },
+        zip: String,
+        createDate:  {
+            type: Date,
+            default: Date.now
+        }
+    },
+    Membership: [{
+        orgType: String,
         schoolName: {
             type: String
         },
@@ -17,14 +44,10 @@ var FEAccountSchema = new Schema({
         relationshipTitle: {
             type: String
         },
-        state: {
-            type: String,
-            trim: true },
-        zip: Number,
-        statePTAId: {
+        stateId: {
             type: String,
             default: ''},
-        nationalPTAId: {
+        nationalId: {
             type: String,
             default: ''},
         isSchoolAdmin:{
@@ -39,18 +62,12 @@ var FEAccountSchema = new Schema({
             type: Date,
             default: Date.now
         }
-    },
-    SecondaryAcct: {
-        secondaryId: String,
-        firstName: String,
-        lastName: String,
-        userName: String
-    },
+    }],
     StudentInfo:[{
         nbr: Number,
         studentName: String,
-        studentTeacherName: String,
-        gradeLevel: Number}]
+        dob:String
+    }]
 });
 
 mongoose.model('FEAccount', FEAccountSchema);
