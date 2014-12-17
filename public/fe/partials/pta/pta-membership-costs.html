@@ -92,7 +92,6 @@
 
             <form id="ptaAddStudentForm" name="ptaAddStudentForm" ng-show="partialChldrenShow" role="form" novalidate>
                 <ul class="">
-                    <input type="text" value="ItemGrade" ng-model="newItemGrade" placeholder="enter a grade...K-12">
                     <input type="text" value="ItemName" ng-model="newItemName" placeholder="name of new student...">
                     <button ng-click="addItem()">Add Student</button>
                     <li ng-repeat="item in students.data" id="item{{item.id}}">

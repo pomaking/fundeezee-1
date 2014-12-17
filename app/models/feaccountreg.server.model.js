@@ -37,6 +37,7 @@ var FEAccountSchema = new Schema({
     },
     Membership: [{
         orgType: String,
+        householdMemberId: String,
         schoolName: {
             type: String
         },

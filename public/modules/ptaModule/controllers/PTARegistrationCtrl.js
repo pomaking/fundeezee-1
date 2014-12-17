@@ -77,8 +77,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     $scope.addItem = function (index) {
         $scope.students.data.push({
             nbr: $scope.students.data.length + 1,
-            studentName: $scope.newItemName,
-            gradeLevel: $scope.newItemGrade
+            studentName: $scope.newItemName
         });
         console.dir(JSON.stringify($scope.students.data));
     }
