@@ -259,7 +259,11 @@ ul.alert-dropdown {
 }
 
 .btn-primary {
-    background-color: #DC5C05;
+    background-color: #357ebd;
+}
+
+.btn-primary:hover {
+    background-color: #428bca;
 }
 
 .add-field {
@@ -413,4 +417,8 @@ ul.alert-dropdown {
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before,  #progressbar li.active:after{
     color: white;
+}
+
+.nopad {
+    padding: 0;
 }

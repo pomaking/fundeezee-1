@@ -7,6 +7,7 @@ var SchoolAdminContribFormSchema = new Schema(
         {
         'schoolName':String,
         'schoolState':String,
+        'schoolZip': String,
         'ptaName': String,
         'membershipTerm': {
              type: String

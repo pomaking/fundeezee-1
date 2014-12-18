@@ -239,3 +239,6 @@ ul.alert-dropdown {
 		cursor: pointer;
 	}
 
+.nopad {
+    padding: 0;
+}

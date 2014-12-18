@@ -2,9 +2,10 @@
 
 ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', '$http', '$state', 'ptaAcctService', function($rootScope,$scope, $http, $state, ptaAcctService) {
     // getSchools API URL
-    var url = "https://inventory.data.gov/api/action/datastore_search?";
-    var schoolName = '';
-    var schoolState = '';
+    // var url = "https://inventory.data.gov/api/action/datastore_search?";
+    var url = "http://localhost:3000/api/schooladmincontrib/findschool/";
+    // .schoolName = '';
+    $scope.schoolState = '';
     var ptaAcctObj = {};
 /*    $scope.prefix = ['Mr.', 'Mrs.', 'Ms.'];*/
     $scope.ptaAddStudentForm = {};
@@ -12,8 +13,48 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     $scope.partialMultiShow = false;
     $scope.partialIndShow = false;
     $scope.partialChldrenShow = false;
+    $scope.showContinue = true;
 
-    $scope.getSchoolsSearch = function(val) {
+    $scope.schooldropdown = true;
+
+
+/*    $scope.getSchoolsSearch = function(val) {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:' + val + '/:GA'
+        }).
+            success(function (data) {
+                ptaCosts = data;
+                callback(data);
+                //return ptaCosts;
+            }).
+            error(function (data) {
+                alert('there was an error creating an account');
+            });
+    }*/
+
+    $scope.showSchoolLookup = function(){
+        console.log('schoolState: ' + $scope.schoolState);
+        $scope.schooldropdown = false;
+    }
+
+    $scope.getSchoolsSearch = function(schoolname) {
+         return  $http({
+             method: 'GET',
+             url: 'http://localhost:3000/api/schooladmincontrib/findschool/:'+schoolname + '/:' + $scope.schoolState
+         }).then(function(response){
+             //alert(JSON.stringify(response));
+             var schools = [];
+             for(var i=0;i < response.data.length;i++){
+                 schools.push(response.data[i].schoolName);
+             }
+             //alert(JSON.stringify( schools) );
+             $scope.showContinue = false;
+             return schools;
+         });
+     };
+
+    /*$scope.getSchoolsSearch = function(val) {
         return $http.get(url, {
             params: {
                 q: val,
@@ -28,7 +69,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
             return schools;
         });
     };
-
+*/
 
     // PTA Registration JSON obj
     $scope.ptaRegistrationJSON = [];
@@ -65,6 +106,10 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
             $scope.partialIndShow = false;
             $scope.partialChldrenShow = false;
         }
+
+        if(x.substring(0,1) != 'i' || x.substring(0,1) != 'f' || x.substring(0,1) != 'b' ) {
+            $scope.partialMultiShow = true;
+        }
     }
 
     $scope.students = {};
@@ -83,13 +128,10 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     }
 
     $scope.ptaRegistrationSubmit = function (ptaAcctObj, ptaRegForm) {
-        var x = ptaAcctObj.schoolName.indexOf('(');
-        var state = ptaAcctObj.schoolName.substring(x+1,x+3);
-        var name = ptaAcctObj.schoolName.substring(0, x).trim();
-        ptaAcctService.setSchoolName(name);
-        ptaAcctService.setSchoolState(state);
+        ptaAcctService.setSchoolName(ptaAcctObj.schoolName);
+        ptaAcctService.setSchoolState($scope.schoolState);
 
-        ptaAcctService.findCostsbySchoolName(findCostsCallback, name, state);
+        ptaAcctService.findCostsbySchoolName(findCostsCallback, ptaAcctObj.schoolName, $scope.schoolState);
     };
 
     var createAcctCallback = function (data) {
@@ -107,6 +149,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     }
 
     $scope.ptaSelectedCosts = function(ptaAcctObj, ptaSecondaryAcct, ptaMembershipCosts, ptaMembershipForm){
+        // ptaMembershipCosts.membership
         console.dir('ptaregistrationCtrl.ptaSelectedCosts method ' + JSON.stringify(ptaMembershipCosts));
 
         console.dir('ptaregistrationCtrl.ptaSecondaryAcct ' + JSON.stringify(ptaSecondaryAcct));

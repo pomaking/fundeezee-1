@@ -22,28 +22,33 @@
         <form name="schoolAdminMembershipForm" id="schoolAdminMembershipForm" role="form" novalidate>
 
             <div class="well">
-                <div>Select the membership types you would like to add and then fill in an amount: </div>
+                <div>Select the membership type(s) you would like to make available. </div>
+                <div>When you click the checkbox an amount box will appear.  This is what the registrants will pay.</div>
+                <div>Only the checked memberships will be available for your organization. </div>
                 <div>
                     <ul class="admin-membership-types">
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.individualCost"> <input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.individual"><span>Individual Membership</span></li>
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.familyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.family"><span>Family Membership</span></li>
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.facultyCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.faculty"><span>Faculty Membership</span></li>
-                        <li><input type="text" style="width:30px;" ng-model="staticMembership.businessCost"><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.business"><span>Business Membership</span></li>
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.individual"><span>Individual Membership</span>  <input ng-show="staticMembership.individual" type="text" style="width:30px;" ng-model="staticMembership.individualCost"></li>
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.family"><span>Family Membership  <input ng-show="staticMembership.family" type="text" style="width:30px;" ng-model="staticMembership.familyCost"></span></li>
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.faculty"><span>Faculty Membership</span>  <input ng-show="staticMembership.faculty" type="text" style="width:30px;" ng-model="staticMembership.facultyCost"></li>
+                        <li><input type="checkbox" ng-false-value="false" ng-true-value="true" ng-model="staticMembership.business"><span>Business Membership</span>  <input ng-show="staticMembership.business" type="text" style="width:30px;" ng-model="staticMembership.businessCost"></li>
                     </ul>
                 </div>
                 <br>
+                <div>If you would like to create a membership with your own brand click the Add button  </div>
+                <div>then provide a title and the amount you'd like to charge for the membership  </div>
                 <div class="form-fields" ng-hide="previewMode">
-                    <div class="form-group">
+                <!--    <div class="form-group">
                         <label for="form-name">Enter Form Name</label>
                         <input type="text" id="form-name" name="form-name" ng-disabled="previewMode" ng-model="form.form_name">
-                    </div>
+                    </div>-->
 
                     <hr>
-                    <h5>Create Membership Levels</h5>
+                    <h5>Create your own branded membership levels</h5>
                     <div class="add-field col-lg-12">
                         <input type="hidden" ng-model="addField.new" value="radio">
                         <button type="submit" class="btn pull-left" ng-click="addNewField()"><i class="icon-plus"></i> Add</button>
                     </div>
+                    <br>
                     <br>
                     <p ng-show="form.form_fields.length == 0">No fields added yet.</p>
                     <accordion close-others="accordion.oneAtATime">
@@ -68,7 +73,7 @@
 
                                 </div>
                                 <div class="clear"></div> <hr>
-                                <div class="row">
+                                <!--<div class="row">
                                     <div class="span2">Required:</div>
                                     <div class="span4">
                                         <label>
@@ -94,7 +99,7 @@
                                             &nbsp; No
                                         </label>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </accordion-group>
                     </accordion>
@@ -120,6 +125,7 @@
                 </div>
                 <br>
                 <h3>Membership Terms</h3>
+                <h5>Tell us when the membership term ends.  (If calendar year selected the membership ends December 31)</h5>
                 <div class="span4">
                     <input type="radio" ng-model="staticMembership.membershipTerm" value="C">  Calendar Term <br/>
                     <input type="radio" ng-model="staticMembership.membershipTerm" value="A"> Academic Term <br/>

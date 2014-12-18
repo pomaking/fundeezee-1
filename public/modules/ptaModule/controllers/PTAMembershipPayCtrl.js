@@ -25,22 +25,32 @@ ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$st
             review.display = 'Individual';
             review.mCost  = x.individualCost;
             review.tCost = x.individualCost + 1;
-        }
-        if(membership == 'family'){
+        } else if(membership == 'family'){
             review.display = 'Family';
             review.mCost  = x.familyCost;
             review.tCost = x.familyCost + 1;
-        }
-        if(membership == 'faculty'){
+        } else if(membership == 'faculty'){
             review.display = 'Faculty';
             review.mCost  = x.facultyCost;
             review.tCost = x.facultyCost + 1;
-        }
-        if(membership == 'business'){
+        } else if(membership == 'business'){
             review.display = 'Business';
             review.mCost  = x.businessCost;
             review.tCost = x.businessCost + 1;
+        } else {
+            for(var i = 0; i < x.membership.length; i++){
+                var field = x.membership[i];
+                if( field.field_title == membership){
+                    review.display = membership;
+                    review.mCost  = field.field_cost;
+
+                    var y = Number(field.field_cost);
+                    review.tCost = y + 1;
+                }
+            }
         }
+
+
         ptaAcctService.setChoice(review);
         return review;
 

@@ -39,13 +39,32 @@ ptaServices.service('ptaAcctService', function($http) {
         console.log('school cost lookup for school ' + schoolname);
             $http({
                 method: 'GET',
-                url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolState
+                url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolstate
             }).
                 success(function(data) {
                     ptaCosts = data;
                     callback(data);
                     //return ptaCosts;
                 }).
+            error(function(data) {
+                alert('there was an error creating an account');
+            });
+
+    };
+
+    var findSchoolLookup = function (callback, schoolname, schoolstate) {
+        schoolName = schoolname;
+        schoolState = schoolstate;
+        console.log('school lookup for school ' + schoolname);
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/api/schooladmincontrib/findschool/:'+schoolname+'/:'+schoolstate
+        }).
+            success(function(data) {
+                ptaCosts = data;
+                callback(data);
+                //return ptaCosts;
+            }).
             error(function(data) {
                 alert('there was an error creating an account');
             });

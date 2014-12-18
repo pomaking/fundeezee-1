@@ -25,13 +25,21 @@
         <H3>Membership</H3>
 
         <form name="ptaMembershipForm" id="ptaMembershipForm" role="form" novalidate>
-            <div ng-show="ptaMembershipCosts.individualCost > 0"><input type="radio" ng-change="changePartial()" value="individual" name="membership"  data-ng-model="ptaMembershipCosts.selectedMembership">Individual {{ptaMembershipCosts.individual}} {{ptaMembershipCosts.individualCost | currency}} </div>
-            <div ng-show="ptaMembershipCosts.familyCost > 0"><input type="radio" ng-change="changePartial()" value="family" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Family {{ptaMembershipCosts.family}} {{ptaMembershipCosts.familyCost | currency}} </div>
-            <div ng-show="ptaMembershipCosts.facultyCost > 0"><input type="radio" ng-change="changePartial()" value="faculty" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Faculty {{ptaMembershipCosts.faculty}} {{ptaMembershipCosts.facultyCost | currency}} </div>
-            <div ng-show="ptaMembershipCosts.businessCost > 0"><input type="radio"  ng-change="changePartial()" value="business" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Business {{ptaMembershipCosts.business}} {{ptaMembershipCosts.businessCost | currency}} </div>
+            <div ng-show="ptaMembershipCosts.individual">
+                <div class="form-group"><input type="radio" ng-change="changePartial()" value="individual" name="membership"  data-ng-model="ptaMembershipCosts.selectedMembership">Individual {{ptaMembershipCosts.individualCost | currency}} </div>
+            </div>
+            <div ng-show="ptaMembershipCosts.family">
+                <div class="form-group"><input type="radio" ng-change="changePartial()" value="family" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Family {{ptaMembershipCosts.familyCost | currency}} </div>
+            </div>
+            <div ng-show="ptaMembershipCosts.faculty">
+                <div class="form-group"><input type="radio" ng-change="changePartial()" value="faculty" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Faculty  {{ptaMembershipCosts.facultyCost | currency}} </div>
+            </div>
+            <div ng-show="ptaMembershipCosts.business">
+                <div class="form-group"><input type="radio"  ng-change="changePartial()" value="business" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Business {{ptaMembershipCosts.businessCost | currency}} </div>
+            </div>
 
             <div data-ng-repeat="field in ptaMembershipCosts.membership">
-                <input type="radio" ng-model="ptaMembershipCosts.selectedMembership" name="membership" value="{{field.field_id}}" />{{field.field_title}} {{field.field_cost | currency}}
+                <input type="radio" ng-model="ptaMembershipCosts.selectedMembership" ng-change="changePartial()" name="membership" value="{{field.field_title}}" />{{field.field_title}} {{field.field_cost | currency}}
             </div>
 
             <div id="ptaIndMembershipform" class="col-md-12" ng-show="partialIndShow">
@@ -90,14 +98,21 @@
                 </div>
             </div>
 
-            <form id="ptaAddStudentForm" name="ptaAddStudentForm" ng-show="partialChldrenShow" role="form" novalidate>
-                <ul class="">
-                    <input type="text" value="ItemName" ng-model="newItemName" placeholder="name of new student...">
-                    <button ng-click="addItem()">Add Student</button>
+            <form class="form-inline" id="ptaAddStudentForm" name="ptaAddStudentForm" ng-show="partialChldrenShow" role="form" novalidate>
+                <div class="form-group">
+                    <div class="col-md-4 nopad">
+                        <label class="sr-only" for="ItemName">Item Name</label>
+                        <input class="form-control" type="text" value="ItemName" id="ItemName" ng-model="newItemName" placeholder="name of new student...">
+                    </div>
+                    <div class="col-md-4">
+                        <button ng-click="addItem()">Add Student</button>
+                    </div>
+                </div>
+                    <ul class="">
                     <li ng-repeat="item in students.data" id="item{{item.id}}">
                         {{item.studentName}}  <a ng-click="deleteItem($index)" class="delete-item">x</a>
                     </li>
-                </ul>
+                    </ul>
             </form>
 
 
@@ -122,7 +137,7 @@
                 </label>
             </div>
             <br>
-            <button ng-click="ptaSelectedCosts(ptaAcctObj, ptaSecondaryAcct, ptaMembershipCosts, ptaMembershipForm)" type="button" class="btn btn-default">Proceed to Checkout</button>
+            <button ng-click="ptaSelectedCosts(ptaAcctObj, ptaSecondaryAcct, ptaMembershipCosts, ptaMembershipForm)" type="button" class="btn btn-primary">Proceed to Checkout</button>
         </form>
     </div>
 </div>

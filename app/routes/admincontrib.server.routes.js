@@ -23,6 +23,10 @@ module.exports = function(app) {
     app.route('/api/schooladmincontrib/findbyschool/:schoolname/:schoolstate')
         .get(contrib.findbySchoolName);
 
+    //          api/schooladmincontrib/findschool/
+    app.route('/api/schooladmincontrib/findschool/:schoolname/:schoolstate')
+        .get(contrib.findSchoolName);
+
     app.route('/api/schooladmincontrib/helloworld/')
         .get(contrib.helloWorld);
 
