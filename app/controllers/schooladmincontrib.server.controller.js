@@ -48,22 +48,29 @@ exports.findbySchoolName = function(req, res)  {
 
 exports.findSchoolName = function(req, res)  {
     var schoolName = req.params.schoolname.substring(1).trim();
-    var stateAbbr = req.params.schoolstate.substring(1).trim();
-    console.log('params: schoolName ' + schoolName );
+    var schoolLocation = req.params.schoollocation.substring(1).trim();
+    var locationParam = '"schoolZip"';
+
+    if(typeof schoolLocation === 'string') {
+        locationParam = '"schoolState"';
+    }
 
 
-    schoolcontrib.find({"schoolName": new RegExp(schoolName, "i"), "schoolState": stateAbbr }, function(err, schoolContribforms) {
-            if (err)
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            if (!schoolContribforms)
-                return res.status(404).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            res.json(schoolContribforms);
 
-        });
+    console.log('params: schoolName ' + schoolName + ' ' + locationParam + ' ' + schoolLocation );
+
+    schoolcontrib.find({"schoolName": new RegExp(schoolName, "i"), $or: [{"schoolState": schoolLocation.toUpperCase()}, {"schoolZip": schoolLocation}] }, function (err, schoolContribforms) {
+        if (err)
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        if (!schoolContribforms)
+            return res.status(404).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        res.json(schoolContribforms);
+
+    });
 };
 
 

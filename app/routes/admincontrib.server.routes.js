@@ -24,7 +24,7 @@ module.exports = function(app) {
         .get(contrib.findbySchoolName);
 
     //          api/schooladmincontrib/findschool/
-    app.route('/api/schooladmincontrib/findschool/:schoolname/:schoolstate')
+    app.route('/api/schooladmincontrib/findschool/:schoolname/:schoollocation')
         .get(contrib.findSchoolName);
 
     app.route('/api/schooladmincontrib/helloworld/')
