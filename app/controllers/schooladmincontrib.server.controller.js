@@ -49,28 +49,41 @@ exports.findbySchoolName = function(req, res)  {
 exports.findSchoolName = function(req, res)  {
     var schoolName = req.params.schoolname.substring(1).trim();
     var schoolLocation = req.params.schoollocation.substring(1).trim();
-    var locationParam = '"schoolZip"';
 
-    if(typeof schoolLocation === 'string') {
-        locationParam = '"schoolState"';
+
+    console.log('params: schoolName ' + schoolName + ' schoolLocation: ' + schoolLocation );
+
+    if(/^\d*$/.test(schoolName) ){
+        console.log("in the school zip lookup...");
+        schoolcontrib.find({"schoolState": schoolLocation.toUpperCase(), "schoolZip": schoolName}, function (err, schoolContribforms) {
+            if (err)
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            if (!schoolContribforms)
+                return res.status(404).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            res.json(schoolContribforms);
+
+        });
+    }
+    else{
+        console.log("in the school name lookup...");
+        schoolcontrib.find({"schoolState": schoolLocation.toUpperCase(), "schoolName": new RegExp(schoolName, "i")}, function (err, schoolContribforms) {
+            if (err)
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            if (!schoolContribforms)
+                return res.status(404).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            res.json(schoolContribforms);
+
+        });
     }
 
-
-
-    console.log('params: schoolName ' + schoolName + ' ' + locationParam + ' ' + schoolLocation );
-
-    schoolcontrib.find({"schoolName": new RegExp(schoolName, "i"), $or: [{"schoolState": schoolLocation.toUpperCase()}, {"schoolZip": schoolLocation}] }, function (err, schoolContribforms) {
-        if (err)
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        if (!schoolContribforms)
-            return res.status(404).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        res.json(schoolContribforms);
-
-    });
 };
 
 
