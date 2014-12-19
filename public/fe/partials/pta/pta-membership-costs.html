@@ -26,16 +26,16 @@
 
         <form name="ptaMembershipForm" id="ptaMembershipForm" role="form" novalidate>
             <div ng-show="ptaMembershipCosts.individual">
-                <div class="form-group"><input type="radio" ng-change="changePartial()" value="individual" name="membership"  data-ng-model="ptaMembershipCosts.selectedMembership">Individual {{ptaMembershipCosts.individualCost | currency}} </div>
+                <div class="form-group"><input type="radio"  ng-change="changePartial()" value="individual" name="membership"  data-ng-model="ptaMembershipCosts.selectedMembership">Individual {{ptaMembershipCosts.individualCost | currency}} </div>
             </div>
             <div ng-show="ptaMembershipCosts.family">
                 <div class="form-group"><input type="radio" ng-change="changePartial()" value="family" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Family {{ptaMembershipCosts.familyCost | currency}} </div>
             </div>
             <div ng-show="ptaMembershipCosts.faculty">
-                <div class="form-group"><input type="radio" ng-change="changePartial()" value="faculty" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Faculty  {{ptaMembershipCosts.facultyCost | currency}} </div>
+                <div class="form-group"><input type="radio"  ng-change="changePartial()" value="faculty" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Faculty  {{ptaMembershipCosts.facultyCost | currency}} </div>
             </div>
             <div ng-show="ptaMembershipCosts.business">
-                <div class="form-group"><input type="radio"  ng-change="changePartial()" value="business" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Business {{ptaMembershipCosts.businessCost | currency}} </div>
+                <div class="form-group"><input type="radio" ng-change="changePartial()" value="business" name="membership" data-ng-model="ptaMembershipCosts.selectedMembership">Business {{ptaMembershipCosts.businessCost | currency}} </div>
             </div>
 
             <div data-ng-repeat="field in ptaMembershipCosts.membership">

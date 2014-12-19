@@ -47,7 +47,7 @@ ptaServices.service('ptaAcctService', function($http) {
                     //return ptaCosts;
                 }).
             error(function(data) {
-                alert('there was an error creating an account');
+                alert('It is possible that your school has not created the membership costs yet.  Please contact your local pta.');
             });
 
     };
@@ -88,44 +88,87 @@ ptaServices.service('ptaAcctService', function($http) {
         scopeObj.selectedTextContribution = [];
         scopeObj.taxExempt = ptaCosts[0].taxExempt;
         scopeObj.ptaName =  ptaCosts[0].ptaName;
-        scopeObj.individual =   ptaCosts[0].individual;
-        scopeObj.family =  ptaCosts[0].family;
-        scopeObj.faculty =  ptaCosts[0].faculty;
-        scopeObj.business =  ptaCosts[0].business;
-        scopeObj.individualCost = ptaCosts[0].individualCost;
-        scopeObj.familyCost =  ptaCosts[0].familyCost;
-        scopeObj.facultyCost =  ptaCosts[0].facultyCost;
-        scopeObj.businessCost =  ptaCosts[0].businessCost;
 
-        scopeObj.membership = [];
-        scopeObj.contribution = [];
-        scopeObj.textContribution = [];
+        var checked = false;
 
-// iterate over each element in the array
-        for (var i = 0; i < ptaCosts[0].membership.form_fields.length; i++){
-            var x = {
-                "field_id" : ptaCosts[0].membership.form_fields[i]._id,
-                "field_title" : ptaCosts[0].membership.form_fields[i].field_title,
-                "field_type" : ptaCosts[0].membership.form_fields[i].field_type,
-                "field_value" : ptaCosts[0].membership.form_fields[i].field_value,
-                "field_cost" :  ptaCosts[0].membership.form_fields[i].field_options[0].option_value};
-            scopeObj.membership.push(x);
+
+        if(ptaCosts[0].individual) {
+            scopeObj.individual = ptaCosts[0].individual;
+            scopeObj.individualCost = ptaCosts[0].individualCost;
+            scopeObj.selectedMembership = "individual";
+            checked = true;
         }
 
-        for (var i = 0; i < ptaCosts[0].contribution.form_fields.length; i++){
-            var x = {
-                "field_id" : ptaCosts[0].contribution.form_fields[i]._id,
-                "field_title" : ptaCosts[0].contribution.form_fields[i].field_title,
-                "field_type" : ptaCosts[0].contribution.form_fields[i].field_type,
-                "field_value" : ptaCosts[0].contribution.form_fields[i].field_value,
-                "field_cost" : ptaCosts[0].contribution.form_fields[i].field_value};
+        if(ptaCosts[0].family) {
+            scopeObj.family = ptaCosts[0].family;
+            scopeObj.familyCost = ptaCosts[0].familyCost;
+            if(!checked){
+                scopeObj.ptaMembershipCosts.selectedMembership = "family";
+                checked = false;
+            } else
+                scopeObj.familySelected = false;
+        }
 
-            if(ptaCosts[0].contribution.form_fields[i].field_type == 'checkbox')
-                scopeObj.contribution.push(x);
-            else
-                scopeObj.textContribution.push(x);
-            //var y = ptaCosts[0].contribution.form_fields[i].field_title + ptaCosts[0].contribution.form_fields[i].field_value;
-            //scopeObj.selectedContribution.push(y);
+        if(ptaCosts[0].faculty) {
+            scopeObj.faculty = ptaCosts[0].faculty;
+            scopeObj.facultyCost = ptaCosts[0].facultyCost;
+            if(!checked) {
+                scopeObj.ptaMembershipCosts.selectedMembership = "faculty";
+                checked = false;
+            } else {
+                scopeObj.facultySelected = false;
+            }
+        }
+
+        if(ptaCosts[0].business) {
+            scopeObj.business = ptaCosts[0].business;
+            scopeObj.businessCost = ptaCosts[0].businessCost;
+            if (!checked) {
+                scopeObj.ptaMembershipCosts.selectedMembership = "business";
+                checked = false;
+            } else {
+                scopeObj.businessSelected = false;
+            }
+        }
+
+        if(ptaCosts[0].membership.form_fields.length > 0){
+            scopeObj.membership = [];
+            for (var i = 0; i < ptaCosts[0].membership.form_fields.length; i++){
+                var x = {
+                    "field_id" : ptaCosts[0].membership.form_fields[i]._id,
+                    "field_title" : ptaCosts[0].membership.form_fields[i].field_title,
+                    "field_type" : ptaCosts[0].membership.form_fields[i].field_type,
+                    "field_value" : ptaCosts[0].membership.form_fields[i].field_value,
+                    "field_cost" :  ptaCosts[0].membership.form_fields[i].field_options[0].option_value,
+                    "field_selected" : false};
+
+                if(!checked){
+                        checked = true;
+                    }
+
+                scopeObj.membership.push(x);
+            }
+        }
+
+        if(ptaCosts[0].contribution.form_fields.length > 0 ) {
+            scopeObj.contribution = [];
+            scopeObj.textContribution = [];
+
+            for (var i = 0; i < ptaCosts[0].contribution.form_fields.length; i++){
+                var x = {
+                    "field_id" : ptaCosts[0].contribution.form_fields[i]._id,
+                    "field_title" : ptaCosts[0].contribution.form_fields[i].field_title,
+                    "field_type" : ptaCosts[0].contribution.form_fields[i].field_type,
+                    "field_value" : ptaCosts[0].contribution.form_fields[i].field_value,
+                    "field_cost" : ptaCosts[0].contribution.form_fields[i].field_value};
+
+                if(ptaCosts[0].contribution.form_fields[i].field_type == 'checkbox')
+                    scopeObj.contribution.push(x);
+                else
+                    scopeObj.textContribution.push(x);
+                //var y = ptaCosts[0].contribution.form_fields[i].field_title + ptaCosts[0].contribution.form_fields[i].field_value;
+                //scopeObj.selectedContribution.push(y);
+            }
         }
 
         //console.dir(JSON.stringify(scopeObj));

@@ -1,8 +1,7 @@
 'use strict';
 
 ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', '$http', '$state', 'ptaAcctService', function($rootScope,$scope, $http, $state, ptaAcctService) {
-    // getSchools API URL
-    // var url = "https://inventory.data.gov/api/action/datastore_search?";
+
     var url = "http://localhost:3000/api/schooladmincontrib/findschool/";
     // .schoolName = '';
     $scope.schoolState = '';
@@ -16,22 +15,6 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     $scope.showContinue = true;
 
     $scope.schooldropdown = true;
-
-
-/*    $scope.getSchoolsSearch = function(val) {
-        $http({
-            method: 'GET',
-            url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:' + val + '/:GA'
-        }).
-            success(function (data) {
-                ptaCosts = data;
-                callback(data);
-                //return ptaCosts;
-            }).
-            error(function (data) {
-                alert('there was an error creating an account');
-            });
-    }*/
 
     $scope.showSchoolLookup = function(){
         console.log('schoolState: ' + $scope.schoolState);
@@ -53,23 +36,6 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
              return schools;
          });
      };
-
-    /*$scope.getSchoolsSearch = function(val) {
-        return $http.get(url, {
-            params: {
-                q: val,
-                resource_id: '102fd9bd-4737-401b-b88f-5c5b0fab94ec',
-                fields: 'SCHNAM09,LEANM09,MZIP09,LSTATE09'
-            }
-        }).then(function(response){
-            var schools = [];
-            for(var i=0;i < response.data.result.records.length;i++){
-                schools.push(response.data.result.records[i].SCHNAM09+' ('+response.data.result.records[i].LSTATE09+')');
-            }
-            return schools;
-        });
-    };
-*/
 
     // PTA Registration JSON obj
     $scope.ptaRegistrationJSON = [];
@@ -143,6 +109,8 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     };
 
     $scope.ptaMembershipCosts = ptaAcctService.getScopeCosts();
+    if($scope.ptaMembershipCosts)
+        $scope.changePartial();
 
     $scope.getMembershipCosts = function(){
         ptaAcctService.getScopeCosts();
@@ -165,12 +133,11 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
         console.dir('ptaregistrationCtrl.ptaAcctObj ' + JSON.stringify(ptaAcctObj));
         console.dir('ptaregistrationCtrl.memberhsip (pta) ' + JSON.stringify(member));
 
-        $scope.ptaRegistrationJSON = {"FEAccount": ptaAcctObj, "SecondaryAcct" : ptaSecondaryAcct, "Membership": member,  "StudentInfo":  $scope.students.data};
+        $scope.ptaRegistrationJSON = {"FEAccount": ptaAcctObj, "SecondaryAcct" : ptaSecondaryAcct, "Membership": member, "StudentInfo":  $scope.students.data};
         // send create acct form
         ptaAcctService.createAcct(createAcctCallback, $scope.ptaRegistrationJSON);
 
         ptaAcctService.setReviewChoice(ptaMembershipCosts);
-
 
         $state.go('ptaregistrationreviewchoice', {});
     };
