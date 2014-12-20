@@ -11,6 +11,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
     $scope.ptaPrimaryAcct = {};
     $scope.partialMultiShow = false;
     $scope.partialIndShow = false;
+    $scope.partialBusShow = false;
     $scope.partialChldrenShow = false;
     $scope.showContinue = true;
 
@@ -51,31 +52,34 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
 
     $scope.changePartial = function(){
         console.log('showing partial based on radio selection...' + $scope.ptaMembershipCosts.selectedMembership);
-        var multi = "#ptaMultipleMembershipform";
-        var ind = "#ptaIndMembershipform";
-        var addStudent ="#ptaAddStudentForm";
+
         var x = $scope.ptaMembershipCosts.selectedMembership;
 
-        if( x == 'individual' || x == 'business'){
+        if( x == 'individual'){
             $scope.partialMultiShow = false;
+            $scope.partialBusShow = false;
             $scope.partialIndShow = true;
-            if(x == 'individual') {
-                $scope.partialChldrenShow = true;
-            }
-            else {
-                $scope.partialChldrenShow = false;
-            }
-        }
-
-        if(x == 'family' || x == 'faculty') {
-            $scope.partialMultiShow = true;
+            $scope.partialChldrenShow = true;
+        } else if(x == 'business'){
+            $scope.partialMultiShow = false;
             $scope.partialIndShow = false;
             $scope.partialChldrenShow = false;
+
+            $scope.partialBusShow = true;
+        } else if(x == 'family' || x == 'faculty') {
+            $scope.partialMultiShow = true;
+            $scope.partialChldrenShow = true;
+
+            $scope.partialBusShow = false;
+            $scope.partialIndShow = false;
+        } else {
+            $scope.partialMultiShow = true;
+            $scope.partialChldrenShow = true;
+
+            $scope.partialBusShow = false;
+            $scope.partialIndShow = false;
         }
 
-        if(x.substring(0,1) != 'i' || x.substring(0,1) != 'f' || x.substring(0,1) != 'b' ) {
-            $scope.partialMultiShow = true;
-        }
     }
 
     $scope.students = {};
@@ -90,7 +94,7 @@ ptaControllersModule.controller('PTARegistrationCtrl', ['$rootScope', '$scope', 
             nbr: $scope.students.data.length + 1,
             studentName: $scope.newItemName
         });
-        console.dir(JSON.stringify($scope.students.data));
+        $scope.newItemName = '';
     }
 
     $scope.ptaRegistrationSubmit = function (ptaAcctObj, ptaRegForm) {
