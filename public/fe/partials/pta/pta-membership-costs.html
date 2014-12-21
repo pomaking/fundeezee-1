@@ -57,10 +57,24 @@
                 </div>
             </div>
 
+            <div id="ptaBusMembershipform" class="col-md-12" ng-show="partialBusShow">
+                <div class="form-group required">
+                    <label>Business Name</label>
+                    <input class="form-control" placeholder="First name" type="text" ng-model="ptaAcctObj.firstName" name="firstName">
+                </div>
+                <div class="form-group required">
+                    <label>Contact</label>
+                    <input class="form-control" placeholder="last name" type="text" ng-model="ptaAcctObj.lastName" name="lastName">
+                </div>
+                <div class="form-group required">
+                    <label>Email Address</label>
+                    <input class="form-control" placeholder="Email address" type="text" ng-model="ptaAcctObj.userName" name="userName">
+                </div>
+            </div>
+
             <div id="ptaMultipleMembershipform" ng-show="partialMultiShow">
                 <div class="col-md-12">
                     <div class="col-md-6">
-
                         <div class="form-group required">
                             <label>First Name</label>
                             <input class="form-control" placeholder="First name" type="text" ng-model="ptaAcctObj.firstName" name="firstName">
@@ -75,13 +89,6 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <!--<div class="form-group">
-                            <label>Prefix</label>
-                            <select ng-model="ptaAcctObj.prefix2">
-                                <option value="">Choose a Prefix</option>
-                                <option ng-repeat="pre in prefix" value="{{pre}}">{{pre}}</option>
-                            </select>
-                        </div>-->
                         <div class="form-group required">
                             <label>First Name</label>
                             <input class="form-control" placeholder="First name" type="text" ng-model="ptaSecondaryAcct.firstName" name="firstName">
@@ -97,8 +104,8 @@
                     </div>
                 </div>
             </div>
-
-            <form class="form-inline" id="ptaAddStudentForm" name="ptaAddStudentForm" ng-show="partialChldrenShow" role="form" novalidate>
+        </form>
+            <form id="ptaAddStudentForm" name="ptaAddStudentForm" ng-show="partialChldrenShow" role="form" novalidate>
                 <div class="form-group">
                     <div class="col-md-4 nopad">
                         <label class="sr-only" for="ItemName">Item Name</label>
@@ -108,14 +115,16 @@
                         <button ng-click="addItem()">Add Student</button>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="col-md-6">
                     <ul class="">
-                    <li ng-repeat="item in students.data" id="item{{item.id}}">
-                        {{item.studentName}}  <a ng-click="deleteItem($index)" class="delete-item">x</a>
-                    </li>
+                        <li ng-repeat="item in students.data" id="item{{item.id}}">
+                            {{item.studentName}}  <a ng-click="deleteItem($index)" class="delete-item">x</a>
+                        </li>
                     </ul>
+                    </div>
+                </div>
             </form>
-
-
             <br>
             <!--  <H3>Contributions</H3>-->
             <div ng-repeat="field in ptaMembershipCosts.contribution">
@@ -138,7 +147,7 @@
             </div>
             <br>
             <button ng-click="ptaSelectedCosts(ptaAcctObj, ptaSecondaryAcct, ptaMembershipCosts, ptaMembershipForm)" type="button" class="btn btn-primary">Proceed to Checkout</button>
-        </form>
+
     </div>
 </div>
 <!-- /.row -->

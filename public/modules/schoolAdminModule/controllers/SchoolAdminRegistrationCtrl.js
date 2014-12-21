@@ -16,8 +16,7 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
     //ptaAcctService.findCostsbySchoolName(initCostsCallback, 'JOHNS CREEK ELEMENTARY','GA');
 
 	// getSchools API URL
-	// var url = 'https://inventory.data.gov/api/action/datastore_search?';
-    var url = 'http://localhost:3000/api/schooladmincontrib/findbyschool/';
+	var url = 'https://inventory.data.gov/api/action/datastore_search?';
 	
 	$scope.getSchoolsSearch = function(val) {
     return $http.get(url, {
