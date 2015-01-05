@@ -6,7 +6,10 @@ var ptaAdminServices = angular.module('fundeezee.schoolAdminModule.services', []
 
 ptaAdminServices.service('contributionBuilderService', function($http) {
     var adminAcct = {};
+
     var formsJsonPath = './data/sample_forms.json';
+    var schoolState = '';
+    var schoolZip = '';
 
     var schoolAdminMembership = {};
 
@@ -103,6 +106,18 @@ ptaAdminServices.service('contributionBuilderService', function($http) {
             adminAcct = data;
             console.log('setAdminAcct: ' + JSON.stringify(adminAcct) );
             callback();
+        },
+        getSchoolZip: function(){
+            return schoolZip;
+        },
+        setSchoolZip: function(data){
+            schoolZip = data;
+        },
+        getSchoolState: function(){
+            return schoolState;
+        },
+        setSchoolState: function(callback, data){
+            schoolState = data;
         }
 
     };

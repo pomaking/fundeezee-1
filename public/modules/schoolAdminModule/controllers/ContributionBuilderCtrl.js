@@ -142,9 +142,11 @@ schoolAdminControllersModule.controller('ContributionBuilderCtrl', ['$scope', '$
         var aa = contributionBuilderService.getAdminAcct();
 
         schoolAdminCreateFormJSON.schoolName = aa.schoolName;
-        schoolAdminCreateFormJSON.schoolState = aa.schoolState;
+        schoolAdminCreateFormJSON.schoolState = contributionBuilderService.getSchoolState();
         schoolAdminCreateFormJSON.taxExempt = aa.taxExempt;
-        schoolAdminCreateFormJSON.ptaName = aa.ptaOrgName;
+        schoolAdminCreateFormJSON.ptaName = aa.ptaName;
+        schoolAdminCreateFormJSON.website = aa.website;
+        schoolAdminCreateFormJSON.schoolZip = contributionBuilderService.getSchoolZip();
 
         schoolAdminCreateFormJSON.individual = membership.individual;
         schoolAdminCreateFormJSON.family = membership.family;

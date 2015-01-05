@@ -2,9 +2,11 @@
 
 schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope', '$http', '$state', 'ptaAcctService', 'contributionBuilderService', function($scope, $http, $state, ptaAcctService, contributionBuilderService) {
     $scope.admin = {};
+
     $scope.admin.data = [];
 
     $scope.adminAcct = {};
+    $scope.adminAcct.taxExempt = 'no';
     // PTA students data - should be added to $scope.adminAcct
     $scope.additionalAdmin = [];
 
@@ -19,6 +21,8 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
 	var url = 'https://inventory.data.gov/api/action/datastore_search?';
 	
 	$scope.getSchoolsSearch = function(val) {
+
+    // console.log('school search: ' + val);
     return $http.get(url, {
       params: {
         q: val,
@@ -28,7 +32,9 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
     }).then(function(response){
 		var schools = [];
 		for(var i=0;i < response.data.result.records.length;i++){
-			schools.push(response.data.result.records[i].SCHNAM09+' ('+response.data.result.records[i].LSTATE09+')');
+			schools.push(response.data.result.records[i].SCHNAM09);
+            contributionBuilderService.setSchoolZip(response.data.result.records[i].MZIP09);
+            contributionBuilderService.setSchoolState(response.data.result.records[i].LSTATE09);
 		}
 
       //return response.data.result.records;
@@ -61,11 +67,12 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
 
 
 	$scope.schoolAdminRegistrationSubmit = function (data, schoolAdminRegForm) {
-        var x = data.schoolName.indexOf('(');
-        $scope.adminAcct.schoolState =  data.schoolName.substring(x+1,x+3);
-        $scope.adminAcct.schoolName = data.schoolName.substring(0, x).trim();
+        //var x = data.schoolName.indexOf('(');
+        // $scope.adminAcct.schoolState =  data.schoolName.substring(x+1,x+3);
+        $scope.adminAcct.schoolName = data.schoolName;
         $scope.adminAcct.username  = 'kate198@smith.com';
-
+        $scope.adminAcct.website = data.website;
+        console.log('admin registrationSubmit ' + JSON.stringify($scope.adminAcct) );
         contributionBuilderService.setAdminAcct(setAdminAcctCallback, $scope.adminAcct);
 	};
 
@@ -80,9 +87,9 @@ schoolAdminControllersModule.controller('SchoolAdminRegistrationCtrl', ['$scope'
 
         // add users if create escrow successful
         if($scope.admin.data.length > 0) {
-            var x = $scope.adminAcct.schoolName.indexOf('(');
-            var state = $scope.adminAcct.schoolName.substring(x+1,x+3);
-            var name = $scope.adminAcct.schoolName.substring(0, x).trim();
+
+            var state =  contributionBuilderService.getSchoolState();
+            var name = $scope.adminAcct.schoolName;
            // create admins....
             for( var i = 0; i<$scope.admin.data.length; i++){
                 console.dir( JSON.stringify( $scope.admin.data[i] ) );

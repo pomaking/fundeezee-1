@@ -88,6 +88,14 @@ exports.findSchoolName = function(req, res)  {
 
 };
 
+/*function callback(response) {
+    console.log('callback: ' + JSON.stringify(response) );
+    if(response.status_code, 201){
+        console.log("success");
+    }
+
+}*/
+
 exports.createSchoolAdminRegisterBank = function(req, res) {
     // create an instance/object out of the model
     // balanced.
@@ -100,20 +108,20 @@ exports.createSchoolAdminRegisterBank = function(req, res) {
         account_type: req.body.bankAcctType
     };
     // Tokenize bank account
-    var x = balanced.marketplace.bank_accounts.create(payload, handleResponse);
-    JSON.stringify('bank accounts create resp ' + x);
+    balanced.marketplace.bank_accounts.create(payload).then(handleResponse);
+
 };
 
     function handleResponse(response) {
         // Successful tokenization
-        if (response.status_code === 201) {
+        if(response.status_code, 201) {
             // 'save' the instance to mongodb
             console.log('success adding acct');
             res.json('success');
         }
         else{
             return res.status(400).send({
-                message: 'unsuccessful in adding your acct...'
+                message: 'unsuccessful in adding your account, error text ' +response
             });
         }
     }

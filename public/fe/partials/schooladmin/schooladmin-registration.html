@@ -32,13 +32,13 @@
                             <br>
                             <div class="form-group">
                                 <label>Organization Website</label>
-                                <input class="form-control" placeholder="http://" type="url" ng-model="adminAcct.website" name="ptawebsite">
+                                <input class="form-control" placeholder="http://" type="url" ng-model="adminAcct.website">
                             </div>
 
                             <div class="form-group">
                                 <label>501(c)(3) </label>
                                 <input  type="radio" ng-model="adminAcct.taxExempt"  value="yes">Yes
-                                <input  type="radio" ng-model="adminAcct.taxExempt"  value="no">No<br/>
+                                <input  type="radio" ng-model="adminAcct.taxExempt" selected value="no">No<br/>
                             </div>
                             <button ng-click="schoolAdminRegistrationSubmit(adminAcct, schoolAdminRegForm)" type="button" class="btn btn-default">Continue</button>
                             <label>By clicking Continue, I acknowledge that I have read and accept the Terms and Conditions</label>

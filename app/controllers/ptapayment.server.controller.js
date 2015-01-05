@@ -10,6 +10,14 @@ var mongoose = require('mongoose'),
 
 
 exports.savefeptapmt = function(req, res) {
+
+/*    balanced.marketplace.bank_accounts.create({
+        "routing_number": "121000358",
+        "account_type": "checking",
+        "name": "Johann Bernoulli",
+        "account_number": "9900000001"
+    }).then(callback);*/
+
     // create an instance/object out of the model
     var newAccount = new FEPTAPayment(req.body);
 
