@@ -66,6 +66,18 @@ ptaAdminServices.service('contributionBuilderService', function($http) {
         },
         addEscrowAcct: function(callback, data){
             console.dir('addEscrowAccount: ' + JSON.stringify(data));
+            $http({
+                method: 'POST',
+                url: 'http://localhost:3000/api/schooladmincontribregisterbank/',
+
+                data: data
+            }).
+                success(function (data) {
+                    callback(data);
+                }).
+                error(function (data) {
+                    alert('there was an error creating an account');
+                });
 
             callback();
         },

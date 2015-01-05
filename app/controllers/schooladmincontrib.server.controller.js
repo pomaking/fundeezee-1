@@ -6,8 +6,10 @@
 var mongoose = require('mongoose'),
     errorHandler = require('./errors.server.controller'),
     schoolcontrib = mongoose.model('SchoolAdminContribForm'),
+    balanced = require('balanced-official'),
     _ = require('lodash');
 
+balanced.configure("ak-test-1p1Tsac7gHeMQowL2seB7ieliuAJAufyq");
 
 exports.findbyUsername = function(req, res)  {
     var userName = req.params.username.substring(1).trim();
@@ -85,6 +87,36 @@ exports.findSchoolName = function(req, res)  {
     }
 
 };
+
+exports.createSchoolAdminRegisterBank = function(req, res) {
+    // create an instance/object out of the model
+    // balanced.
+    console.log(req.body);
+
+    var payload = {
+        name: req.body.bankAcctNickname,
+        account_number: req.body.bankAcct,
+        routing_number: req.body.bankRouting,
+        account_type: req.body.bankAcctType
+    };
+    // Tokenize bank account
+    var x = balanced.marketplace.bank_accounts.create(payload, handleResponse);
+    JSON.stringify('bank accounts create resp ' + x);
+};
+
+    function handleResponse(response) {
+        // Successful tokenization
+        if (response.status_code === 201) {
+            // 'save' the instance to mongodb
+            console.log('success adding acct');
+            res.json('success');
+        }
+        else{
+            return res.status(400).send({
+                message: 'unsuccessful in adding your acct...'
+            });
+        }
+    }
 
 
 

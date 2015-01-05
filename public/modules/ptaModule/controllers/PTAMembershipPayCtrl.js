@@ -5,14 +5,21 @@ ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$st
     $scope.feUser = {};
 
 
-   $scope.checkout = function (ptaMembershipSelectedCosts, ptaPaymentForm) {
+   $scope.ptaCheckout = function () {
+
+       var ptaPayment = {};
+       ptaPayment.schoolName = ptaAcctService.getSchoolName();
+       ptaPayment.schoolState = ptaAcctService.getSchoolState();
+       ptaPayment.schoolContribId = ptaAcctService.getReviewChoice()._id;
+       ptaPayment.memberContribution = ptaAcctService.getChoice().tCost;
+       ptaPayment.feAccountUser  = ptaAcctService.getFEAccount()._id;  //getFEAccount._id
+       ptaPayment.endDate = ptaAcctService.getCosts().endDate
+       ptaPayment.taxExempt = ptaAcctService.getCosts().taxExempt;
+
         // call balancedjs - placeholder for now
-        console.log('ctrl.checkout');
-        ptaAcctService.checkout();
-        //
 
-
-
+        console.log('ctrl.checkout ' + JSON.stringify(ptaPayment));
+        ptaAcctService.checkout(ptaPayment);
     };
 
     var assembleReview = function(){

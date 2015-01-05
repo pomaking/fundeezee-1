@@ -6,11 +6,17 @@
 //var users = require('../../app/controllers/users.server.controller'),     articles = require('../../app/controllers/articles.server.controller');
 
 var feAccount = require('../../app/controllers/feaccount.server.controller');
+var saContrib = require('../../app/controllers/schooladmincontrib.server.controller');
 
 module.exports = function(app) {
     // Article Routes
     app.route('/api/schooladmincontrib/')
         .post(feAccount.createfeaccount);
+
+    app.route('/api/schooladmincontribregisterbank/')
+        .post(saContrib.createSchoolAdminRegisterBank);
+
+
 
     /*app.route('/api/ptaregistration/bystate/:stateAbbr')
         .get(feAccount.findbyStateAbbr);

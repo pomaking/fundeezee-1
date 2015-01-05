@@ -6,11 +6,17 @@ var ptaServices = angular.module('fundeezee.ptaModule.services', []);
 
 ptaServices.service('ptaAcctService', function($http) {
 
+    // the persisted fe Acct
     var feAccount = {};
+    // the persisted payment info
+    var ptaPayment = {};
+    // raw costs
     var ptaCosts = {};
+    // selected costs
     var selectedPTACosts = {};
     var schoolName = '';
     var schoolState = '';
+    // flattened costs(that you see on when the checkout button is shown)
     var reviewChoice = {};
     var choice = {};
 
@@ -36,7 +42,7 @@ ptaServices.service('ptaAcctService', function($http) {
     var findCostsbySchoolName = function (callback, schoolname, schoolstate) {
         schoolName = schoolname;
         schoolState = schoolstate;
-        console.log('school cost lookup for school ' + schoolname);
+        //console.log('school cost lookup for school ' + schoolname);
             $http({
                 method: 'GET',
                 url: 'http://localhost:3000/api/schooladmincontrib/findbyschool/:'+schoolname+'/:'+schoolstate
@@ -55,7 +61,7 @@ ptaServices.service('ptaAcctService', function($http) {
     var findSchoolLookup = function (callback, schoolname, schoolstate) {
         schoolName = schoolname;
         schoolState = schoolstate;
-        console.log('school lookup for school ' + schoolname);
+        //console.log('school lookup for school ' + schoolname);
         $http({
             method: 'GET',
             url: 'http://localhost:3000/api/schooladmincontrib/findschool/:'+schoolname+'/:'+schoolstate
@@ -177,7 +183,7 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getCosts = function () {
-        console.log('getCosts: ' + JSON.stringify(ptaCosts));
+        // console.log('getCosts: ' + JSON.stringify(ptaCosts));
         if(ptaCosts[0])
             ptaCosts[0].schoolName = ptaCosts[0].schoolName + ' (' + ptaCosts[0].schoolState + ')';
         return ptaCosts[0];
@@ -188,7 +194,7 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getReviewChoice = function(){
-        console.log('getReviewChoice ' + JSON.stringify(reviewChoice));
+        //console.log('getReviewChoice ' + JSON.stringify(reviewChoice));
         return reviewChoice;
     }
 
@@ -197,7 +203,7 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getChoice = function(){
-        console.log('getChoice ' + JSON.stringify(choice));
+        //console.log('getChoice ' + JSON.stringify(choice));
         return choice;
     }
 
@@ -206,7 +212,7 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getFEAccount = function(){
-        console.log('getFEAccount ' + JSON.stringify(feAccount));
+        //console.log('getFEAccount ' + JSON.stringify(feAccount));
         return feAccount;
     }
 
@@ -215,7 +221,7 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getSchoolName = function(){
-        console.log('schoolName: ' + schoolName);
+        //console.log('schoolName: ' + schoolName);
         return schoolName;
     }
 
@@ -224,18 +230,33 @@ ptaServices.service('ptaAcctService', function($http) {
     }
 
     var getSchoolState = function(){
-        console.log('schoolstate: ' + schoolState);
+        //console.log('schoolstate: ' + schoolState);
         return schoolState;
     }
 
-    // need to assemble the balalnced payment adn persist to the db
-    var checkout = function() {
-        var balancedPayment = {};
-             $http.post(balancedPayment)
-             .then(function (response) {
+    var getPTAPayment = function(){
+        return ptaPayment;
+    }
 
-             return response.data;
+    // need to assemble the balalnced payment adn persist to the db
+    var checkout = function(ptaPayment) {
+        //
+        console.log( "pta checout service: " + JSON.stringify(ptaPayment));
+        $http({
+            method: 'POST',
+            url: 'http://localhost:3000/api/ptapayment',
+            data: ptaPayment
+        }).
+            success(function(data) {
+                ptaPayment = data;
+                //callback(data);
+            }).
+            error(function(data) {
+                alert('there was an error creating an account');
             });
+
+
+
     }
 
     return {
@@ -253,7 +274,8 @@ ptaServices.service('ptaAcctService', function($http) {
         setSchoolName: setSchoolName,
         getSchoolName: getSchoolName,
         setSchoolState : setSchoolState,
-        getSchoolState : getSchoolState
+        getSchoolState : getSchoolState,
+        getPTAPayment : getPTAPayment
     };
 });
 

@@ -8,11 +8,8 @@ var FEPTAPaymentSchema = new Schema(
     {
         schoolName: String,
         schoolState: String,
-        ptaName: String,
-        selectedMembership: String,
-        selectedMembershipCost: Number,
-        selectedContribution: [],
-        selectedTextContribution: [],
+        schoolContribId: String,
+        memberContribution: String,
         feAccountUser : { type: mongoose.Schema.Types.ObjectId, ref: 'FEAccount' },
         createDate:{
             type: Date,

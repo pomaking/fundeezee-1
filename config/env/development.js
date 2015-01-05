@@ -2,7 +2,7 @@
 
 module.exports = {
 	//db: 'mongodb://localhost/mean-dev',
-    db: 'mongodb://localhost/fedb',
+    db: 'mongodb://127.0.0.1/fedb',
 	log: {
 		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
 		format: 'dev',
