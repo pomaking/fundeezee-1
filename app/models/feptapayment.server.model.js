@@ -15,8 +15,8 @@ var FEPTAPaymentSchema = new Schema(
             type: Date,
             default: Date.now
         },
-        endDate: Date,
-        taxExempt: Boolean
+        endDate: String,
+        taxExempt: String
     }
 );
 

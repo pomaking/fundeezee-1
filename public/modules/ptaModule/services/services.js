@@ -94,7 +94,7 @@ ptaServices.service('ptaAcctService', function($http) {
         scopeObj.selectedTextContribution = [];
         scopeObj.taxExempt = ptaCosts[0].taxExempt;
         scopeObj.ptaName =  ptaCosts[0].ptaName;
-
+        scopeObj.membershipTerm = ptaCosts[0].membershipTerm;
         var checked = false;
 
 

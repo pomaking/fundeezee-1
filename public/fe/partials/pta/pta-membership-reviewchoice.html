@@ -21,6 +21,7 @@
 <div> Selection  {{reviewChoice.display}}</div>
 <div> Cost  {{reviewChoice.mCost | currency}}</div>
 <div> Total Cost  {{reviewChoice.tCost | currency}}</div>
+<div> Your membership will expire on {{reviewChoice.membershipTerm | date:"MM/dd/yyyy"}} </div>
 
 <button ng-click="ptaCheckout(reviewChoice, ptaMembershipForm)" type="button" class="btn btn-default">Checkout</button>
 <!--<button ng-click="goBack(ptaMembershipCheckout, ptaMembershipForm)" type="button" class="btn btn-default">Checkout</button>-->

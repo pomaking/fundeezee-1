@@ -13,7 +13,7 @@ ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$st
        ptaPayment.schoolContribId = ptaAcctService.getReviewChoice()._id;
        ptaPayment.memberContribution = ptaAcctService.getChoice().tCost;
        ptaPayment.feAccountUser  = ptaAcctService.getFEAccount()._id;  //getFEAccount._id
-       ptaPayment.endDate = ptaAcctService.getCosts().endDate
+       ptaPayment.endDate = ptaAcctService.getChoice().membershipTerm;
        ptaPayment.taxExempt = ptaAcctService.getCosts().taxExempt;
 
         // call balancedjs - placeholder for now
@@ -28,6 +28,30 @@ ptaControllersModule.controller('PTAMembershipPayCtrl', ['$scope', '$http', '$st
         var membership = x.selectedMembership;
         review.schoolName = x.schoolName;
         review.ptaName = x.ptaName;
+
+        var expDate = ptaAcctService.getCosts().endDate.substring(5,10);
+
+        var currentTime = new Date();
+        var year = currentTime.getFullYear();
+        var mth = currentTime.getMonth() + 1;
+        var endTerm = '';
+
+        // calc expiration
+        if(ptaAcctService.getCosts().membershipTerm == 'A') {
+            if(mth > 6) {
+                year = year + 1;
+            }
+            endTerm = expDate + '/' + year.toString();
+        } else {
+            if (mth > 11) {
+                year = year + 1;
+            }
+            endTerm = expDate + '/' + year.toString();
+        }
+        endTerm = endTerm.split("-").join("/").toString();
+        review.membershipTerm = endTerm;
+        console.log('membershipTerm: ' + review.membershipTerm);
+
         if(membership == 'individual'){
             review.display = 'Individual';
             review.mCost  = x.individualCost;
